@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{01FE46E7-3F78-411D-A995-4E3D0024A144}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VSS.DA</RootNamespace>
+    <AssemblyName>VSS.DA</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EF\VssDb\BloodGroup.cs" />
+    <Compile Include="EF\VssDb\Brand.cs" />
+    <Compile Include="EF\VssDb\BusinessPartner.cs" />
+    <Compile Include="EF\VssDb\BusinessPartnerBalance.cs" />
+    <Compile Include="EF\VssDb\BusinessPartnerType.cs" />
+    <Compile Include="EF\VssDb\Color.cs" />
+    <Compile Include="EF\VssDb\Company.cs" />
+    <Compile Include="EF\VssDb\CompanyLogo.cs" />
+    <Compile Include="EF\VssDb\Designation.cs" />
+    <Compile Include="EF\VssDb\DocType.cs" />
+    <Compile Include="EF\VssDb\Employee.cs" />
+    <Compile Include="EF\VssDb\EngineSize.cs" />
+    <Compile Include="EF\VssDb\Gender.cs" />
+    <Compile Include="EF\VssDb\Invoice.cs" />
+    <Compile Include="EF\VssDb\InvoiceItem.cs" />
+    <Compile Include="EF\VssDb\Item.cs" />
+    <Compile Include="EF\VssDb\ItemCategory.cs" />
+    <Compile Include="EF\VssDb\ItemGroup.cs" />
+    <Compile Include="EF\VssDb\ItemPrice.cs" />
+    <Compile Include="EF\VssDb\JcJob.cs" />
+    <Compile Include="EF\VssDb\JcResource.cs" />
+    <Compile Include="EF\VssDb\Job.cs" />
+    <Compile Include="EF\VssDb\JobCard.cs" />
+    <Compile Include="EF\VssDb\JobGroup.cs" />
+    <Compile Include="EF\VssDb\Manufacturer.cs" />
+    <Compile Include="EF\VssDb\MaritalStatu.cs" />
+    <Compile Include="EF\VssDb\Menu.cs" />
+    <Compile Include="EF\VssDb\MenuPermission.cs" />
+    <Compile Include="EF\VssDb\ModelVssDb.cs" />
+    <Compile Include="EF\VssDb\Module.cs" />
+    <Compile Include="EF\VssDb\PayMethod.cs" />
+    <Compile Include="EF\VssDb\PaySettle.cs" />
+    <Compile Include="EF\VssDb\PayStatu.cs" />
+    <Compile Include="EF\VssDb\PayTran.cs" />
+    <Compile Include="EF\VssDb\Religion.cs" />
+    <Compile Include="EF\VssDb\Role.cs" />
+    <Compile Include="EF\VssDb\Size.cs" />
+    <Compile Include="EF\VssDb\Unit.cs" />
+    <Compile Include="EF\VssDb\User.cs" />
+    <Compile Include="EF\VssDb\UserRole.cs" />
+    <Compile Include="EF\VssDb\Warehouse.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Operation\ClientVM.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

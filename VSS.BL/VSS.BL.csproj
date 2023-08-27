@@ -55,12 +55,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VSS.DA\VSS.DA.csproj">
-      <Project>{01fe46e7-3f78-411d-a995-4e3d0024a144}</Project>
-      <Name>VSS.DA</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>

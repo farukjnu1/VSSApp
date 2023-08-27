@@ -169,12 +169,58 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Attributes\VssCorsAttribute.cs" />
+    <Compile Include="BL\Operation\ClientBL.cs" />
+    <Compile Include="BL\Operation\EngineSizeBL.cs" />
+    <Compile Include="BL\Operation\JobBL.cs" />
+    <Compile Include="BL\Operation\JobGroupBL.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\EngineSizeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobController.cs" />
     <Compile Include="Controllers\JobGroupController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DA\EF\VssDb\BloodGroup.cs" />
+    <Compile Include="DA\EF\VssDb\Brand.cs" />
+    <Compile Include="DA\EF\VssDb\BusinessPartner.cs" />
+    <Compile Include="DA\EF\VssDb\BusinessPartnerBalance.cs" />
+    <Compile Include="DA\EF\VssDb\BusinessPartnerType.cs" />
+    <Compile Include="DA\EF\VssDb\Color.cs" />
+    <Compile Include="DA\EF\VssDb\Company.cs" />
+    <Compile Include="DA\EF\VssDb\CompanyLogo.cs" />
+    <Compile Include="DA\EF\VssDb\Designation.cs" />
+    <Compile Include="DA\EF\VssDb\DocType.cs" />
+    <Compile Include="DA\EF\VssDb\Employee.cs" />
+    <Compile Include="DA\EF\VssDb\EngineSize.cs" />
+    <Compile Include="DA\EF\VssDb\Gender.cs" />
+    <Compile Include="DA\EF\VssDb\Invoice.cs" />
+    <Compile Include="DA\EF\VssDb\InvoiceItem.cs" />
+    <Compile Include="DA\EF\VssDb\Item.cs" />
+    <Compile Include="DA\EF\VssDb\ItemCategory.cs" />
+    <Compile Include="DA\EF\VssDb\ItemGroup.cs" />
+    <Compile Include="DA\EF\VssDb\ItemPrice.cs" />
+    <Compile Include="DA\EF\VssDb\JcJob.cs" />
+    <Compile Include="DA\EF\VssDb\JcResource.cs" />
+    <Compile Include="DA\EF\VssDb\Job.cs" />
+    <Compile Include="DA\EF\VssDb\JobCard.cs" />
+    <Compile Include="DA\EF\VssDb\JobGroup.cs" />
+    <Compile Include="DA\EF\VssDb\Manufacturer.cs" />
+    <Compile Include="DA\EF\VssDb\MaritalStatu.cs" />
+    <Compile Include="DA\EF\VssDb\Menu.cs" />
+    <Compile Include="DA\EF\VssDb\MenuPermission.cs" />
+    <Compile Include="DA\EF\VssDb\ModelVssDb.cs" />
+    <Compile Include="DA\EF\VssDb\Module.cs" />
+    <Compile Include="DA\EF\VssDb\PayMethod.cs" />
+    <Compile Include="DA\EF\VssDb\PaySettle.cs" />
+    <Compile Include="DA\EF\VssDb\PayStatu.cs" />
+    <Compile Include="DA\EF\VssDb\PayTran.cs" />
+    <Compile Include="DA\EF\VssDb\Religion.cs" />
+    <Compile Include="DA\EF\VssDb\Role.cs" />
+    <Compile Include="DA\EF\VssDb\Size.cs" />
+    <Compile Include="DA\EF\VssDb\Unit.cs" />
+    <Compile Include="DA\EF\VssDb\User.cs" />
+    <Compile Include="DA\EF\VssDb\UserRole.cs" />
+    <Compile Include="DA\EF\VssDb\Warehouse.cs" />
+    <Compile Include="DA\ViewModels\Operation\ClientVM.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -321,16 +367,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\VSS.BL\VSS.BL.csproj">
-      <Project>{26edea1b-7205-4f9f-9086-ce65d6a0c262}</Project>
-      <Name>VSS.BL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VSS.DA\VSS.DA.csproj">
-      <Project>{01FE46E7-3F78-411D-A995-4E3D0024A144}</Project>
-      <Name>VSS.DA</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

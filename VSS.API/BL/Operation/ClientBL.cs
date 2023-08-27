@@ -54,8 +54,7 @@ namespace VSS.BL.Operation
         {
             try
             {
-                var mid = _vssDb.BusinessPartners.Max(x => x.BpId) + 1;
-                model.BpId = mid;
+                model.BpId = GetNewId();
                 model.BpTypeId = 1;
                 _vssDb.BusinessPartners.Add(model);
                 _vssDb.SaveChanges();
@@ -65,7 +64,18 @@ namespace VSS.BL.Operation
             {
                 return false;
             }
-            
+        }
+        private int GetNewId()
+        {
+            try
+            {
+                var nid = Convert.ToInt32(_vssDb.BusinessPartners.Max(x => x.BpId)) + 1;
+                return nid;
+            }
+            catch
+            {
+                return 0;
+            }
         }
         public bool Update(BusinessPartner model)
         {

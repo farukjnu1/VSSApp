@@ -39,7 +39,7 @@ namespace VSS.API.Controllers
         }
 
         // PUT: api/Client/5
-        public bool Put(int id, [FromBody]BusinessPartner model)
+        public bool Put([FromBody]BusinessPartner model)
         {
             ClientBL _BL = new ClientBL();
             return _BL.Update(model);

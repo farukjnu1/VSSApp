@@ -35,6 +35,7 @@ namespace VSS.BL.Operation
         }
         public ClientVM Get(int id)
         {
+            oClient = new ClientVM();
             var oBP = _vssDb.BusinessPartners
                 .Where(x => x.BpTypeId == 1 && x.BpId == id)
                 .FirstOrDefault();
@@ -53,6 +54,9 @@ namespace VSS.BL.Operation
         {
             try
             {
+                var mid = _vssDb.BusinessPartners.Max(x => x.BpId) + 1;
+                model.BpId = mid;
+                model.BpTypeId = 1;
                 _vssDb.BusinessPartners.Add(model);
                 _vssDb.SaveChanges();
                 return true;
@@ -72,7 +76,11 @@ namespace VSS.BL.Operation
                  .FirstOrDefault();
                 if (oBP != null)
                 {
-                    _vssDb.BusinessPartners.Add(model);
+                    oBP.BpTypeId = model.BpTypeId;
+                    oBP.Name = model.Name;
+                    oBP.Phone = model.Phone;
+                    oBP.Email = model.Email;
+                    oBP.Address = model.Address;
                     _vssDb.SaveChanges();
                     return true;
                 }

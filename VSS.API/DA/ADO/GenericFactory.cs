@@ -12,117 +12,107 @@ namespace VSS.DA.ADO
     //public class GenericFactory<T> where T : class, new() //No Interface
     public class GenericFactory<T> : IGenericFactory<T> where T : class, new()
     {
-        public Task<string> ExecuteCommandStr(CommandType cmdType, string query, Hashtable ht, string connString)
+        public string ExecuteCommandStr(CommandType cmdType, string query, Hashtable ht, string connString)
         {
-            return Task.Run(() =>
+            string result = "";
+            try
             {
-                string result = "";
-                try
+                using (SqlConnection con = new SqlConnection(connString))
                 {
-                    using (SqlConnection con = new SqlConnection(connString))
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.CommandText = query;
+                    cmd.CommandType = cmdType;
+                    cmd.Connection = con;
+                    if (ht != null)
                     {
-                        con.Open();
-                        SqlCommand cmd = new SqlCommand();
-                        cmd.CommandText = query;
-                        cmd.CommandType = cmdType;
-                        cmd.Connection = con;
-                        if (ht != null)
-                        {
-                            foreach (object obj in ht.Keys)
-                            {
-                                string str = Convert.ToString(obj);
-                                SqlParameter parameter = new SqlParameter("@" + str, ht[obj]);
-                                cmd.Parameters.Add(parameter);
-                            }
-                        }
-                        IDataReader dr = cmd.ExecuteReader();
-                        if (dr.Read())
-                        {
-                            result = dr.IsDBNull(0) ? "[]" : dr.GetString(0);
-                        }
-                        if (ht != null)
-                        {
-                            cmd.Parameters.Clear();
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    //Logs.WriteBug(ex);
-                }
-                return result;
-            });
-        }
-
-        public Task<List<T>> ExecuteCommandList(CommandType cmdType, string query, Hashtable ht, string connString)
-        {
-            return Task.Run(() =>
-            {
-                List<T> Results = null;
-                try
-                {
-                    using (SqlConnection con = new SqlConnection(connString))
-                    {
-                        con.Open();
-                        SqlCommand cmd = new SqlCommand();
-                        cmd.CommandText = query;
-                        cmd.CommandType = cmdType;
-                        cmd.Connection = con;
-                        if (ht!=null)
-                        {
-                            foreach (object obj in ht.Keys)
-                            {
-                                string str = Convert.ToString(obj);
-                                SqlParameter parameter = new SqlParameter("@" + str, ht[obj]);
-                                cmd.Parameters.Add(parameter);
-                            }
-                        }
-                        Results = DataReaderMapToList<T>(cmd.ExecuteReader());
-                        if (ht != null)
-                        {
-                            cmd.Parameters.Clear();
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    //Logs.WriteBug(ex);
-                }
-                return Results;
-            });
-        }
-
-        public Task<T> ExecuteCommandObject(CommandType cmdType, string query, Hashtable ht, string connString)
-        {
-            return Task.Run(() =>
-            {
-                T Results = null;
-                try
-                {
-                    using (SqlConnection con = new SqlConnection(connString))
-                    {
-                        con.Open();
-                        SqlCommand cmd = new SqlCommand();
-                        cmd.CommandText = query;
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Connection = con;
                         foreach (object obj in ht.Keys)
                         {
                             string str = Convert.ToString(obj);
                             SqlParameter parameter = new SqlParameter("@" + str, ht[obj]);
                             cmd.Parameters.Add(parameter);
                         }
-                        Results = DataReaderMapToList<T>(cmd.ExecuteReader()).FirstOrDefault();
+                    }
+                    IDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        result = dr.IsDBNull(0) ? "[]" : dr.GetString(0);
+                    }
+                    if (ht != null)
+                    {
                         cmd.Parameters.Clear();
                     }
                 }
-                catch (Exception ex)
-                {
-                    //Logs.WriteBug(ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                //Logs.WriteBug(ex);
+            }
+            return result;
+        }
 
-                return Results;
-            });
+        public List<T> ExecuteCommandList(CommandType cmdType, string query, Hashtable ht, string connString)
+        {
+            List<T> Results = null;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connString))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.CommandText = query;
+                    cmd.CommandType = cmdType;
+                    cmd.Connection = con;
+                    if (ht != null)
+                    {
+                        foreach (object obj in ht.Keys)
+                        {
+                            string str = Convert.ToString(obj);
+                            SqlParameter parameter = new SqlParameter("@" + str, ht[obj]);
+                            cmd.Parameters.Add(parameter);
+                        }
+                    }
+                    Results = DataReaderMapToList<T>(cmd.ExecuteReader());
+                    if (ht != null)
+                    {
+                        cmd.Parameters.Clear();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //Logs.WriteBug(ex);
+            }
+            return Results;
+        }
+
+        public T ExecuteCommandObject(CommandType cmdType, string query, Hashtable ht, string connString)
+        {
+            T Results = null;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connString))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.CommandText = query;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = con;
+                    foreach (object obj in ht.Keys)
+                    {
+                        string str = Convert.ToString(obj);
+                        SqlParameter parameter = new SqlParameter("@" + str, ht[obj]);
+                        cmd.Parameters.Add(parameter);
+                    }
+                    Results = DataReaderMapToList<T>(cmd.ExecuteReader()).FirstOrDefault();
+                    cmd.Parameters.Clear();
+                }
+            }
+            catch (Exception ex)
+            {
+                //Logs.WriteBug(ex);
+            }
+            return Results;
         }
 
         public List<T> DataReaderMapToList<Tentity>(IDataReader reader)

@@ -222,10 +222,12 @@
     <Compile Include="BL\Operation\ClientBL.cs" />
     <Compile Include="BL\Operation\EngineSizeBL.cs" />
     <Compile Include="BL\Operation\JobBL.cs" />
+    <Compile Include="BL\Operation\JobCardBL.cs" />
     <Compile Include="BL\Operation\JobGroupBL.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\EngineSizeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobCardController.cs" />
     <Compile Include="Controllers\JobController.cs" />
     <Compile Include="Controllers\JobGroupController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -233,6 +235,7 @@
     <Compile Include="DA\ADO\GenericFactoryMySql.cs" />
     <Compile Include="DA\ADO\IGenericFactory.cs" />
     <Compile Include="DA\ADO\IGenericFactoryMySql.cs" />
+    <Compile Include="DA\ADO\StoredProcedure.cs" />
     <Compile Include="DA\EF\VssDb\BloodGroup.cs" />
     <Compile Include="DA\EF\VssDb\Brand.cs" />
     <Compile Include="DA\EF\VssDb\BusinessPartner.cs" />
@@ -276,6 +279,7 @@
     <Compile Include="DA\EF\VssDb\Warehouse.cs" />
     <Compile Include="DA\Utilities\Logs.cs" />
     <Compile Include="DA\ViewModels\Operation\ClientVM.cs" />
+    <Compile Include="DA\ViewModels\Operation\JobCardVM.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

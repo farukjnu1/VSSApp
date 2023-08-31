@@ -54,5 +54,21 @@ namespace VSS.API.Controllers
             return jobCardBL.GetByVehicleNo(vehicleno);
         }
 
+        [HttpGet]
+        [Route("api/JobCard/GetVehicleReceiver")]
+        public List<VehicleReceiverVM> GetVehicleReceiver()
+        {
+            JobCardBL jobCardBL = new JobCardBL();
+            return jobCardBL.GetVehicleReceiver();
+        }
+
+        [HttpGet]
+        [Route("api/JobCard/GetCompany")]
+        public CompanyVM GetCompany()
+        {
+            JobCardBL jobCardBL = new JobCardBL();
+            return jobCardBL.GetCompany();
+        }
+
     }
 }

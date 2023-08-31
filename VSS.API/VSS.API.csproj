@@ -279,7 +279,9 @@
     <Compile Include="DA\EF\VssDb\Warehouse.cs" />
     <Compile Include="DA\Utilities\Logs.cs" />
     <Compile Include="DA\ViewModels\Operation\ClientVM.cs" />
+    <Compile Include="DA\ViewModels\Operation\CompanyVM.cs" />
     <Compile Include="DA\ViewModels\Operation\JobCardVM.cs" />
+    <Compile Include="DA\ViewModels\Operation\VehicleReceiverVM.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 
-namespace VSS.DA.EF.VssDb
+namespace VSS.API.DA.EF.VssDb
 {
     public partial class ModelVssDb : DbContext
     {
@@ -17,7 +17,6 @@ namespace VSS.DA.EF.VssDb
         public virtual DbSet<BusinessPartner> BusinessPartners { get; set; }
         public virtual DbSet<BusinessPartnerBalance> BusinessPartnerBalances { get; set; }
         public virtual DbSet<BusinessPartnerType> BusinessPartnerTypes { get; set; }
-        public virtual DbSet<Color> Colors { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<CompanyLogo> CompanyLogoes { get; set; }
         public virtual DbSet<Designation> Designations { get; set; }
@@ -52,6 +51,8 @@ namespace VSS.DA.EF.VssDb
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
+        public virtual DbSet<WorkGroup> WorkGroups { get; set; }
+        public virtual DbSet<WorkGroupEmp> WorkGroupEmps { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -93,10 +94,6 @@ namespace VSS.DA.EF.VssDb
                 .HasMany(e => e.BusinessPartners)
                 .WithOptional(e => e.BusinessPartnerType)
                 .HasForeignKey(e => e.BpTypeId);
-
-            modelBuilder.Entity<Color>()
-                .Property(e => e.ColorName)
-                .IsUnicode(false);
 
             modelBuilder.Entity<Company>()
                 .Property(e => e.CompanyCode)
@@ -181,11 +178,19 @@ namespace VSS.DA.EF.VssDb
                 .IsUnicode(false);
 
             modelBuilder.Entity<Item>()
+                .Property(e => e.Barcode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Item>()
                 .Property(e => e.Model)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Item>()
-                .Property(e => e.PartNo)
+                .Property(e => e.PartNoOld)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Item>()
+                .Property(e => e.PartNoNew)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ItemCategory>()
@@ -202,6 +207,10 @@ namespace VSS.DA.EF.VssDb
 
             modelBuilder.Entity<Job>()
                 .Property(e => e.Description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<JobCard>()
+                .Property(e => e.JcNo)
                 .IsUnicode(false);
 
             modelBuilder.Entity<JobCard>()
@@ -370,6 +379,10 @@ namespace VSS.DA.EF.VssDb
             modelBuilder.Entity<Warehouse>()
                 .Property(e => e.Longitude)
                 .HasPrecision(18, 6);
+
+            modelBuilder.Entity<WorkGroup>()
+                .Property(e => e.WgName)
+                .IsUnicode(false);
         }
     }
 }

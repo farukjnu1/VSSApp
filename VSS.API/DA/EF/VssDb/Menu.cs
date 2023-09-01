@@ -1,4 +1,4 @@
-namespace VSS.DA.EF.VssDb
+namespace VSS.API.DA.EF.VssDb
 {
     using System;
     using System.Collections.Generic;

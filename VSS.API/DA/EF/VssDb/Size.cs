@@ -1,4 +1,4 @@
-namespace VSS.DA.EF.VssDb
+namespace VSS.API.DA.EF.VssDb
 {
     using System;
     using System.Collections.Generic;
@@ -9,12 +9,6 @@ namespace VSS.DA.EF.VssDb
     [Table("Size")]
     public partial class Size
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Size()
-        {
-            Items = new HashSet<Item>();
-        }
-
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
@@ -23,8 +17,5 @@ namespace VSS.DA.EF.VssDb
         public string Size1 { get; set; }
 
         public int? IsActive { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Item> Items { get; set; }
     }
 }

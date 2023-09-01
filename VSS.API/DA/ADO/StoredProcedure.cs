@@ -10,8 +10,12 @@ namespace VSS.API.DA.ADO
         //Operation       
         public const string sp_GetJobCardNo = "[dbo].[sp_GetJobCardNo]";
         public const string sp_GetByVehicleNo = "[dbo].[sp_GetByVehicleNo]";
-        public const string sp_GetVehicleReceiver = "[dbo].[sp_GetVehicleReceiver]";
+        public const string sp_GetWorkGroupById = "[dbo].[sp_GetWorkGroupById]";
         public const string sp_GetCompany = "[dbo].[sp_GetCompany]";
-        
+        public const string sp_GetJob = "[dbo].[sp_GetJob]";
+        public const string sp_GetEngineSize = "[dbo].[sp_GetEngineSize]";
+        public const string sp_GetJobGroup = "[dbo].[sp_GetJobGroup]";
+        public const string sp_GetItemByParts = "[dbo].[sp_GetItemByParts]";
+
     }
 }

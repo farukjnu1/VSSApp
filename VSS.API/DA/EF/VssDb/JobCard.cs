@@ -1,4 +1,4 @@
-namespace VSS.DA.EF.VssDb
+namespace VSS.API.DA.EF.VssDb
 {
     using System;
     using System.Collections.Generic;
@@ -11,6 +11,9 @@ namespace VSS.DA.EF.VssDb
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long Id { get; set; }
+
+        [StringLength(20)]
+        public string JcNo { get; set; }
 
         public int? ClientId { get; set; }
 

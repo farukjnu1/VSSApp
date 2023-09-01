@@ -1,4 +1,4 @@
-namespace VSS.DA.EF.VssDb
+namespace VSS.API.DA.EF.VssDb
 {
     using System;
     using System.Collections.Generic;
@@ -39,25 +39,16 @@ namespace VSS.DA.EF.VssDb
         [StringLength(150)]
         public string Model { get; set; }
 
-        [StringLength(100)]
-        public string Dimension { get; set; }
-
-        [StringLength(100)]
-        public string Weight { get; set; }
-
-        public int? ColorId { get; set; }
-
-        public int? SizeId { get; set; }
-
         public int? ManufacturerId { get; set; }
 
         [StringLength(50)]
-        public string PartNo { get; set; }
+        public string PartNoOld { get; set; }
+
+        [StringLength(50)]
+        public string PartNoNew { get; set; }
 
         [StringLength(250)]
         public string Remarks { get; set; }
-
-        public int? Duration { get; set; }
 
         public bool? IsActive { get; set; }
 
@@ -77,8 +68,6 @@ namespace VSS.DA.EF.VssDb
 
         public virtual Brand Brand { get; set; }
 
-        public virtual Color Color { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InvoiceItem> InvoiceItems { get; set; }
 
@@ -87,8 +76,6 @@ namespace VSS.DA.EF.VssDb
         public virtual ItemGroup ItemGroup { get; set; }
 
         public virtual Manufacturer Manufacturer { get; set; }
-
-        public virtual Size Size { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemPrice> ItemPrices { get; set; }

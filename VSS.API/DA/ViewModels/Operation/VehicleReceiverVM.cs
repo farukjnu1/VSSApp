@@ -6,7 +6,7 @@ using System.Web;
 
 namespace VSS.API.DA.ViewModels.Operation
 {
-    public class VehicleReceiverVM
+    public class WorkGroupVM
     {
         [StringLength(50)]
         public string WgName { get; set; }

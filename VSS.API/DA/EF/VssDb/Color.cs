@@ -5,6 +5,7 @@ namespace VSS.DA.EF.VssDb
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using VSS.API.DA.EF.VssDb;
 
     [Table("Color")]
     public partial class Color

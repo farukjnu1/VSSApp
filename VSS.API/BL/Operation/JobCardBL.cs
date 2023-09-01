@@ -17,9 +17,14 @@ namespace VSS.API.BL.Operation
     {
         private IGenericFactory<ClientVM> Generic_T = null;
         private IGenericFactory<JobCardVM> Generic_JobCardVM = null;
-        private IGenericFactory<VehicleReceiverVM> Generic_VehicleReceiverVM = null;
+        private IGenericFactory<WorkGroupVM> Generic_WorkGroupVM = null;
         private IGenericFactory<CompanyVM> Generic_CompanyVM = null;
-        //VehicleReceiverVM
+        private IGenericFactory<JobVM> Generic_JobVM = null;
+        private IGenericFactory<EngineSizeVM> Generic_EngineSizeVM = null;
+        private IGenericFactory<JobGroupVM> Generic_JobGroupVM = null;
+        private IGenericFactory<ItemVM> Generic_ItemVM = null;
+        
+
         public string GetJCNo() 
         {
             string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
@@ -32,17 +37,41 @@ namespace VSS.API.BL.Operation
             Generic_JobCardVM = new GenericFactory<JobCardVM>();
             return Generic_JobCardVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetByVehicleNo, new Hashtable() { { "vehicleno", vehicleNo } }, vssDb);
         }
-        public List<VehicleReceiverVM> GetVehicleReceiver()
+        public List<WorkGroupVM> GetWorkGroupById(int workGroupId)
         {
             string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
-            Generic_VehicleReceiverVM = new GenericFactory<VehicleReceiverVM>();
-            return Generic_VehicleReceiverVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetVehicleReceiver, new Hashtable() { }, vssDb);
+            Generic_WorkGroupVM = new GenericFactory<WorkGroupVM>();
+            return Generic_WorkGroupVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetWorkGroupById, new Hashtable() { { "WorkGroupId", workGroupId } }, vssDb);
         }
         public CompanyVM GetCompany()
         {
             string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
             Generic_CompanyVM = new GenericFactory<CompanyVM>();
             return Generic_CompanyVM.ExecuteCommandObject(CommandType.StoredProcedure, StoredProcedure.sp_GetCompany, new Hashtable() { }, vssDb);
+        }
+        public List<JobVM> GetJob()
+        {
+            string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
+            Generic_JobVM = new GenericFactory<JobVM>();
+            return Generic_JobVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetJob, new Hashtable() { }, vssDb);
+        }
+        public List<EngineSizeVM> GetEngineSize()
+        {
+            string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
+            Generic_EngineSizeVM = new GenericFactory<EngineSizeVM>();
+            return Generic_EngineSizeVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetEngineSize, new Hashtable() { }, vssDb);
+        }
+        public List<JobGroupVM> GetJobGroup()
+        {
+            string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
+            Generic_JobGroupVM = new GenericFactory<JobGroupVM>();
+            return Generic_JobGroupVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetJobGroup, new Hashtable() { }, vssDb);
+        }
+        public List<ItemVM> GetItemByParts(string value)
+        {
+            string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
+            Generic_ItemVM = new GenericFactory<ItemVM>();
+            return Generic_ItemVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetItemByParts, new Hashtable() { { "value", value } }, vssDb);
         }
     }
 }

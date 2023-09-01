@@ -6,21 +6,14 @@ namespace VSS.API.DA.EF.VssDb
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("CompanyLogo")]
-    public partial class CompanyLogo
+    [Table("WorkGroup")]
+    public partial class WorkGroup
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int LogoId { get; set; }
+        public int WgId { get; set; }
 
         [StringLength(50)]
-        public string Name { get; set; }
-
-        [StringLength(250)]
-        public string LogoUrl { get; set; }
-
-        public int? CompanyId { get; set; }
-
-        public virtual Company Company { get; set; }
+        public string WgName { get; set; }
     }
 }

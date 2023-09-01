@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Google.Protobuf.WellKnownTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -55,11 +56,11 @@ namespace VSS.API.Controllers
         }
 
         [HttpGet]
-        [Route("api/JobCard/GetVehicleReceiver")]
-        public List<VehicleReceiverVM> GetVehicleReceiver()
+        [Route("api/JobCard/GetWorkGroupById")]
+        public List<WorkGroupVM> GetWorkGroupById([FromUri] int workGroupId)
         {
             JobCardBL jobCardBL = new JobCardBL();
-            return jobCardBL.GetVehicleReceiver();
+            return jobCardBL.GetWorkGroupById(workGroupId);
         }
 
         [HttpGet]
@@ -68,6 +69,38 @@ namespace VSS.API.Controllers
         {
             JobCardBL jobCardBL = new JobCardBL();
             return jobCardBL.GetCompany();
+        }
+
+        [HttpGet]
+        [Route("api/JobCard/GetJob")]
+        public List<JobVM> GetJob()
+        {
+            JobCardBL jobCardBL = new JobCardBL();
+            return jobCardBL.GetJob();
+        }
+
+        [HttpGet]
+        [Route("api/JobCard/GetEngineSize")]
+        public List<EngineSizeVM> GetEngineSize()
+        {
+            JobCardBL jobCardBL = new JobCardBL();
+            return jobCardBL.GetEngineSize();
+        }
+
+        [HttpGet]
+        [Route("api/JobCard/GetJobGroup")]
+        public List<JobGroupVM> GetJobGroup()
+        {
+            JobCardBL jobCardBL = new JobCardBL();
+            return jobCardBL.GetJobGroup();
+        }
+
+        [HttpGet]
+        [Route("api/JobCard/GetItemByParts")]
+        public List<ItemVM> GetItemByParts([FromUri] string value)
+        {
+            JobCardBL jobCardBL = new JobCardBL();
+            return jobCardBL.GetItemByParts(value);
         }
 
     }

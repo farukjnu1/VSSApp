@@ -1,15 +1,13 @@
-namespace VSS.API.DA.EF.VssDb
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
-    [Table("Job")]
-    public partial class Job
+namespace VSS.API.DA.ViewModels.Operation
+{
+    public class JobVM
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int JobId { get; set; }
 
         [StringLength(150)]

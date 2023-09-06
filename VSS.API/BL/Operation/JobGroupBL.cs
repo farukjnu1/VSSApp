@@ -6,15 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using VSS.API.DA.EF.VssDb;
 using VSS.API.DA.ViewModels.Operation;
-using VSS.DA.EF.VssDb;
 
 namespace VSS.BL.Operation
 {
     public class JobGroupBL
     {
         ModelVssDb _vssDb = new ModelVssDb();
-        List<JobGroup> listJobGroup = null;
-
         public IEnumerable<JobGroupVM> Get(int pageIndex = 0, int pageSize = 5)
         {
             int nRow = _vssDb.JobGroups.Count();
@@ -34,7 +31,7 @@ namespace VSS.BL.Operation
             return listJobGroup;
         }
 
-        public bool AddJobGroup(JobGroup model)
+        public bool Add(JobGroup model)
         {
             try
             {
@@ -49,7 +46,7 @@ namespace VSS.BL.Operation
             }
         }
 
-        public bool RemoveJobGroup(int id)
+        public bool Remove(int id)
         {
             try
             {
@@ -70,7 +67,7 @@ namespace VSS.BL.Operation
             return false;
         }
 
-        public bool UpdateJobGroup(JobGroup model)
+        public bool Update(JobGroup model)
         {
             try
             {

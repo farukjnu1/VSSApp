@@ -9,8 +9,7 @@ namespace VSS.API.DA.EF.VssDb
     [Table("JcJob")]
     public partial class JcJob
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public long JcJobId { get; set; }
+        public long Id { get; set; }
 
         public int? JobGroupId { get; set; }
 
@@ -23,5 +22,11 @@ namespace VSS.API.DA.EF.VssDb
         public int? Duration { get; set; }
 
         public int? JobStatus { get; set; }
+
+        public long? JcId { get; set; }
+
+        public int? CreateBy { get; set; }
+
+        public DateTime? CreateDate { get; set; }
     }
 }

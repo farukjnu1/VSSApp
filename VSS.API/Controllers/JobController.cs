@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Web.Http;
 using VSS.API.DA.EF.VssDb;
 using VSS.BL.Operation;
-using VSS.DA.EF.VssDb;
 
 namespace VSS.API.Controllers
 {

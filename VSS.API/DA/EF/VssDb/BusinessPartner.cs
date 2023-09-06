@@ -16,7 +16,6 @@ namespace VSS.API.DA.EF.VssDb
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int BpId { get; set; }
 
         [StringLength(100)]
@@ -32,6 +31,9 @@ namespace VSS.API.DA.EF.VssDb
         public string Email { get; set; }
 
         public int? BpTypeId { get; set; }
+
+        [StringLength(10)]
+        public string MembershipNo { get; set; }
 
         public bool? IsActive { get; set; }
 

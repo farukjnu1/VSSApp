@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using VSS.API.DA.EF.VssDb;
 using VSS.API.DA.ViewModels.Operation;
-using VSS.DA.EF.VssDb;
 
 namespace VSS.BL.Operation
 {

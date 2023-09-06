@@ -6,14 +6,15 @@ namespace VSS.API.DA.EF.VssDb
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("JcResource")]
-    public partial class JcResource
+    [Table("JcHR")]
+    public partial class JcHR
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int JcResourceId { get; set; }
+        public int Id { get; set; }
 
-        public int? EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
 
         public long? JcId { get; set; }
+
+        public long? JcJobId { get; set; }
     }
 }

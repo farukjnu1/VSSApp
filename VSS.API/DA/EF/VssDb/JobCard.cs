@@ -9,7 +9,6 @@ namespace VSS.API.DA.EF.VssDb
     [Table("JobCard")]
     public partial class JobCard
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long Id { get; set; }
 
         [StringLength(20)]
@@ -38,18 +37,7 @@ namespace VSS.API.DA.EF.VssDb
         [StringLength(30)]
         public string Vin { get; set; }
 
-        public decimal? Vat { get; set; }
-
-        [Column(TypeName = "money")]
-        public decimal? Total { get; set; }
-
-        [Column(TypeName = "money")]
-        public decimal? Discount { get; set; }
-
-        [Column(TypeName = "money")]
-        public decimal? GrandTotal { get; set; }
-
-        public DateTime? ArriveDate { get; set; }
+        public DateTime? ReceiveDate { get; set; }
 
         public int? SupervisorId { get; set; }
 
@@ -57,11 +45,36 @@ namespace VSS.API.DA.EF.VssDb
 
         public int? Bay { get; set; }
 
-        [StringLength(10)]
-        public string MembershipNumber { get; set; }
+        public decimal? Mileage { get; set; }
+
+        public int? JcStatus { get; set; }
+
+        public decimal? EstiCostJob { get; set; }
+
+        public decimal? EstiCostSpare { get; set; }
+
+        public decimal? EstiCostTotal { get; set; }
+
+        public decimal? ActualCostJob { get; set; }
+
+        public decimal? ActualCostSpare { get; set; }
+
+        public decimal? ActualCostTotal { get; set; }
+
+        public bool? IsActive { get; set; }
+
+        public DateTime? CreateDate { get; set; }
 
         public int? CreateBy { get; set; }
 
-        public DateTime? CreateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
+
+        public int? UpdateBy { get; set; }
+
+        public bool? IsDelete { get; set; }
+
+        public int? DeleteDate { get; set; }
+
+        public int? DeleteBy { get; set; }
     }
 }

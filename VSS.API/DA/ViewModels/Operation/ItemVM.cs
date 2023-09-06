@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using VSS.DA.EF.VssDb;
 
 namespace VSS.API.DA.ViewModels.Operation
 {

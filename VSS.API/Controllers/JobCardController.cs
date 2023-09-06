@@ -7,26 +7,32 @@ using System.Net.Http;
 using System.Web.Http;
 using VSS.API.BL.Operation;
 using VSS.API.DA.ViewModels.Operation;
+using VSS.BL.Operation;
+using ZstdSharp.Unsafe;
 
 namespace VSS.API.Controllers
 {
     public class JobCardController : ApiController
     {
-        // GET: api/JobCard
-        public IEnumerable<string> Get()
+        // GET: api/JobCard/5
+        public IEnumerable<JobCardVM> Get(int pi = 0, int ps = 5)
         {
-            return new string[] { "value1", "value2" };
+            JobCardBL _BL = new JobCardBL();
+            return _BL.Get(pi, ps);
         }
 
-        // GET: api/JobCard/5
-        public string Get(int id)
+        // GET: api/JobGroup/5
+        public JobCardVM Get(int id)
         {
-            return "value";
+            JobCardBL _BL = new JobCardBL();
+            return _BL.Get(id);
         }
 
         // POST: api/JobCard
-        public void Post([FromBody]string value)
+        public bool Post([FromBody]JobCardVM model)
         {
+            JobCardBL _BL = new JobCardBL();
+            return _BL.Add(model);
         }
 
         // PUT: api/JobCard/5

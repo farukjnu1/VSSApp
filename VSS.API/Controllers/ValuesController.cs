@@ -4,8 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using VSS.BL;
-using VSS.DA.EF.VssDb;
 
 namespace VSS.API.Controllers
 {

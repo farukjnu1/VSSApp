@@ -30,8 +30,9 @@ namespace VSS.API.DA.EF.VssDb
         public virtual DbSet<ItemCategory> ItemCategories { get; set; }
         public virtual DbSet<ItemGroup> ItemGroups { get; set; }
         public virtual DbSet<ItemPrice> ItemPrices { get; set; }
+        public virtual DbSet<JcHR> JcHRs { get; set; }
         public virtual DbSet<JcJob> JcJobs { get; set; }
-        public virtual DbSet<JcResource> JcResources { get; set; }
+        public virtual DbSet<JcSpare> JcSpares { get; set; }
         public virtual DbSet<Job> Jobs { get; set; }
         public virtual DbSet<JobCard> JobCards { get; set; }
         public virtual DbSet<JobGroup> JobGroups { get; set; }
@@ -47,6 +48,7 @@ namespace VSS.API.DA.EF.VssDb
         public virtual DbSet<Religion> Religions { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
+        public virtual DbSet<StoreReq> StoreReqs { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
@@ -79,6 +81,10 @@ namespace VSS.API.DA.EF.VssDb
 
             modelBuilder.Entity<BusinessPartner>()
                 .Property(e => e.Email)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<BusinessPartner>()
+                .Property(e => e.MembershipNo)
                 .IsUnicode(false);
 
             modelBuilder.Entity<BusinessPartner>()
@@ -205,6 +211,18 @@ namespace VSS.API.DA.EF.VssDb
                 .Property(e => e.Price)
                 .HasPrecision(18, 0);
 
+            modelBuilder.Entity<JcSpare>()
+                .Property(e => e.SalePrice)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<JcSpare>()
+                .Property(e => e.Quantity)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<JcSpare>()
+                .Property(e => e.SpareAmount)
+                .HasPrecision(18, 0);
+
             modelBuilder.Entity<Job>()
                 .Property(e => e.Description)
                 .IsUnicode(false);
@@ -230,24 +248,32 @@ namespace VSS.API.DA.EF.VssDb
                 .IsUnicode(false);
 
             modelBuilder.Entity<JobCard>()
-                .Property(e => e.Vat)
+                .Property(e => e.Mileage)
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<JobCard>()
-                .Property(e => e.Total)
-                .HasPrecision(19, 4);
+                .Property(e => e.EstiCostJob)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<JobCard>()
-                .Property(e => e.Discount)
-                .HasPrecision(19, 4);
+                .Property(e => e.EstiCostSpare)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<JobCard>()
-                .Property(e => e.GrandTotal)
-                .HasPrecision(19, 4);
+                .Property(e => e.EstiCostTotal)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<JobCard>()
-                .Property(e => e.MembershipNumber)
-                .IsUnicode(false);
+                .Property(e => e.ActualCostJob)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<JobCard>()
+                .Property(e => e.ActualCostSpare)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<JobCard>()
+                .Property(e => e.ActualCostTotal)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<JobGroup>()
                 .Property(e => e.Name)
@@ -343,6 +369,14 @@ namespace VSS.API.DA.EF.VssDb
             modelBuilder.Entity<Size>()
                 .Property(e => e.Size1)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<StoreReq>()
+                .Property(e => e.PurPrice)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<StoreReq>()
+                .Property(e => e.SalePrice)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<Unit>()
                 .Property(e => e.Code)

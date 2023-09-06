@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace VSS.API.DA.ViewModels.Operation
+{
+    public class JcHRVM
+    {
+        public int? Id { get; set; }
+
+        public int? EmployeeId { get; set; }
+        public string EmployeeName { get; set; }
+
+        public long? JcId { get; set; }
+
+        public long? JcJobId { get; set; }
+    }
+}

@@ -14,10 +14,10 @@ namespace VSS.API.Controllers
     public class JobGroupController : ApiController
     {
         // GET: api/JobGroup
-        public IEnumerable<JobGroupVM> Get(int pn = 0, int ps = 10)
+        public IEnumerable<JobGroupVM> Get(int pi = 0, int ps = 10)
         {
             JobGroupBL _BL = new JobGroupBL();
-            return _BL.Get(pn, ps);
+            return _BL.Get(pi, ps);
         }
 
         // GET: api/JobGroup/5

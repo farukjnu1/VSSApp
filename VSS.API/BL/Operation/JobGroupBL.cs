@@ -15,19 +15,20 @@ namespace VSS.BL.Operation
         ModelVssDb _vssDb = new ModelVssDb();
         List<JobGroup> listJobGroup = null;
 
-        public IEnumerable<JobGroupVM> Get(int pageNumber = 0, int pageSize = 10)
+        public IEnumerable<JobGroupVM> Get(int pageIndex = 0, int pageSize = 5)
         {
             int nRow = _vssDb.JobGroups.Count();
             var listJobGroup = _vssDb.JobGroups
-                .Select(x=> new JobGroupVM { 
-                    GroupId=x.GroupId,
-                    Name=x.Name,
-                    PageNumber=pageNumber,
-                    PageSize=pageSize,
-                    PageCount=nRow
+                .Select(x => new JobGroupVM
+                {
+                    GroupId = x.GroupId,
+                    Name = x.Name,
+                    PageIndex = pageIndex,
+                    PageSize = pageSize,
+                    RowCount = nRow
                 })
                 .OrderByDescending(s => s.GroupId)
-                .Skip(pageNumber * 10)
+                .Skip(pageIndex * pageSize)
                 .Take(pageSize)
                 .ToList();
             return listJobGroup;

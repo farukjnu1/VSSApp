@@ -7,8 +7,8 @@ namespace VSS.API.DA.ViewModels.Common
 {
     public class Pager
     {
-        public int PageNumber { get; set; } = 0;
+        public int PageIndex { get; set; } = 0;
         public int PageSize { get; set; } = 10;
-        public int PageCount { get; set; } = 0;
+        public int RowCount { get; set; } = 0;
     }
 }

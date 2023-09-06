@@ -281,6 +281,7 @@
     <Compile Include="DA\EF\VssDb\WorkGroup.cs" />
     <Compile Include="DA\EF\VssDb\WorkGroupEmp.cs" />
     <Compile Include="DA\Utilities\Logs.cs" />
+    <Compile Include="DA\ViewModels\Common\Pager.cs" />
     <Compile Include="DA\ViewModels\Operation\ClientVM.cs" />
     <Compile Include="DA\ViewModels\Operation\CompanyVM.cs" />
     <Compile Include="DA\ViewModels\Operation\EngineSizeVM.cs" />

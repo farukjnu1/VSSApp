@@ -17,5 +17,81 @@ namespace VSS.BL.Operation
         {
             return listJob = _vssDb.Jobs.ToList();
         }
+
+        public bool AddJob(Job model)
+        {
+            try
+            {
+                model.JobId = GetNewId();
+                _vssDb.Jobs.Add(model);
+                _vssDb.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateJob(Job model)
+        {
+            try
+            {
+                var selectedJob = _vssDb.Jobs
+                 .Where(x =>x.JobId == model.JobId).FirstOrDefault();
+                if (selectedJob != null)
+                {
+                    selectedJob.Description = model.Description;
+                    selectedJob.JobGroupId = model.JobGroupId;
+                    selectedJob.A = model.A;
+                    selectedJob.B = model.B;
+                    selectedJob.C = model.C;
+                    selectedJob.DurationA = model.DurationA;
+                    selectedJob.DurationB = model.DurationB;
+                    selectedJob.DurationC = model.DurationC;
+                    _vssDb.SaveChanges();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return false;
+        }
+
+        public bool RemoveJob(int id)
+        {
+            try
+            {
+                var selectedJob = _vssDb.Jobs
+                 .Where(x => x.JobId == id)
+                 .FirstOrDefault();
+                if (selectedJob != null)
+                {
+                    _vssDb.Jobs.Remove(selectedJob);
+                    _vssDb.SaveChanges();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return false;
+        }
+
+        private int GetNewId()
+        {
+            try
+            {
+                var jobId = Convert.ToInt32(_vssDb.Jobs.Max(x => x.JobId)) + 1;
+                return jobId;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
     }
 }

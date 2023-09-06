@@ -19,25 +19,25 @@ namespace VSS.API.Controllers
             return _BL.Get();
         }
 
-        // GET: api/EngineSize/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST: api/EngineSize
-        public void Post([FromBody]string value)
+        public bool Post([FromBody] EngineSize model)
         {
+            EngineSizeBL _BL = new EngineSizeBL();
+            return _BL.Add(model);
         }
 
-        // PUT: api/EngineSize/5
-        public void Put(int id, [FromBody]string value)
+        // PUT: api/EngineSize/5      
+        public bool Put([FromBody] EngineSize model)
         {
+            EngineSizeBL _BL = new EngineSizeBL();
+            return _BL.updateEngine(model);
         }
-
+        
         // DELETE: api/EngineSize/5
-        public void Delete(int id)
+        public bool Delete(int id)
         {
+            EngineSizeBL _BL = new EngineSizeBL();
+            return _BL.RemoveEngine(id);
         }
     }
 }

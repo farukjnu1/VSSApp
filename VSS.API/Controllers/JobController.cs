@@ -26,18 +26,24 @@ namespace VSS.API.Controllers
         }
 
         // POST: api/Job
-        public void Post([FromBody]string value)
+        public bool Post([FromBody] Job model)
         {
+            JobBL _BL = new JobBL();
+            return _BL.AddJob(model);
         }
 
         // PUT: api/Job/5
-        public void Put(int id, [FromBody]string value)
+        public bool Put([FromBody] Job model)
         {
+            JobBL _BL = new JobBL();
+            return _BL.UpdateJob(model);
         }
 
         // DELETE: api/Job/5
-        public void Delete(int id)
+        public bool Delete(int id)
         {
+            JobBL _BL = new JobBL();
+            return _BL.RemoveJob(id);
         }
     }
 }

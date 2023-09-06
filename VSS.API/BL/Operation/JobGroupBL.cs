@@ -1,9 +1,11 @@
-﻿using System;
+﻿using MySqlX.XDevAPI.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VSS.API.DA.EF.VssDb;
+using VSS.API.DA.ViewModels.Operation;
 using VSS.DA.EF.VssDb;
 
 namespace VSS.BL.Operation
@@ -13,9 +15,90 @@ namespace VSS.BL.Operation
         ModelVssDb _vssDb = new ModelVssDb();
         List<JobGroup> listJobGroup = null;
 
-        public IEnumerable<JobGroup> Get()
+        public IEnumerable<JobGroupVM> Get(int pageNumber = 0, int pageSize = 10)
         {
-            return listJobGroup = _vssDb.JobGroups.ToList();
+            int nRow = _vssDb.JobGroups.Count();
+            var listJobGroup = _vssDb.JobGroups
+                .Select(x=> new JobGroupVM { 
+                    GroupId=x.GroupId,
+                    Name=x.Name,
+                    PageNumber=pageNumber,
+                    PageSize=pageSize,
+                    PageCount=nRow
+                })
+                .OrderByDescending(s => s.GroupId)
+                .Skip(pageNumber * 10)
+                .Take(pageSize)
+                .ToList();
+            return listJobGroup;
+        }
+
+        public bool AddJobGroup(JobGroup model)
+        {
+            try
+            {
+                model.GroupId = GetNewId();
+                _vssDb.JobGroups.Add(model);
+                _vssDb.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool RemoveJobGroup(int id)
+        {
+            try
+            {
+                var selectedJobGroup = _vssDb.JobGroups
+                 .Where(x => x.GroupId == id)
+                 .FirstOrDefault();
+                if (selectedJobGroup != null)
+                {
+                    _vssDb.JobGroups.Remove(selectedJobGroup);
+                    _vssDb.SaveChanges();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return false;
+        }
+
+        public bool UpdateJobGroup(JobGroup model)
+        {
+            try
+            {
+                var selectedJobGroup = _vssDb.JobGroups
+                 .Where(x => x.GroupId == model.GroupId).FirstOrDefault();
+                if (selectedJobGroup != null)
+                {
+                    selectedJobGroup.Name = model.Name;
+                    _vssDb.SaveChanges();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return false;
+        }
+        private int GetNewId()
+        {
+            try
+            {
+                var jobId = Convert.ToInt32(_vssDb.JobGroups.Max(x => x.GroupId)) + 1;
+                return jobId;
+            }
+            catch
+            {
+                return 0;
+            }
         }
     }
 }

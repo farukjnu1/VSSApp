@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using VSS.API.DA.EF.VssDb;
+using VSS.API.DA.ViewModels.Operation;
 using VSS.BL.Operation;
 
 namespace VSS.API.Controllers
@@ -12,10 +13,10 @@ namespace VSS.API.Controllers
     public class JobController : ApiController
     {
         // GET: api/Job
-        public IEnumerable<Job> Get()
+        public IEnumerable<JobVM> Get(int pi = 0, int ps = 5)
         {
             JobBL _BL = new JobBL();
-            return _BL.Get();
+            return _BL.Get(pi, ps);
         }
 
         // GET: api/Job/5

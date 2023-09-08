@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VSS.API.DA.EF.VssDb;
+using VSS.API.DA.ViewModels.Operation;
 
 namespace VSS.BL.Operation
 {
@@ -12,9 +13,31 @@ namespace VSS.BL.Operation
         ModelVssDb _vssDb = new ModelVssDb();
         List<Job> listJob = null;
 
-        public IEnumerable<Job> Get()
+        public IEnumerable<JobVM> Get(int pageIndex = 0, int pageSize = 5)
         {
-            return listJob = _vssDb.Jobs.ToList();
+            int nRow = _vssDb.Jobs.Count();
+            var listJob = _vssDb.Jobs
+                .Select(x => new JobVM
+                {
+                    JobId = x.JobId,
+                    Description = x.Description,
+                    JobGroupId = x.JobGroupId,
+                    A = x.A,
+                    B = x.B,
+                    C = x.C,
+                    DurationA = x.DurationA,
+                    DurationB = x.DurationB,
+                    DurationC = x.DurationC,
+
+                    PageIndex = pageIndex,
+                    PageSize = pageSize,
+                    RowCount = nRow
+                })
+                .OrderByDescending(s => s.JobId)
+                .Skip(pageIndex * pageSize)
+                .Take(pageSize)
+                .ToList();
+            return listJob;
         }
 
         public bool AddJob(Job model)

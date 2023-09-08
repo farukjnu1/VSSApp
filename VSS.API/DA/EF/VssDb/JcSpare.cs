@@ -21,8 +21,6 @@ namespace VSS.API.DA.EF.VssDb
 
         public long? JcId { get; set; }
 
-        public long? JcJobId { get; set; }
-
         public int? ItemId { get; set; }
     }
 }

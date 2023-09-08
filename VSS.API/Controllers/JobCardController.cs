@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using VSS.API.BL.Operation;
+using VSS.API.DA.EF.VssDb;
 using VSS.API.DA.ViewModels.Operation;
 using VSS.BL.Operation;
 using ZstdSharp.Unsafe;
@@ -36,8 +37,10 @@ namespace VSS.API.Controllers
         }
 
         // PUT: api/JobCard/5
-        public void Put(int id, [FromBody]string value)
+        public bool Put([FromBody] JobCardVM model)
         {
+            JobCardBL _BL = new JobCardBL();
+            return _BL.Update(model);
         }
 
         // DELETE: api/JobCard/5

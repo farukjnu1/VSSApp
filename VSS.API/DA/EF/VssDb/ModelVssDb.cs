@@ -232,14 +232,6 @@ namespace VSS.API.DA.EF.VssDb
                 .IsUnicode(false);
 
             modelBuilder.Entity<JobCard>()
-                .Property(e => e.Mobile)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<JobCard>()
-                .Property(e => e.Email)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<JobCard>()
                 .Property(e => e.Model)
                 .IsUnicode(false);
 
@@ -274,6 +266,14 @@ namespace VSS.API.DA.EF.VssDb
             modelBuilder.Entity<JobCard>()
                 .Property(e => e.ActualCostTotal)
                 .HasPrecision(18, 0);
+
+            modelBuilder.Entity<JobCard>()
+                .Property(e => e.ContactPerson)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<JobCard>()
+                .Property(e => e.ContactPersonNo)
+                .IsUnicode(false);
 
             modelBuilder.Entity<JobGroup>()
                 .Property(e => e.Name)

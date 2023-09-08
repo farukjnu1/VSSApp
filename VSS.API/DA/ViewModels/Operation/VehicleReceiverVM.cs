@@ -11,11 +11,7 @@ namespace VSS.API.DA.ViewModels.Operation
         [StringLength(50)]
         public string WgName { get; set; }
         public int? EmployeeId { get; set; }
-        [StringLength(150)]
-        public string FirstName { get; set; }
-        [StringLength(150)]
-        public string MiddleName { get; set; }
-        [StringLength(150)]
-        public string LastName { get; set; }
+        [StringLength(300)]
+        public string FullName { get; set; }
     }
 }

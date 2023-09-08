@@ -14,20 +14,6 @@ namespace VSS.API.DA.EF.VssDb
         [StringLength(20)]
         public string JcNo { get; set; }
 
-        public int? ClientId { get; set; }
-
-        [StringLength(200)]
-        public string ClientInfo { get; set; }
-
-        [StringLength(100)]
-        public string Address { get; set; }
-
-        [StringLength(20)]
-        public string Mobile { get; set; }
-
-        [StringLength(100)]
-        public string Email { get; set; }
-
         [StringLength(25)]
         public string VehicleNo { get; set; }
 
@@ -60,6 +46,17 @@ namespace VSS.API.DA.EF.VssDb
         public decimal? ActualCostSpare { get; set; }
 
         public decimal? ActualCostTotal { get; set; }
+
+        public int? ClientId { get; set; }
+
+        [StringLength(200)]
+        public string ClientInfo { get; set; }
+
+        [StringLength(50)]
+        public string ContactPerson { get; set; }
+
+        [StringLength(20)]
+        public string ContactPersonNo { get; set; }
 
         public bool? IsActive { get; set; }
 

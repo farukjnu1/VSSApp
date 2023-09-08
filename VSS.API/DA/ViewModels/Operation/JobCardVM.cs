@@ -57,8 +57,8 @@ namespace VSS.API.DA.ViewModels.Operation
         public int? Duration { get; set; }
         public int? JobStatus { get; set; }
         public string JobStatusName { get; set; }
-        //public int[] Resources { get; set; }
-        public List<JcHRVM> Resources { get; set; }
+        public List<int?> Resources { get; set; }
+        public List<JcHRVM> ResourceNames { get; set; }
     }
 
     public class JcSpareVm
@@ -80,6 +80,7 @@ namespace VSS.API.DA.ViewModels.Operation
         public decimal? Quantity { get; set; }
         public decimal? SpareAmount { get; set; }
         public int? ItemStatus { get; set; }
+        public string ItemStatusName { get; set; }
     }
 
 }

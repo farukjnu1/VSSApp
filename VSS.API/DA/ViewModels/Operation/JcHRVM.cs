@@ -11,9 +11,6 @@ namespace VSS.API.DA.ViewModels.Operation
 
         public int? EmployeeId { get; set; }
         public string FullName { get; set; }
-
         public long? JcId { get; set; }
-
-        public long? JcJobId { get; set; }
     }
 }

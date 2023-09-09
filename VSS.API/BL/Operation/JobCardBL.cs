@@ -196,9 +196,9 @@ namespace VSS.API.BL.Operation
                             oJcHr.JcId = oJobCard.Id;
                             listJcHR.Add(oJcHr);
                         }
-                        #endregion
                         _vssDb.JcHRs.AddRange(listJcHR);
                         _vssDb.SaveChanges();
+                        #endregion
                         _tran.Commit();
                         return true;
                     }
@@ -333,6 +333,8 @@ namespace VSS.API.BL.Operation
                             oJcHr.JcId = oJobCard.Id;
                             listJcHR.Add(oJcHr);
                         }
+                        _vssDb.JcHRs.AddRange(listJcHR);
+                        _vssDb.SaveChanges();
                         #endregion
                         _tran.Commit();
                         return true;
@@ -390,6 +392,7 @@ namespace VSS.API.BL.Operation
             JobCardVM oJobCard = null;
             oJobCard = (from jc in _vssDb.JobCards
                         join bp in _vssDb.BusinessPartners on jc.ClientId equals bp.BpId
+                        where jc.Id == id
                         select new JobCardVM
                         {
                             Id = jc.Id,
@@ -415,6 +418,7 @@ namespace VSS.API.BL.Operation
                             ClientAddress = bp.Address,
                             ClientEmail = bp.Email,
                             ClientName = bp.Name,
+                            ClientPhone = bp.Phone,
                             MembershipNo = bp.MembershipNo,
                             ContactPerson = jc.ContactPerson,
                             ContactPersonNo = jc.ContactPersonNo,

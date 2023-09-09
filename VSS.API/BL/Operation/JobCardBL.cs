@@ -143,11 +143,13 @@ namespace VSS.API.BL.Operation
                         oJobCard.CreateDate = DateTime.Now;
                         _vssDb.JobCards.Add(oJobCard);
                         _vssDb.SaveChanges();
+                        model.Id = oJobCard.Id;
                         #endregion
                         #region Job-Details
-                        var listJcJob = _vssDb.JcJobs.Where(x => x.JcId == model.Id).ToList();
-                        _vssDb.JcJobs.RemoveRange(listJcJob);
+                        var listJcJobRem = _vssDb.JcJobs.Where(x => x.JcId == model.Id).ToList();
+                        _vssDb.JcJobs.RemoveRange(listJcJobRem);
                         _vssDb.SaveChanges();
+                        List<JcJob> listJcJob = new List<JcJob>();
                         foreach (var jcJob in model.JobDetails)
                         {
                             JcJob oJcJob = new JcJob();
@@ -158,28 +160,16 @@ namespace VSS.API.BL.Operation
                             oJcJob.Duration = jcJob.Duration;
                             oJcJob.JobStatus = jcJob.JobStatus;
                             oJcJob.JcId = oJobCard.Id;
-                            _vssDb.JcJobs.Add(oJcJob);
-                            _vssDb.SaveChanges();
-                            #region JC HR
-                            var listJcHR = _vssDb.JcHRs.Where(x => x.JcJobId == oJcJob.Id && x.JcId == oJcJob.JcId).ToList();
-                            _vssDb.JcHRs.RemoveRange(listJcHR);
-                            _vssDb.SaveChanges();
-                            foreach (var EmployeeId in jcJob.Resources)
-                            {
-                                JcHR oJcHr = new JcHR();
-                                oJcHr.EmployeeId = EmployeeId;
-                                oJcHr.JcJobId = oJcJob.Id;
-                                oJcHr.JcId = oJobCard.Id;
-                                _vssDb.JcHRs.Add(oJcHr);
-                                _vssDb.SaveChanges();
-                            }
-                            #endregion
+                            listJcJob.Add(oJcJob);
                         }
+                        _vssDb.JcJobs.AddRange(listJcJob);
+                        _vssDb.SaveChanges();
                         #endregion
                         #region Spare-Parts
-                        var listJcSpare = _vssDb.JcSpares.Where(x => x.JcId == model.Id).ToList();
-                        _vssDb.JcSpares.RemoveRange(listJcSpare);
+                        var listJcSpareRe = _vssDb.JcSpares.Where(x => x.JcId == model.Id).ToList();
+                        _vssDb.JcSpares.RemoveRange(listJcSpareRe);
                         _vssDb.SaveChanges();
+                        List<JcSpare> listJcSpare = new List<JcSpare>();
                         foreach (var jcSpare in model.JcSpares)
                         {
                             JcSpare oJcSpare = new JcSpare();
@@ -189,10 +179,26 @@ namespace VSS.API.BL.Operation
                             oJcSpare.ItemStatus = jcSpare.ItemStatus;
                             oJcSpare.SpareAmount = jcSpare.SpareAmount;
                             oJcSpare.JcId = oJobCard.Id;
-                            _vssDb.JcSpares.Add(oJcSpare);
-                            _vssDb.SaveChanges();
+                            listJcSpare.Add(oJcSpare);
+                        }
+                        _vssDb.JcSpares.AddRange(listJcSpare);
+                        _vssDb.SaveChanges();
+                        #endregion
+                        #region JC HR
+                        var listJcHRRe = _vssDb.JcHRs.Where(x => x.JcId == model.Id).ToList();
+                        _vssDb.JcHRs.RemoveRange(listJcHRRe);
+                        _vssDb.SaveChanges();
+                        List<JcHR> listJcHR = new List<JcHR>();
+                        foreach (var oJcHR in model.Resources)
+                        {
+                            JcHR oJcHr = new JcHR();
+                            oJcHr.EmployeeId = oJcHR.EmployeeId;
+                            oJcHr.JcId = oJobCard.Id;
+                            listJcHR.Add(oJcHr);
                         }
                         #endregion
+                        _vssDb.JcHRs.AddRange(listJcHR);
+                        _vssDb.SaveChanges();
                         _tran.Commit();
                         return true;
                     }
@@ -277,9 +283,10 @@ namespace VSS.API.BL.Operation
                         }
                         #endregion
                         #region Job-Details
-                        var listJcJob = _vssDb.JcJobs.Where(x => x.JcId == model.Id).ToList();
-                        _vssDb.JcJobs.RemoveRange(listJcJob);
+                        var listJcJobRem = _vssDb.JcJobs.Where(x => x.JcId == model.Id).ToList();
+                        _vssDb.JcJobs.RemoveRange(listJcJobRem);
                         _vssDb.SaveChanges();
+                        List<JcJob> listJcJob = new List<JcJob>();
                         foreach (var jcJob in model.JobDetails)
                         {
                             JcJob oJcJob = new JcJob();
@@ -290,28 +297,16 @@ namespace VSS.API.BL.Operation
                             oJcJob.Duration = jcJob.Duration;
                             oJcJob.JobStatus = jcJob.JobStatus;
                             oJcJob.JcId = oJobCard.Id;
-                            _vssDb.JcJobs.Add(oJcJob);
-                            _vssDb.SaveChanges();
-                            #region JC HR
-                            var listJcHR = _vssDb.JcHRs.Where(x => x.JcJobId == oJcJob.Id && x.JcId == oJcJob.JcId).ToList();
-                            _vssDb.JcHRs.RemoveRange(listJcHR);
-                            _vssDb.SaveChanges();
-                            foreach (var EmployeeId in jcJob.Resources)
-                            {
-                                JcHR oJcHr = new JcHR();
-                                oJcHr.EmployeeId = EmployeeId;
-                                oJcHr.JcJobId = oJcJob.Id;
-                                oJcHr.JcId = oJobCard.Id;
-                                _vssDb.JcHRs.Add(oJcHr);
-                                _vssDb.SaveChanges();
-                            }
-                            #endregion
+                            listJcJob.Add(oJcJob);
                         }
+                        _vssDb.JcJobs.AddRange(listJcJob);
+                        _vssDb.SaveChanges();
                         #endregion
                         #region Spare-Parts
-                        var listJcSpare = _vssDb.JcSpares.Where(x => x.JcId == model.Id).ToList();
-                        _vssDb.JcSpares.RemoveRange(listJcSpare);
+                        var listJcSpareRe = _vssDb.JcSpares.Where(x => x.JcId == model.Id).ToList();
+                        _vssDb.JcSpares.RemoveRange(listJcSpareRe);
                         _vssDb.SaveChanges();
+                        List<JcSpare> listJcSpare = new List<JcSpare>();
                         foreach (var jcSpare in model.JcSpares)
                         {
                             JcSpare oJcSpare = new JcSpare();
@@ -321,8 +316,22 @@ namespace VSS.API.BL.Operation
                             oJcSpare.ItemStatus = jcSpare.ItemStatus;
                             oJcSpare.SpareAmount = jcSpare.SpareAmount;
                             oJcSpare.JcId = oJobCard.Id;
-                            _vssDb.JcSpares.Add(oJcSpare);
-                            _vssDb.SaveChanges();
+                            listJcSpare.Add(oJcSpare);
+                        }
+                        _vssDb.JcSpares.AddRange(listJcSpare);
+                        _vssDb.SaveChanges();
+                        #endregion
+                        #region JC HR
+                        var listJcHRRe = _vssDb.JcHRs.Where(x => x.JcId == model.Id).ToList();
+                        _vssDb.JcHRs.RemoveRange(listJcHRRe);
+                        _vssDb.SaveChanges();
+                        List<JcHR> listJcHR = new List<JcHR>();
+                        foreach (var oJcHR in model.Resources)
+                        {
+                            JcHR oJcHr = new JcHR();
+                            oJcHr.EmployeeId = oJcHR.EmployeeId;
+                            oJcHr.JcId = oJobCard.Id;
+                            listJcHR.Add(oJcHr);
                         }
                         #endregion
                         _tran.Commit();
@@ -427,19 +436,7 @@ namespace VSS.API.BL.Operation
                                               EngineSizeName = es.CC,
                                               JobStatusName = j.JobStatus == 1 ? "Close" : j.JobStatus == 2 ? "Open" : "",
                                               JobName = jj.Description,
-                                              Price = j.Price,
-                                              Resources = (from hr in _vssDb.JcHRs where hr.JcId == jc.Id && hr.JcJobId == j.Id orderby hr.EmployeeId select hr.EmployeeId).ToList(),
-                                              ResourceNames = (from hr in _vssDb.JcHRs
-                                                           join e in _vssDb.Employees on hr.EmployeeId equals e.EmployeeId
-                                                               where hr.JcId == jc.Id && hr.JcJobId == j.Id
-                                                               select new JcHRVM
-                                                                {
-                                                               EmployeeId = hr.EmployeeId,
-                                                               FullName = e.FirstName + " " + e.MiddleName + " " + e.LastName,
-                                                               Id = hr.Id,
-                                                               JcId = jc.Id,
-                                                               JcJobId = j.Id
-                                                           }).ToList()
+                                              Price = j.Price
                                           }).ToList(),
                             JcSpares = (from s in _vssDb.JcSpares
                                         join i in _vssDb.Items on s.ItemId equals i.Id
@@ -459,6 +456,16 @@ namespace VSS.API.BL.Operation
                                             SpareAmount = s.SpareAmount,
                                             ItemStatus = s.ItemStatus,
                                             ItemStatusName = s.ItemStatus == 1 ? "USED" : "REFUND"
+                                        }).ToList(),
+                        Resources = (from hr in _vssDb.JcHRs
+                                        join e in _vssDb.Employees on hr.EmployeeId equals e.EmployeeId
+                                        where hr.JcId == jc.Id
+                                        select new JcHRVM
+                                        {
+                                            Id = hr.Id,
+                                            JcId = jc.Id,
+                                            EmployeeId = hr.EmployeeId,
+                                            FullName = e.FirstName + " " + e.MiddleName + " " + e.LastName
                                         }).ToList()
                         }).FirstOrDefault();
             return oJobCard;

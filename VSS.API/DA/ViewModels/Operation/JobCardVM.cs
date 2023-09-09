@@ -39,8 +39,9 @@ namespace VSS.API.DA.ViewModels.Operation
         public string ContactPerson { get; set; }
         public string ContactPersonNo { get; set; }
         public string Description { get; set; }
-        public List<JobDetailVm> JobDetails { get; set; }
-        public List<JcSpareVm> JcSpares { get; set; }
+        public List<JobDetailVm> JobDetails { get; set; }  = new List<JobDetailVm>();
+        public List<JcSpareVm> JcSpares { get; set; } = new List<JcSpareVm>();
+        public List<JcHRVM> Resources { get; set; } = new List<JcHRVM>();
     }
 
     public class JobDetailVm
@@ -57,8 +58,6 @@ namespace VSS.API.DA.ViewModels.Operation
         public int? Duration { get; set; }
         public int? JobStatus { get; set; }
         public string JobStatusName { get; set; }
-        public List<int?> Resources { get; set; }
-        public List<JcHRVM> ResourceNames { get; set; }
     }
 
     public class JcSpareVm

@@ -13,5 +13,6 @@ namespace VSS.API.DA.ViewModels.Operation
         public int? EmployeeId { get; set; }
         [StringLength(300)]
         public string FullName { get; set; }
+        public bool IsSelect { get; set; } = false;
     }
 }

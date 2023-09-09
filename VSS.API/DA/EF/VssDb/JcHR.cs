@@ -14,7 +14,5 @@ namespace VSS.API.DA.EF.VssDb
         public int? EmployeeId { get; set; }
 
         public long? JcId { get; set; }
-
-        public long? JcJobId { get; set; }
     }
 }

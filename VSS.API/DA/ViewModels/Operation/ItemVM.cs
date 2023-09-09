@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using VSS.API.DA.ViewModels.Common;
 
 namespace VSS.API.DA.ViewModels.Operation
 {
-    public class ItemVM
+    public class ItemVM:Pager
     {
         public int Id { get; set; }
 

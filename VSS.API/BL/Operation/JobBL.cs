@@ -11,9 +11,8 @@ namespace VSS.BL.Operation
     public class JobBL
     {
         ModelVssDb _vssDb = new ModelVssDb();
-        List<Job> listJob = null;
 
-        public IEnumerable<JobVM> Get(int pageIndex = 0, int pageSize = 5)
+        public IEnumerable<JobVM> Get(int pageIndex = 0, int pageSize = 10)
         {
             int nRow = _vssDb.Jobs.Count();
             var listJob = _vssDb.Jobs

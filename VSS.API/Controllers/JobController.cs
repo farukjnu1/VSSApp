@@ -13,7 +13,7 @@ namespace VSS.API.Controllers
     public class JobController : ApiController
     {
         // GET: api/Job
-        public IEnumerable<JobVM> Get(int pi = 0, int ps = 5)
+        public IEnumerable<JobVM> Get(int pi = 0, int ps = 10)
         {
             JobBL _BL = new JobBL();
             return _BL.Get(pi, ps);

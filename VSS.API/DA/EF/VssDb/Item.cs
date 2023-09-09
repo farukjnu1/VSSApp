@@ -16,7 +16,6 @@ namespace VSS.API.DA.EF.VssDb
             ItemPrices = new HashSet<ItemPrice>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [StringLength(50)]

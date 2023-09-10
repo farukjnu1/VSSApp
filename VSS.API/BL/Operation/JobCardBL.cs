@@ -12,6 +12,7 @@ using System.Collections;
 using VSS.API.DA.ViewModels.Operation;
 using VSS.API.DA.EF.VssDb;
 using System.Resources;
+using Google.Protobuf.WellKnownTypes;
 
 namespace VSS.API.BL.Operation
 {
@@ -348,7 +349,21 @@ namespace VSS.API.BL.Operation
             }
         }
 
-        public IEnumerable<JobCardVM> Get(int pageIndex = 0, int pageSize = 5)
+        public IEnumerable<JobCardVM> Get(int pageIndex = 0, int pageSize = 5, int jcStatus = 0)
+        {
+            _vssDb = new ModelVssDb();
+            string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
+            Generic_JobCardVM = new GenericFactory<JobCardVM>();
+            var oHashTable = new Hashtable()
+            {
+                { "PageIndex", pageIndex },
+                { "PageSize", pageSize },
+                { "JcStatus", jcStatus }
+            };
+            return Generic_JobCardVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetJobCard, oHashTable, vssDb);
+        }
+
+        /*public IEnumerable<JobCardVM> Get(int pageIndex = 0, int pageSize = 5)
         {
             _vssDb = new ModelVssDb();
             int nRow = _vssDb.JobCards.Count();
@@ -384,7 +399,7 @@ namespace VSS.API.BL.Operation
                 .Take(pageSize)
                 .ToList();
             return listJobCard;
-        }
+        }*/
 
         public JobCardVM Get(int id)
         {

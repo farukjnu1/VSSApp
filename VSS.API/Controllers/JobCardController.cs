@@ -16,10 +16,10 @@ namespace VSS.API.Controllers
     public class JobCardController : ApiController
     {
         // GET: api/JobCard/5
-        public IEnumerable<JobCardVM> Get(int pi = 0, int ps = 5)
+        public IEnumerable<JobCardVM> Get(int pi = 0, int ps = 5, int jcStatus = 0)
         {
             JobCardBL _BL = new JobCardBL();
-            return _BL.Get(pi, ps);
+            return _BL.Get(pi, ps, jcStatus);
         }
 
         // GET: api/JobGroup/5

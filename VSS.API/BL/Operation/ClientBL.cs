@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VSS.API.DA.EF.VssDb;
+using VSS.API.DA.ViewModels.Operation;
 using VSS.DA.ViewModels.Operation;
 
 namespace VSS.BL.Operation
@@ -120,6 +121,37 @@ namespace VSS.BL.Operation
                 return false;
             }
             return false;
+        }
+
+        /* public IEnumerable<ClientVM> getSName()
+         {
+             var listName = _vssDb.BusinessPartners
+                 .Select(x => new ClientVM
+                 {
+                     BpId = x.BpId,
+                     Name = x.Name
+                 }).OrderBy(s => s.Name).ToList();
+             return listName;
+         }*/
+
+        public IEnumerable<ClientVM> getSName()
+        {
+            listClient = new List<ClientVM>();
+            var listBP = _vssDb.BusinessPartners
+                .Where(x => x.BpTypeId == 2)
+                .ToList();
+            foreach (BusinessPartner oBP in listBP)
+            {
+                ClientVM oClient = new ClientVM();
+                oClient.BpId = oBP.BpId;
+                oClient.BpTypeId = oBP.BpTypeId;
+                oClient.Name = oBP.Name;
+                oClient.Phone = oBP.Phone;
+                oClient.Email = oBP.Email;
+                oClient.Address = oBP.Address;
+                listClient.Add(oClient);
+            }
+            return listClient;
         }
     }
 }

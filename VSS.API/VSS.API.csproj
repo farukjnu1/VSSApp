@@ -227,6 +227,8 @@
     <Compile Include="BL\Operation\JobGroupBL.cs" />
     <Compile Include="BL\Stores\BrandBL.cs" />
     <Compile Include="BL\Stores\ItemBL.cs" />
+    <Compile Include="BL\Stores\SRBL.cs" />
+    <Compile Include="BL\Stores\WarehouseBL.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\EngineSizeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -234,7 +236,9 @@
     <Compile Include="Controllers\JobCardController.cs" />
     <Compile Include="Controllers\JobController.cs" />
     <Compile Include="Controllers\JobGroupController.cs" />
+    <Compile Include="Controllers\SRController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\WarehouseController.cs" />
     <Compile Include="DA\ADO\GenericFactory.cs" />
     <Compile Include="DA\ADO\GenericFactoryMySql.cs" />
     <Compile Include="DA\ADO\IGenericFactory.cs" />
@@ -296,6 +300,8 @@
     <Compile Include="DA\ViewModels\Operation\JobGroupVM.cs" />
     <Compile Include="DA\ViewModels\Operation\JobVM.cs" />
     <Compile Include="DA\ViewModels\Operation\VehicleReceiverVM.cs" />
+    <Compile Include="DA\ViewModels\Stores\SRVM.cs" />
+    <Compile Include="DA\ViewModels\Stores\WarehouseVM.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

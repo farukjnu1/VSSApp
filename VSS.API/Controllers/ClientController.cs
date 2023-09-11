@@ -6,7 +6,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using VSS.API.BL.Stores;
 using VSS.API.DA.EF.VssDb;
+using VSS.API.DA.ViewModels.Operation;
 using VSS.BL.Operation;
 using VSS.DA.ViewModels.Operation;
 
@@ -49,6 +51,15 @@ namespace VSS.API.Controllers
         {
             ClientBL _BL = new ClientBL();
             return _BL.Remove(id);
+        }
+
+
+        [HttpGet]
+        [Route("api/Client/getSuplierName")]
+        public IEnumerable<ClientVM> getSuplierName()
+        {
+            ClientBL _BL = new ClientBL();
+            return _BL.getSName();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace VSS.API.DA.EF.VssDb
             PaySettles = new HashSet<PaySettle>();
         }
 
-        public long InvoiceId { get; set; }
+        public long Id { get; set; }
 
         public int? ClientId { get; set; }
 
@@ -27,6 +27,10 @@ namespace VSS.API.DA.EF.VssDb
         public bool? IsPaid { get; set; }
 
         public long? JcId { get; set; }
+
+        public decimal? GrandTotal { get; set; }
+
+        public int? InvoiceStatus { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InvoiceItem> InvoiceItems { get; set; }

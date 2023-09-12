@@ -8,7 +8,7 @@ namespace VSS.API.DA.ViewModels.Billing
 {
     public class InvoiceVM
     {
-        public long InvoiceId { get; set; }
+        public long Id { get; set; }
 
         public int? ClientId { get; set; }
 
@@ -19,7 +19,11 @@ namespace VSS.API.DA.ViewModels.Billing
         public bool? IsPaid { get; set; }
 
         public long? JcId { get; set; }
-        public List<InvoiceItemVM> listInvoiceItem { get; set; }
+
+        public decimal? GrandTotal { get; set; }
+
+        public int? InvoiceStatus { get; set; }
+        public List<InvoiceItemVM> InvoiceItems { get; set; } = new List<InvoiceItemVM>();
     }
 
     public class InvoiceItemVM
@@ -30,18 +34,31 @@ namespace VSS.API.DA.ViewModels.Billing
 
         public int? ItemId { get; set; }
 
-        public int? PriceId { get; set; }
+        public int? ItemType { get; set; }
 
         public decimal? Qty { get; set; }
+
+        public decimal? UnitPrice { get; set; }
 
         [Column(TypeName = "money")]
         public decimal? Tax { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal? Amount { get; set; }
-
         public int? DoneBy { get; set; }
 
         public DateTime? DoneDate { get; set; }
+
+        public decimal? TotalPrice { get; set; }
+
+        public decimal? Discount { get; set; }
+
+        public decimal? DiscountAmount { get; set; }
+
+        public decimal? TpAfterDiscount { get; set; }
+
+        public decimal? Vat { get; set; }
+
+        public decimal? TotalVat { get; set; }
+
+        public decimal? TotalAmount { get; set; }
     }
 }

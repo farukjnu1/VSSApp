@@ -48,10 +48,13 @@ namespace VSS.API.BL.System
                         List<UserRole> listUR = new List<UserRole>();
                         foreach (var model in listModel)
                         {
-                            UserRole oUR = new UserRole();
-                            oUR.UserId = model.UserId;
-                            oUR.RoleId = model.RoleId;
-                            listUR.Add(oUR);
+                            if (model.IsSelect)
+                            {
+                                UserRole oUR = new UserRole();
+                                oUR.UserId = model.UserId;
+                                oUR.RoleId = model.RoleId;
+                                listUR.Add(oUR);
+                            }
                         }
                         _vssDb.UserRoles.AddRange(listUR);
                         _vssDb.SaveChanges();

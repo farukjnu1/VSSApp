@@ -9,9 +9,7 @@ namespace VSS.API.DA.EF.VssDb
     [Table("MenuPermission")]
     public partial class MenuPermission
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int PermissionId { get; set; }
+        public int Id { get; set; }
 
         public bool? CanCreate { get; set; }
 

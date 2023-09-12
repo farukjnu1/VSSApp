@@ -9,7 +9,6 @@ namespace VSS.API.DA.EF.VssDb
     [Table("UserRole")]
     public partial class UserRole
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         public int? UserId { get; set; }

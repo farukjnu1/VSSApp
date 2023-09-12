@@ -17,5 +17,6 @@ namespace VSS.API.DA.ADO
         public const string sp_GetJobGroup = "[dbo].[sp_GetJobGroup]";
         public const string sp_GetItemByParts = "[dbo].[sp_GetItemByParts]";
         public const string sp_GetJobCard = "[dbo].[sp_GetJobCard]";
+        public const string sp_GetUserRole = "[dbo].[sp_GetUserRole]";
     }
 }

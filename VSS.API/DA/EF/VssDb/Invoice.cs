@@ -26,7 +26,7 @@ namespace VSS.API.DA.EF.VssDb
 
         public bool? IsPaid { get; set; }
 
-        public long? JCId { get; set; }
+        public long? JcId { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InvoiceItem> InvoiceItems { get; set; }

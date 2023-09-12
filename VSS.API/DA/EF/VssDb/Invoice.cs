@@ -16,7 +16,6 @@ namespace VSS.API.DA.EF.VssDb
             PaySettles = new HashSet<PaySettle>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long InvoiceId { get; set; }
 
         public int? ClientId { get; set; }

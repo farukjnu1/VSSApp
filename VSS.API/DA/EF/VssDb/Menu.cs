@@ -15,7 +15,6 @@ namespace VSS.API.DA.EF.VssDb
             MenuPermissions = new HashSet<MenuPermission>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int MenuId { get; set; }
 
         public int? ModuleId { get; set; }

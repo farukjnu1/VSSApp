@@ -9,8 +9,7 @@ namespace VSS.API.DA.EF.VssDb
     [Table("InvoiceItem")]
     public partial class InvoiceItem
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public long InvoiceItemId { get; set; }
+        public long Id { get; set; }
 
         public long? InvoiceId { get; set; }
 

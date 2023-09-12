@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using VSS.API.DA.EF.VssDb;
 using VSS.API.DA.ViewModels.Operation;
+using VSS.API.DA.ViewModels.Stores;
 
 namespace VSS.API.BL.Stores
 {
@@ -92,6 +93,17 @@ namespace VSS.API.BL.Stores
                 return false;
             }
             return false;
+        }
+
+        public IEnumerable<ItemVM> getItemName()
+        {
+            var listItemName = _vssDb.Items
+                .Select(x => new ItemVM
+                {
+                    Id = x.Id,
+                    ItemName = x.ItemName
+                }).OrderBy(s => s.ItemName).ToList();
+            return listItemName;
         }
     }
 }

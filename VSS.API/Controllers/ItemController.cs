@@ -55,5 +55,13 @@ namespace VSS.API.Controllers
             BrandBL _BL = new BrandBL();
             return _BL.GetBrand();
         }
+
+        [HttpGet]
+        [Route("api/Item/getItemName")]
+        public IEnumerable<ItemVM> getWareHouse()
+        {
+            ItemBL _BL = new ItemBL();
+            return _BL.getItemName();
+        }
     }
 }

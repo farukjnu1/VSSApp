@@ -9,9 +9,7 @@ namespace VSS.API.DA.EF.VssDb
     [Table("PaySettle")]
     public partial class PaySettle
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int PayId { get; set; }
+        public int Id { get; set; }
 
         public long? InvoiceId { get; set; }
 

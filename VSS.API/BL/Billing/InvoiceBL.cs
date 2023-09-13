@@ -110,7 +110,6 @@ namespace VSS.API.BL.Billing
                             oInvoice.CreateBy = model.CreateBy;
                             oInvoice.CreateDate = DateTime.Now;
                             oInvoice.GrandTotal = model.GrandTotal;
-                            _vssDb.Invoices.Add(oInvoice);
                             _vssDb.SaveChanges();
                             model.Id = oInvoice.Id;
                             #endregion
@@ -179,11 +178,12 @@ namespace VSS.API.BL.Billing
                         select new InvoiceVM
                         {
                             Id = i.Id,
-                            JcId = i.JcId,
-                            JcNo = jc.JcNo,
-                            ClientId = jc.ClientId,
+                            JcId = i.JcId == null ? 0 : i.JcId,
                             CreateBy = i.CreateBy,
                             CreateDate = i.CreateDate,
+                            GrandTotal = i.GrandTotal,
+                            JcNo = jc.JcNo,
+                            ClientId = jc.ClientId,
                             Description = jc.ClientInfo,
                             ClientAddress = bp.Address,
                             ClientEmail = bp.Email,

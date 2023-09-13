@@ -373,6 +373,7 @@ namespace VSS.API.BL.Operation
                         {
                             Id = jc.Id,
                             JcNo = jc.JcNo,
+                            JcId = 0,
                             VehicleNo = jc.VehicleNo,
                             Model = jc.Model,
                             Vin = jc.Vin,

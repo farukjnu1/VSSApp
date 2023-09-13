@@ -351,7 +351,6 @@ namespace VSS.API.BL.Operation
 
         public IEnumerable<JobCardVM> Get(int pageIndex = 0, int pageSize = 5, int jcStatus = 0)
         {
-            _vssDb = new ModelVssDb();
             string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
             Generic_JobCardVM = new GenericFactory<JobCardVM>();
             var oHashTable = new Hashtable()
@@ -362,44 +361,6 @@ namespace VSS.API.BL.Operation
             };
             return Generic_JobCardVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetJobCard, oHashTable, vssDb);
         }
-
-        /*public IEnumerable<JobCardVM> Get(int pageIndex = 0, int pageSize = 5)
-        {
-            _vssDb = new ModelVssDb();
-            int nRow = _vssDb.JobCards.Count();
-            var listJobCard = _vssDb.JobCards
-                .Select(x => new JobCardVM
-                {
-                    Id = x.Id,
-                    JcNo = x.JcNo,
-                    VehicleNo = x.VehicleNo,
-                    Model = x.Model,
-                    Vin = x.Vin,
-                    Mileage = x.Mileage,
-                    ReceiveDate = x.ReceiveDate,
-                    ReceiveBy = x.SupervisorId,
-                    Bay = x.Bay,
-                    JcStatus = x.JcStatus,
-                    EstiCostJob = x.EstiCostJob,
-                    EstiCostSpare = x.EstiCostSpare,
-                    EstiCostTotal = x.EstiCostTotal,
-                    ActualCostJob = x.ActualCostJob,
-                    ActualCostSpare = x.ActualCostSpare,
-                    ActualCostTotal = x.ActualCostTotal,
-                    ClientId = x.ClientId,
-                    Description = x.ClientInfo,
-                    CreateBy = x.CreateBy,
-                    CreateDate = DateTime.Now,
-                    PageIndex = pageIndex,
-                    PageSize = pageSize,
-                    RowCount = nRow
-                })
-                .OrderByDescending(s => s.Id)
-                .Skip(pageIndex * pageSize)
-                .Take(pageSize)
-                .ToList();
-            return listJobCard;
-        }*/
 
         public JobCardVM Get(int id)
         {
@@ -428,8 +389,8 @@ namespace VSS.API.BL.Operation
                             ActualCostTotal = jc.ActualCostTotal,
                             ClientId = jc.ClientId,
                             Description = jc.ClientInfo,
-                            //CreateBy = x.CreateBy,
-                            //CreateDate = DateTime.Now,
+                            CreateBy = jc.CreateBy,
+                            CreateDate = jc.CreateDate,
                             ClientAddress = bp.Address,
                             ClientEmail = bp.Email,
                             ClientName = bp.Name,

@@ -167,8 +167,16 @@ namespace VSS.API.DA.EF.VssDb
                 .WithOptional(e => e.Gender1)
                 .HasForeignKey(e => e.Gender);
 
+            modelBuilder.Entity<Invoice>()
+                .Property(e => e.GrandTotal)
+                .HasPrecision(18, 0);
+
             modelBuilder.Entity<InvoiceItem>()
                 .Property(e => e.Qty)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<InvoiceItem>()
+                .Property(e => e.UnitPrice)
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<InvoiceItem>()
@@ -176,8 +184,32 @@ namespace VSS.API.DA.EF.VssDb
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<InvoiceItem>()
-                .Property(e => e.Amount)
-                .HasPrecision(19, 4);
+                .Property(e => e.TotalPrice)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<InvoiceItem>()
+                .Property(e => e.Discount)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<InvoiceItem>()
+                .Property(e => e.DiscountAmount)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<InvoiceItem>()
+                .Property(e => e.TpAfterDiscount)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<InvoiceItem>()
+                .Property(e => e.Vat)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<InvoiceItem>()
+                .Property(e => e.TotalVat)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<InvoiceItem>()
+                .Property(e => e.TotalAmount)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<Item>()
                 .Property(e => e.ItemCode)

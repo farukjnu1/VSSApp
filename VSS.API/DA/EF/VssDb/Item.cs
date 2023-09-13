@@ -12,7 +12,6 @@ namespace VSS.API.DA.EF.VssDb
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Item()
         {
-            InvoiceItems = new HashSet<InvoiceItem>();
             ItemPrices = new HashSet<ItemPrice>();
         }
 
@@ -66,9 +65,6 @@ namespace VSS.API.DA.EF.VssDb
         public DateTime? DeleteAt { get; set; }
 
         public virtual Brand Brand { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InvoiceItem> InvoiceItems { get; set; }
 
         public virtual ItemCategory ItemCategory { get; set; }
 

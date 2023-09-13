@@ -15,24 +15,35 @@ namespace VSS.API.DA.EF.VssDb
 
         public int? ItemId { get; set; }
 
-        public int? PriceId { get; set; }
+        public int? ItemType { get; set; }
 
         public decimal? Qty { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal? Tax { get; set; }
+        public decimal? UnitPrice { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal? Amount { get; set; }
+        public decimal? Tax { get; set; }
 
         public int? DoneBy { get; set; }
 
         public DateTime? DoneDate { get; set; }
 
+        public decimal? TotalPrice { get; set; }
+
+        public decimal? Discount { get; set; }
+
+        public decimal? DiscountAmount { get; set; }
+
+        public decimal? TpAfterDiscount { get; set; }
+
+        public decimal? Vat { get; set; }
+
+        public decimal? TotalVat { get; set; }
+
+        public decimal? TotalAmount { get; set; }
+
         public virtual Employee Employee { get; set; }
 
         public virtual Invoice Invoice { get; set; }
-
-        public virtual Item Item { get; set; }
     }
 }

@@ -15,9 +15,10 @@ namespace VSS.API.Controllers
     public class InvoiceController : ApiController
     {
         // GET: api/Invoice
-        public IEnumerable<string> Get()
+        public IEnumerable<JobCardVM> Get(int pi = 0, int ps = 5, int jcStatus = 1)
         {
-            return new string[] { "value1", "value2" };
+            InvoiceBL _BL = new InvoiceBL();
+            return _BL.Get(pi, ps, jcStatus);
         }
 
         // GET: api/Invoice/5
@@ -34,13 +35,24 @@ namespace VSS.API.Controllers
         }
 
         // PUT: api/Invoice/5
-        public void Put(int id, [FromBody]string value)
+        public bool Put([FromBody] InvoiceVM model)
         {
+            InvoiceBL _BL = new InvoiceBL();
+            return _BL.Update(model);
         }
 
         // DELETE: api/Invoice/5
         public void Delete(int id)
         {
         }
+
+        [HttpGet]
+        [Route("api/JobCard/GetByJc")]
+        public InvoiceVM GetByJc([FromUri] int jcId)
+        {
+            InvoiceBL _BL = new InvoiceBL();
+            return _BL.GetByJc(jcId);
+        }
+
     }
 }

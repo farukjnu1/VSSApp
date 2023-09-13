@@ -24,6 +24,14 @@ namespace VSS.API.DA.ViewModels.Billing
 
         public int? InvoiceStatus { get; set; }
         public List<InvoiceItemVM> InvoiceItems { get; set; } = new List<InvoiceItemVM>();
+        public string JcNo { get; set; }
+        public string ClientName { get; set; }
+        public string ClientPhone { get; set; }
+        public string ClientEmail { get; set; }
+        public string ClientAddress { get; set; }
+        public string ContactPerson { get; set; }
+        public string ContactPersonNo { get; set; }
+        public string Description { get; set; }
     }
 
     public class InvoiceItemVM

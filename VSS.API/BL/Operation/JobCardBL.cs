@@ -351,7 +351,6 @@ namespace VSS.API.BL.Operation
 
         public IEnumerable<JobCardVM> Get(int pageIndex = 0, int pageSize = 5, int jcStatus = 0)
         {
-            _vssDb = new ModelVssDb();
             string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
             Generic_JobCardVM = new GenericFactory<JobCardVM>();
             var oHashTable = new Hashtable()

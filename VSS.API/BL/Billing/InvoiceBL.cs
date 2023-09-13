@@ -96,6 +96,14 @@ namespace VSS.API.BL.Billing
                 {
                     try
                     {
+                        #region Validation
+                        PaySettle oPaySettle = (from x in _vssDb.PaySettles where x.InvoiceId == model.Id select x).FirstOrDefault();
+                        if (oPaySettle != null)
+                        {
+                            _tran.Rollback();
+                            return false;
+                        }
+                        #endregion
                         var oInvoice = _vssDb.Invoices.Where(x => x.JcId == model.JcId).FirstOrDefault();
                         if (oInvoice == null)
                         {
@@ -154,7 +162,7 @@ namespace VSS.API.BL.Billing
             }
         }
 
-        public IEnumerable<JobCardVM> Get(int pageIndex = 0, int pageSize = 5, int jcStatus = 1)
+        public IEnumerable<JobCardVM> Get(int pageIndex = 0, int pageSize = 5, int jcStatus = 1, bool isPaid = false)
         {
             string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
             Generic_JobCardVM = new GenericFactory<JobCardVM>();
@@ -162,7 +170,8 @@ namespace VSS.API.BL.Billing
             {
                 { "PageIndex", pageIndex },
                 { "PageSize", pageSize },
-                { "JcStatus", jcStatus }
+                { "JcStatus", jcStatus },
+                { "IsPaid", isPaid }
             };
             return Generic_JobCardVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetJcInvoice, oHashTable, vssDb);
         }
@@ -178,7 +187,8 @@ namespace VSS.API.BL.Billing
                         select new InvoiceVM
                         {
                             Id = i.Id,
-                            JcId = i.JcId == null ? 0 : i.JcId,
+                            JcId = jc.Id,
+                            IsInvoice = i.JcId == null || i.JcId == 0 ? 0 : 1,
                             CreateBy = i.CreateBy,
                             CreateDate = i.CreateDate,
                             GrandTotal = i.GrandTotal,

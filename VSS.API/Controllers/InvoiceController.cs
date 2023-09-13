@@ -15,10 +15,10 @@ namespace VSS.API.Controllers
     public class InvoiceController : ApiController
     {
         // GET: api/Invoice
-        public IEnumerable<JobCardVM> Get(int pi = 0, int ps = 5, int jcStatus = 1)
+        public IEnumerable<JobCardVM> Get(int pi = 0, int ps = 5, int jcStatus = 1, bool isPaid = false)
         {
             InvoiceBL _BL = new InvoiceBL();
-            return _BL.Get(pi, ps, jcStatus);
+            return _BL.Get(pi, ps, jcStatus, isPaid);
         }
 
         // GET: api/Invoice/5

@@ -229,6 +229,7 @@
     <Compile Include="BL\Stores\ItemBL.cs" />
     <Compile Include="BL\Stores\SRBL.cs" />
     <Compile Include="BL\Stores\WarehouseBL.cs" />
+    <Compile Include="BL\System\RoleBL.cs" />
     <Compile Include="BL\System\UserBL.cs" />
     <Compile Include="BL\System\UserRoleBL.cs" />
     <Compile Include="Controllers\ClientController.cs" />
@@ -238,6 +239,7 @@
     <Compile Include="Controllers\JobCardController.cs" />
     <Compile Include="Controllers\JobController.cs" />
     <Compile Include="Controllers\JobGroupController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SRController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserRoleController.cs" />
@@ -306,6 +308,7 @@
     <Compile Include="DA\ViewModels\Operation\VehicleReceiverVM.cs" />
     <Compile Include="DA\ViewModels\Stores\SRVM.cs" />
     <Compile Include="DA\ViewModels\Stores\WarehouseVM.cs" />
+    <Compile Include="DA\ViewModels\System\RoleVM.cs" />
     <Compile Include="DA\ViewModels\System\UserRoleVM.cs" />
     <Compile Include="DA\ViewModels\System\UserVM.cs" />
     <Compile Include="Global.asax.cs">

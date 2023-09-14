@@ -1,13 +1,13 @@
-namespace VSS.API.DA.EF.VssDb
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
-    [Table("PayTran")]
-    public partial class PayTran
+namespace VSS.API.DA.ViewModels.Billing
+{
+    public class PayTranVM
     {
         public long Id { get; set; }
 
@@ -47,21 +47,5 @@ namespace VSS.API.DA.EF.VssDb
         public DateTime? CreateDate { get; set; }
 
         public int? CreateBy { get; set; }
-
-        public DateTime? UpdateDate { get; set; }
-
-        public int? UpdateBy { get; set; }
-
-        public DateTime? DeleteDate { get; set; }
-
-        public int? DeleteBy { get; set; }
-
-        public bool? IsDelete { get; set; }
-
-        public virtual BusinessPartner BusinessPartner { get; set; }
-
-        public virtual PayMethod PayMethod { get; set; }
-
-        public virtual PayStatu PayStatu { get; set; }
     }
 }

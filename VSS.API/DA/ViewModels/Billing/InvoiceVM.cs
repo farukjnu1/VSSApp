@@ -32,6 +32,7 @@ namespace VSS.API.DA.ViewModels.Billing
         public string ContactPerson { get; set; }
         public string ContactPersonNo { get; set; }
         public string Description { get; set; }
+        public int? IsInvoice { get; set; }
     }
 
     public class InvoiceItemVM

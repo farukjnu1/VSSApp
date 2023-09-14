@@ -39,7 +39,8 @@ namespace VSS.API.DA.ViewModels.Operation
         public string ContactPerson { get; set; }
         public string ContactPersonNo { get; set; }
         public string Description { get; set; }
-        public int? JcId { get; set; }
+        public int? IsInvoice { get; set; }
+        public decimal? GrandTotal { get; set; }
         public List<JobDetailVm> JobDetails { get; set; }  = new List<JobDetailVm>();
         public List<JcSpareVm> JcSpares { get; set; } = new List<JcSpareVm>();
         public List<JcHRVM> Resources { get; set; } = new List<JcHRVM>();

@@ -220,6 +220,14 @@ namespace VSS.API.BL.Operation
                 {
                     try
                     {
+                        #region Validation
+                        Invoice oI = (from x in _vssDb.Invoices where x.JcId == model.Id select x).FirstOrDefault();
+                        if (oI != null) 
+                        {
+                            _tran.Rollback();
+                            return false;
+                        }
+                        #endregion
                         #region Client
                         BusinessPartner oBP = null;
                         if (model.ClientId > 0)
@@ -365,6 +373,8 @@ namespace VSS.API.BL.Operation
         public JobCardVM Get(int id)
         {
             _vssDb = new ModelVssDb();
+            var oI = _vssDb.Invoices.Where(x=>x.JcId == id).FirstOrDefault();
+            var isInvoice = oI == null ? 0 : 1;
             JobCardVM oJobCard = null;
             oJobCard = (from jc in _vssDb.JobCards
                         join bp in _vssDb.BusinessPartners on jc.ClientId equals bp.BpId
@@ -373,6 +383,7 @@ namespace VSS.API.BL.Operation
                         {
                             Id = jc.Id,
                             JcNo = jc.JcNo,
+                            IsInvoice = isInvoice,
                             VehicleNo = jc.VehicleNo,
                             Model = jc.Model,
                             Vin = jc.Vin,

@@ -74,6 +74,7 @@
     <Reference Include="MySql.Data, Version=8.1.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.1.0\lib\net462\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -230,6 +231,7 @@
     <Compile Include="BL\Stores\ItemBL.cs" />
     <Compile Include="BL\Stores\SRBL.cs" />
     <Compile Include="BL\Stores\WarehouseBL.cs" />
+    <Compile Include="BL\System\MenuPermissionBL.cs" />
     <Compile Include="BL\System\RoleBL.cs" />
     <Compile Include="BL\System\UserBL.cs" />
     <Compile Include="BL\System\UserRoleBL.cs" />
@@ -241,6 +243,7 @@
     <Compile Include="Controllers\JobCardController.cs" />
     <Compile Include="Controllers\JobController.cs" />
     <Compile Include="Controllers\JobGroupController.cs" />
+    <Compile Include="Controllers\MenuPermissionController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SRController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -311,6 +314,7 @@
     <Compile Include="DA\ViewModels\Operation\VehicleReceiverVM.cs" />
     <Compile Include="DA\ViewModels\Stores\SRVM.cs" />
     <Compile Include="DA\ViewModels\Stores\WarehouseVM.cs" />
+    <Compile Include="DA\ViewModels\System\MenuPermissionVM.cs" />
     <Compile Include="DA\ViewModels\System\RoleVM.cs" />
     <Compile Include="DA\ViewModels\System\UserRoleVM.cs" />
     <Compile Include="DA\ViewModels\System\UserVM.cs" />

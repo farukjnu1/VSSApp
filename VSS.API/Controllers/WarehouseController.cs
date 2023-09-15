@@ -4,11 +4,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using VSS.API.Attributes;
 using VSS.API.BL.Stores;
 using VSS.API.DA.ViewModels.Stores;
 
 namespace VSS.API.Controllers
 {
+    //[MyAuth]
     public class WarehouseController : ApiController
     {
         // GET: api/Warehouse

@@ -1,4 +1,4 @@
-﻿﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -220,6 +220,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Attributes\JsonWebToken.cs" />
+    <Compile Include="Attributes\MyAuth.cs" />
     <Compile Include="BL\Billing\InvoiceBL.cs" />
     <Compile Include="BL\Billing\PayBL.cs" />
     <Compile Include="BL\Operation\ClientBL.cs" />
@@ -232,6 +234,8 @@
     <Compile Include="BL\Stores\SRBL.cs" />
     <Compile Include="BL\Stores\WarehouseBL.cs" />
     <Compile Include="BL\System\LoginBL.cs" />
+    <Compile Include="BL\System\MenuPermissionBL.cs" />
+    <Compile Include="BL\System\RoleBL.cs" />
     <Compile Include="BL\System\UserBL.cs" />
     <Compile Include="BL\System\UserRoleBL.cs" />
     <Compile Include="Controllers\ClientController.cs" />
@@ -243,7 +247,9 @@
     <Compile Include="Controllers\JobController.cs" />
     <Compile Include="Controllers\JobGroupController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MenuPermissionController.cs" />
     <Compile Include="Controllers\PayController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SRController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserRoleController.cs" />
@@ -302,7 +308,6 @@
     <Compile Include="DA\ViewModels\Billing\InvoiceVM.cs" />
     <Compile Include="DA\ViewModels\Billing\PayTranVM.cs" />
     <Compile Include="DA\ViewModels\Common\Pager.cs" />
-    <Compile Include="DA\ViewModels\Stores\BrandVM.cs" />
     <Compile Include="DA\ViewModels\Operation\ClientVM.cs" />
     <Compile Include="DA\ViewModels\Operation\CompanyVM.cs" />
     <Compile Include="DA\ViewModels\Operation\EngineSizeVM.cs" />
@@ -312,8 +317,12 @@
     <Compile Include="DA\ViewModels\Operation\JobGroupVM.cs" />
     <Compile Include="DA\ViewModels\Operation\JobVM.cs" />
     <Compile Include="DA\ViewModels\Operation\VehicleReceiverVM.cs" />
+    <Compile Include="DA\ViewModels\Stores\BrandVM.cs" />
     <Compile Include="DA\ViewModels\Stores\SRVM.cs" />
     <Compile Include="DA\ViewModels\Stores\WarehouseVM.cs" />
+    <Compile Include="DA\ViewModels\System\MenuPermissionVM.cs" />
+    <Compile Include="DA\ViewModels\System\RoleVM.cs" />
+    <Compile Include="DA\ViewModels\System\UserPayload.cs" />
     <Compile Include="DA\ViewModels\System\UserRoleVM.cs" />
     <Compile Include="DA\ViewModels\System\UserVM.cs" />
     <Compile Include="Global.asax.cs">
@@ -389,10 +398,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Attributes\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Client\" />
-    <Folder Include="Views\Item\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\bootstrap.min.js.map" />

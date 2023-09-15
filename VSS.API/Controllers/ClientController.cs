@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using VSS.API.Attributes;
 using VSS.API.BL.Stores;
 using VSS.API.DA.EF.VssDb;
 using VSS.API.DA.ViewModels.Operation;
@@ -16,6 +17,7 @@ namespace VSS.API.Controllers
 {
     //[EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     //[VssCorsAttribute]
+    //[MyAuth]
     public class ClientController : ApiController
     {
         // GET: api/Client

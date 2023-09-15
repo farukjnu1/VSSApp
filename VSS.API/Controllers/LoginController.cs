@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using VSS.API.Attributes;
 using VSS.API.BL.Operation;
 using VSS.API.BL.System;
 using VSS.API.DA.ViewModels.System;

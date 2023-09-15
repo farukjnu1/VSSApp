@@ -38,5 +38,8 @@ namespace VSS.API.DA.ViewModels.System
         public string PhoneNo { get; set; }
 
         public bool? IsActive { get; set; }
+        public List<MenuPermissionVM> Permissions { get; set; }
+        [StringLength(500)]
+        public string Token { get; set; }
     }
 }

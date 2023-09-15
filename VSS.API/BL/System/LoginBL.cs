@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Configuration;
 using System.Linq;
 using System.Web;
+using VSS.API.Attributes;
 using VSS.API.DA.EF.VssDb;
 using VSS.API.DA.ViewModels.System;
 
@@ -26,21 +29,14 @@ namespace VSS.API.BL.System
                 Email = y.Email,
                 MobileNo = y.MobileNo
             }).FirstOrDefault();
-            var listUserRole = _vssDb.UserRoles.Where(x => x.UserId == oUser.UserID).ToList();
-            //var listMenuPermission = new List<MenuPermission>();
-            foreach (var oUserRole in listUserRole)
+            if (oUser != null) 
             {
-                var listMP = _vssDb.MenuPermissions.Where(x => x.RoleId == oUserRole.RoleId).ToList();
-                //listMenuPermission.AddRange(listMP);
-            }
-            //listMenuPermission.GroupBy(x => x.MenuId);
-            var listMenu = _vssDb.Menus.ToList();
-            var listMenuPermission = _vssDb.MenuPermissions.ToList();
-            List<Menu> listM = new List<Menu>();
-            foreach (var menu in listMenu)
-            {
-                //listMenuPermission.Where(x=>x.MenuId == menu.MenuId).GroupBy(y=>y.MenuId).Max(z=>z.Max(a=>a.))
-            }
+                NameValueCollection myKeys = ConfigurationManager.AppSettings;
+                int tokenExpire = Convert.ToInt32(myKeys["TokenExpire"]);
+                string VSS = myKeys["VSS"];
+                oUser.Permissions = new MenuPermissionBL().GetMenuByUser(oUser.UserID);
+                oUser.Token = JsonWebToken.Encode(new UserPayload() { CreateDate = DateTime.Now, UserId = oUser.UserID, TokenExpire = tokenExpire, UserName = oUser.UserName }, VSS, JwtHashAlgorithm.HS512);
+            }          
             return oUser;
         }
     }

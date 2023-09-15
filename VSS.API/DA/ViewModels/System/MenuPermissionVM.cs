@@ -20,7 +20,7 @@ namespace VSS.API.DA.ViewModels.System
 
         public bool? IsSubParent { get; set; }
 
-        public int? SubParentId { get; set; }
+        public int? SubPareMenuNamentId { get; set; }
 
         public string MenuIcon { get; set; }
 

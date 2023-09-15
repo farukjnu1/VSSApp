@@ -31,6 +31,17 @@ namespace VSS.API.BL.System
             return ResutSet;
         }
 
+        public List<MenuPermissionVM> GetMenuByUser(int UserId)
+        {
+            string rvssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
+            Generic_MenuPermissionVM = new GenericFactory<MenuPermissionVM>();
+            var rHashTable = new Hashtable()
+            {
+                { "UserId", UserId }
+            };
+            return Generic_MenuPermissionVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetMenuPermissionByUserId, rHashTable, rvssDb);
+        }
+
         internal bool add(List<MenuPermissionVM> listModel)
         {
             using (_vssDb = new ModelVssDb())

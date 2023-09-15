@@ -423,6 +423,14 @@ namespace VSS.API.DA.EF.VssDb
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()
+                .Property(e => e.UserName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.UserPass)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
                 .Property(e => e.Email)
                 .IsUnicode(false);
 

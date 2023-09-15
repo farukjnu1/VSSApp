@@ -231,6 +231,7 @@
     <Compile Include="BL\Stores\ItemBL.cs" />
     <Compile Include="BL\Stores\SRBL.cs" />
     <Compile Include="BL\Stores\WarehouseBL.cs" />
+    <Compile Include="BL\System\LoginBL.cs" />
     <Compile Include="BL\System\UserBL.cs" />
     <Compile Include="BL\System\UserRoleBL.cs" />
     <Compile Include="Controllers\ClientController.cs" />
@@ -241,6 +242,7 @@
     <Compile Include="Controllers\JobCardController.cs" />
     <Compile Include="Controllers\JobController.cs" />
     <Compile Include="Controllers\JobGroupController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\SRController.cs" />
     <Compile Include="Controllers\UserController.cs" />

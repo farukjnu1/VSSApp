@@ -14,6 +14,12 @@ namespace VSS.API.DA.ViewModels.System
         public string UserCode { get; set; }
 
         [StringLength(50)]
+        public string UserName { get; set; }
+
+        [StringLength(100)]
+        public string UserPass { get; set; }
+
+        [StringLength(50)]
         public string FirstName { get; set; }
 
         [StringLength(50)]
@@ -32,19 +38,5 @@ namespace VSS.API.DA.ViewModels.System
         public string PhoneNo { get; set; }
 
         public bool? IsActive { get; set; }
-
-        public DateTime? CreateDate { get; set; }
-
-        public int? CreateBy { get; set; }
-
-        public DateTime? UpdateDate { get; set; }
-
-        public int? UpdateBy { get; set; }
-
-        public DateTime? DeleteDate { get; set; }
-
-        public int? DeleteBy { get; set; }
-
-        public bool? IsDelete { get; set; }
     }
 }

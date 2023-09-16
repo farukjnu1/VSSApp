@@ -1,21 +1,13 @@
-namespace VSS.API.DA.EF.VssDb
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace VSS.API.DA.ViewModels.System
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
-    [Table("Company")]
-    public partial class Company
+    public class CompanyVM
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Company()
-        {
-            CompanyLogoes = new HashSet<CompanyLogo>();
-        }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int CompanyId { get; set; }
 
         [StringLength(10)]
@@ -49,8 +41,19 @@ namespace VSS.API.DA.EF.VssDb
         public string Website { get; set; }
 
         public bool? IsActive { get; set; }
+        public List<CompanyLogoVM> Logos { get; set; } = new List<CompanyLogoVM>();
+    }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CompanyLogo> CompanyLogoes { get; set; }
+    public class CompanyLogoVM
+    {
+        public int LogoId { get; set; }
+
+        [StringLength(50)]
+        public string Name { get; set; }
+
+        [StringLength(250)]
+        public string LogoUrl { get; set; }
+
+        public int? CompanyId { get; set; }
     }
 }

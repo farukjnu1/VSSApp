@@ -221,7 +221,20 @@ namespace VSS.API.BL.Billing
                                                 Vat = ii.Vat,
                                                 TotalVat = ii.TotalVat,
                                                 TotalAmount = ii.TotalAmount
-                                            }).ToList()
+                                            }).ToList(),
+                            BalanceAmount = (from b in _vssDb.BusinessPartnerBalances where b.BusinessPartnerId == i.ClientId select b.BalanceAmount).FirstOrDefault(),
+                            PaySettles = (from ps in _vssDb.PaySettles
+                                          join pm in _vssDb.PayMethods on ps.PaymentMethod equals pm.MethodId
+                                          where ps.InvoiceId == i.Id
+                                          select new PaySettleVM()
+                                          {
+                                              Amount = ps.Amount,
+                                              Id = ps.Id,
+                                              InvoiceId = i.Id,
+                                              PayDate = ps.PayDate,
+                                              PaymentMethod = ps.PaymentMethod,
+                                              PayMethodName = pm.Name
+                                          }).ToList()
                         }).FirstOrDefault();
             return oInvoice;
         }

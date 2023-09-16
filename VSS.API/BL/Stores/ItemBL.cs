@@ -39,6 +39,8 @@ namespace VSS.API.BL.Stores
         {
             try
             {
+                model.CreateAt = DateTime.Now;
+                model.IsActive = true;
                 _vssDb.Items.Add(model);
                 _vssDb.SaveChanges();
                 return true;
@@ -53,6 +55,8 @@ namespace VSS.API.BL.Stores
         {
             try
             {
+                model.UpdateAt = DateTime.Now;
+                model.IsActive = true;
                 var selectedItem = _vssDb.Items
                  .Where(x => x.Id == model.Id).FirstOrDefault();
                 if (selectedItem != null)
@@ -63,6 +67,9 @@ namespace VSS.API.BL.Stores
                     selectedItem.PartNoOld = model.PartNoOld;
                     selectedItem.PartNoNew = model.PartNoNew;
                     selectedItem.Remarks = model.Remarks;
+                    selectedItem.UpdateAt = DateTime.Now;
+                    selectedItem.UpdateBy = model.UpdateBy;
+                    selectedItem.IsActive = true;
                     _vssDb.SaveChanges();
                     return true;
                 }

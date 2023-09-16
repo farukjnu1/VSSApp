@@ -47,5 +47,6 @@ namespace VSS.API.DA.ViewModels.Billing
         public DateTime? CreateDate { get; set; }
 
         public int? CreateBy { get; set; }
+        public string PayMethodName { get; set; }
     }
 }

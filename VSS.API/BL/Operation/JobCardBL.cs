@@ -13,6 +13,7 @@ using VSS.API.DA.ViewModels.Operation;
 using VSS.API.DA.EF.VssDb;
 using System.Resources;
 using Google.Protobuf.WellKnownTypes;
+using VSS.API.DA.ViewModels.Billing;
 
 namespace VSS.API.BL.Operation
 {
@@ -374,7 +375,8 @@ namespace VSS.API.BL.Operation
         {
             _vssDb = new ModelVssDb();
             var oI = _vssDb.Invoices.Where(x=>x.JcId == id).FirstOrDefault();
-            var isInvoice = oI == null ? 0 : 1;
+            int isInvoice = oI == null ? 0 : 1;
+            long invoiceId = oI == null ? 0 : oI.Id;
             JobCardVM oJobCard = null;
             oJobCard = (from jc in _vssDb.JobCards
                         join bp in _vssDb.BusinessPartners on jc.ClientId equals bp.BpId
@@ -448,16 +450,29 @@ namespace VSS.API.BL.Operation
                                             ItemStatus = s.ItemStatus,
                                             ItemStatusName = s.ItemStatus == 1 ? "USED" : "REFUND"
                                         }).ToList(),
-                        Resources = (from hr in _vssDb.JcHRs
-                                        join e in _vssDb.Employees on hr.EmployeeId equals e.EmployeeId
-                                        where hr.JcId == jc.Id
-                                        select new JcHRVM
-                                        {
-                                            Id = hr.Id,
-                                            JcId = jc.Id,
-                                            EmployeeId = hr.EmployeeId,
-                                            FullName = e.FirstName + " " + e.MiddleName + " " + e.LastName
-                                        }).ToList()
+                            Resources = (from hr in _vssDb.JcHRs
+                                         join e in _vssDb.Employees on hr.EmployeeId equals e.EmployeeId
+                                         where hr.JcId == jc.Id
+                                         select new JcHRVM
+                                         {
+                                             Id = hr.Id,
+                                             JcId = jc.Id,
+                                             EmployeeId = hr.EmployeeId,
+                                             FullName = e.FirstName + " " + e.MiddleName + " " + e.LastName
+                                         }).ToList(),
+                            BalanceAmount = (from b in _vssDb.BusinessPartnerBalances where b.BusinessPartnerId == jc.ClientId select b.BalanceAmount).FirstOrDefault(),
+                            PaySettles = (from ps in _vssDb.PaySettles
+                                          join pm in _vssDb.PayMethods on ps.PaymentMethod equals pm.MethodId
+                                          where ps.InvoiceId == invoiceId
+                                          select new PaySettleVM()
+                                          {
+                                              Amount = ps.Amount,
+                                              Id = ps.Id,
+                                              InvoiceId = invoiceId,
+                                              PayDate = ps.PayDate,
+                                              PaymentMethod = ps.PaymentMethod,
+                                              PayMethodName = pm.Name
+                                          }).ToList()
                         }).FirstOrDefault();
             return oJobCard;
         }

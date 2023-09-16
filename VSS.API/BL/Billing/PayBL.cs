@@ -63,6 +63,7 @@ namespace VSS.API.BL.Billing
                                 oPaySettle.PayDate = DateTime.Now;
                                 oPaySettle.InvoiceId = oI.Id;
                                 oPaySettle.Amount = oI.GrandTotal;
+                                oPaySettle.PaymentMethod = model.PayMethodId;
                                 _vssDb.PaySettles.Add(oPaySettle);
 
                                 oBPBalance.BalanceAmount -= oPaySettle.Amount;

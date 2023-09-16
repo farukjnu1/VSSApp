@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using VSS.API.DA.ViewModels.Common;
+using VSS.API.DA.ViewModels.Billing;
+using VSS.API.DA.EF.VssDb;
 
 namespace VSS.API.DA.ViewModels.Operation
 {
@@ -41,9 +43,13 @@ namespace VSS.API.DA.ViewModels.Operation
         public string Description { get; set; }
         public int? IsInvoice { get; set; }
         public decimal? GrandTotal { get; set; }
+        public bool? IsPaid { get; set; }
         public List<JobDetailVm> JobDetails { get; set; }  = new List<JobDetailVm>();
         public List<JcSpareVm> JcSpares { get; set; } = new List<JcSpareVm>();
         public List<JcHRVM> Resources { get; set; } = new List<JcHRVM>();
+        public decimal? BalanceAmount { get; set; }
+        public List<PaySettleVM> PaySettles { get; set; } = new List<PaySettleVM>();
+        public DateTime? InvoiceDate { get; set; }
     }
 
     public class JobDetailVm

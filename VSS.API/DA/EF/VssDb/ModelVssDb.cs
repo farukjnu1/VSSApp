@@ -113,6 +113,18 @@ namespace VSS.API.DA.EF.VssDb
                 .Property(e => e.Vat)
                 .HasPrecision(18, 0);
 
+            modelBuilder.Entity<Company>()
+                .Property(e => e.Phone)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Company>()
+                .Property(e => e.Email)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Company>()
+                .Property(e => e.Website)
+                .IsUnicode(false);
+
             modelBuilder.Entity<CompanyLogo>()
                 .Property(e => e.Name)
                 .IsUnicode(false);

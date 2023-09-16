@@ -49,7 +49,7 @@ namespace VSS.API.Controllers
         }
 
         [HttpGet]
-        [Route("api/JobCard/GetByJc")]
+        [Route("api/Invoice/GetByJc")]
         public InvoiceVM GetByJc([FromUri] int jcId)
         {
             InvoiceBL _BL = new InvoiceBL();

@@ -33,6 +33,8 @@ namespace VSS.API.DA.ViewModels.Billing
         public string ContactPersonNo { get; set; }
         public string Description { get; set; }
         public int? IsInvoice { get; set; }
+        public decimal? BalanceAmount { get; set; }
+        public List<PaySettleVM> PaySettles { get; set; } = new List<PaySettleVM>();
     }
 
     public class InvoiceItemVM

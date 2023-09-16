@@ -233,6 +233,7 @@
     <Compile Include="BL\Stores\ItemBL.cs" />
     <Compile Include="BL\Stores\SRBL.cs" />
     <Compile Include="BL\Stores\WarehouseBL.cs" />
+    <Compile Include="BL\System\CompanyBL.cs" />
     <Compile Include="BL\System\LoginBL.cs" />
     <Compile Include="BL\System\MenuPermissionBL.cs" />
     <Compile Include="BL\System\RoleBL.cs" />
@@ -306,6 +307,7 @@
     <Compile Include="DA\EF\VssDb\WorkGroupEmp.cs" />
     <Compile Include="DA\Utilities\Logs.cs" />
     <Compile Include="DA\ViewModels\Billing\InvoiceVM.cs" />
+    <Compile Include="DA\ViewModels\Billing\PaySettleVM.cs" />
     <Compile Include="DA\ViewModels\Billing\PayTranVM.cs" />
     <Compile Include="DA\ViewModels\Common\Pager.cs" />
     <Compile Include="DA\ViewModels\Operation\ClientVM.cs" />
@@ -320,6 +322,7 @@
     <Compile Include="DA\ViewModels\Stores\BrandVM.cs" />
     <Compile Include="DA\ViewModels\Stores\SRVM.cs" />
     <Compile Include="DA\ViewModels\Stores\WarehouseVM.cs" />
+    <Compile Include="DA\ViewModels\System\CompanyVM.cs" />
     <Compile Include="DA\ViewModels\System\MenuPermissionVM.cs" />
     <Compile Include="DA\ViewModels\System\RoleVM.cs" />
     <Compile Include="DA\ViewModels\System\UserPayload.cs" />

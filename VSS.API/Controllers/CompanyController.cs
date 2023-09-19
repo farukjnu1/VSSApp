@@ -6,37 +6,37 @@ using System.Net.Http;
 using System.Web.Http;
 using VSS.API.Attributes;
 using VSS.API.BL.System;
+using VSS.API.DA.ViewModels.Operation;
 using VSS.API.DA.ViewModels.System;
 
 namespace VSS.API.Controllers
 {
     [MyAuth]
-    public class RoleController : ApiController
+    public class CompanyController : ApiController
     {
-        // GET: api/Role
-        public IEnumerable<RoleVM> Get()
+        // GET: api/Company
+        public IEnumerable<string> Get()
         {
-            RoleBL _BL = new RoleBL();
-            return _BL.get();
+            return new string[] { "value1", "value2" };
         }
 
-        // GET: api/Role/5
-        public string Get(int id)
+        // GET: api/Company/5
+        public CompanyVM Get(int id)
         {
-            return "value";
+            return new CompanyBL().Get(id);
         }
 
-        // POST: api/Role
+        // POST: api/Company
         public void Post([FromBody]string value)
         {
         }
 
-        // PUT: api/Role/5
+        // PUT: api/Company/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE: api/Role/5
+        // DELETE: api/Company/5
         public void Delete(int id)
         {
         }

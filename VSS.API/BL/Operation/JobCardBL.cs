@@ -22,7 +22,6 @@ namespace VSS.API.BL.Operation
         private IGenericFactory<ClientVM> Generic_T = null;
         private IGenericFactory<JobCardVM> Generic_JobCardVM = null;
         private IGenericFactory<WorkGroupVM> Generic_WorkGroupVM = null;
-        private IGenericFactory<CompanyVM> Generic_CompanyVM = null;
         private IGenericFactory<JobVM> Generic_JobVM = null;
         private IGenericFactory<EngineSizeVM> Generic_EngineSizeVM = null;
         private IGenericFactory<JobGroupVM> Generic_JobGroupVM = null;
@@ -45,12 +44,6 @@ namespace VSS.API.BL.Operation
             string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
             Generic_WorkGroupVM = new GenericFactory<WorkGroupVM>();
             return Generic_WorkGroupVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetWorkGroupById, new Hashtable() { { "WorkGroupId", workGroupId } }, vssDb);
-        }
-        public CompanyVM GetCompany()
-        {
-            string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
-            Generic_CompanyVM = new GenericFactory<CompanyVM>();
-            return Generic_CompanyVM.ExecuteCommandObject(CommandType.StoredProcedure, StoredProcedure.sp_GetCompany, new Hashtable() { }, vssDb);
         }
         public List<JobVM> GetJob()
         {

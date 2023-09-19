@@ -10,7 +10,7 @@ using VSS.API.DA.ViewModels.Stores;
 
 namespace VSS.API.Controllers
 {
-    //[MyAuth]
+    [MyAuth]
     public class WarehouseController : ApiController
     {
         // GET: api/Warehouse

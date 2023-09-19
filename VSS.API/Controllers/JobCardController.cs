@@ -7,41 +7,45 @@ using System.Net.Http;
 using System.Web.Http;
 using VSS.API.Attributes;
 using VSS.API.BL.Operation;
+using VSS.API.BL.System;
 using VSS.API.DA.EF.VssDb;
 using VSS.API.DA.ViewModels.Operation;
+using VSS.API.DA.ViewModels.System;
 using VSS.BL.Operation;
 using ZstdSharp.Unsafe;
 
 namespace VSS.API.Controllers
 {
-    //[MyAuth]
+    [MyAuth]
     public class JobCardController : ApiController
     {
+        JobCardBL _BL = null;
+        CompanyBL _BLCompany = null;
         // GET: api/JobCard/5
         public IEnumerable<JobCardVM> Get(int pi = 0, int ps = 5, int jcStatus = 0)
         {
-            JobCardBL _BL = new JobCardBL();
+            _BL = new JobCardBL();
             return _BL.Get(pi, ps, jcStatus);
         }
 
         // GET: api/JobGroup/5
         public JobCardVM Get(int id)
         {
-            JobCardBL _BL = new JobCardBL();
+            _BL = new JobCardBL();
             return _BL.Get(id);
         }
 
         // POST: api/JobCard
         public bool Post([FromBody]JobCardVM model)
         {
-            JobCardBL _BL = new JobCardBL();
+            _BL = new JobCardBL();
             return _BL.Add(model);
         }
 
         // PUT: api/JobCard/5
         public bool Put([FromBody] JobCardVM model)
         {
-            JobCardBL _BL = new JobCardBL();
+            _BL = new JobCardBL();
             return _BL.Update(model);
         }
 
@@ -54,8 +58,8 @@ namespace VSS.API.Controllers
         [Route("api/JobCard/GetJCNo")]
         public string GetJCNo()
         {
-            JobCardBL jobCardBL = new JobCardBL();
-            return jobCardBL.GetJCNo();
+            _BL = new JobCardBL();
+            return _BL.GetJCNo();
         }
 
         [HttpGet]
@@ -76,10 +80,10 @@ namespace VSS.API.Controllers
 
         [HttpGet]
         [Route("api/JobCard/GetCompany")]
-        public CompanyVM GetCompany()
+        public CompanyVM GetCompany(int id = 1)
         {
-            JobCardBL jobCardBL = new JobCardBL();
-            return jobCardBL.GetCompany();
+            _BLCompany = new CompanyBL();
+            return _BLCompany.Get(id);
         }
 
         [HttpGet]

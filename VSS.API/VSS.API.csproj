@@ -240,6 +240,7 @@
     <Compile Include="BL\System\UserBL.cs" />
     <Compile Include="BL\System\UserRoleBL.cs" />
     <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\EngineSizeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
@@ -311,7 +312,6 @@
     <Compile Include="DA\ViewModels\Billing\PayTranVM.cs" />
     <Compile Include="DA\ViewModels\Common\Pager.cs" />
     <Compile Include="DA\ViewModels\Operation\ClientVM.cs" />
-    <Compile Include="DA\ViewModels\Operation\CompanyVM.cs" />
     <Compile Include="DA\ViewModels\Operation\EngineSizeVM.cs" />
     <Compile Include="DA\ViewModels\Operation\ItemVM.cs" />
     <Compile Include="DA\ViewModels\Operation\JcHRVM.cs" />
@@ -403,6 +403,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Client\" />
+    <Folder Include="Views\Company\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\bootstrap.min.js.map" />

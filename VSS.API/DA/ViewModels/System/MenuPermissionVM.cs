@@ -35,6 +35,7 @@ namespace VSS.API.DA.ViewModels.System
         public string RoleName { get; set; }
 
         public string ModuleName { get; set; }
+        public string ModuleIcon { get; set; }
 
         public bool? CanView { get; set; }
 

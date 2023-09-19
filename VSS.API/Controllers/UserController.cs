@@ -15,7 +15,7 @@ using VSS.BL.Operation;
 namespace VSS.API.Controllers
 {
     /// <summary>
-    /// [MyAuth]
+    [MyAuth]
     /// </summary>
     public class UserController : ApiController
     {

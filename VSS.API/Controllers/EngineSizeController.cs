@@ -10,7 +10,7 @@ using VSS.BL.Operation;
 
 namespace VSS.API.Controllers
 {
-    //[MyAuth]
+    [MyAuth]
     public class EngineSizeController : ApiController
     {
         // GET: api/EngineSize

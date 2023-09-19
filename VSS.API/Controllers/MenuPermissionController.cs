@@ -10,7 +10,7 @@ using VSS.API.DA.ViewModels.System;
 
 namespace VSS.API.Controllers
 {
-    //[MyAuth]
+    [MyAuth]
     public class MenuPermissionController : ApiController
     {
         // GET: api/MenuPermission

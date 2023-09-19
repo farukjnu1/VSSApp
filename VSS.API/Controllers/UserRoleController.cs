@@ -13,7 +13,7 @@ using VSS.BL.Operation;
 
 namespace VSS.API.Controllers
 {
-    //[MyAuth]
+    [MyAuth]
     public class UserRoleController : ApiController
     {
         // GET: api/UserRole

@@ -11,7 +11,7 @@ using VSS.BL.Operation;
 
 namespace VSS.API.Controllers
 {
-    //[MyAuth]
+    [MyAuth]
     public class JobController : ApiController
     {
         // GET: api/Job

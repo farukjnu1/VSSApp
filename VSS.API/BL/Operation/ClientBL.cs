@@ -57,6 +57,7 @@ namespace VSS.BL.Operation
             {
                 model.BpId = GetNewId();
                 model.BpTypeId = 1;
+                model.CreateDate = DateTime.Now;
                 _vssDb.BusinessPartners.Add(model);
                 _vssDb.SaveChanges();
                 return true;
@@ -92,6 +93,8 @@ namespace VSS.BL.Operation
                     oBP.Phone = model.Phone;
                     oBP.Email = model.Email;
                     oBP.Address = model.Address;
+                    oBP.UpdateBy = model.UpdateBy;
+                    oBP.UpdateDate = DateTime.Now;
                     _vssDb.SaveChanges();
                     return true;
                 }

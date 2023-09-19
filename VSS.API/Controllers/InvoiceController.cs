@@ -13,7 +13,7 @@ using VSS.API.DA.ViewModels.Operation;
 
 namespace VSS.API.Controllers
 {
-    //[MyAuth]
+    [MyAuth]
     public class InvoiceController : ApiController
     {
         // GET: api/Invoice

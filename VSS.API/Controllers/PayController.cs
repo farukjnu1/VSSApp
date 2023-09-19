@@ -10,7 +10,7 @@ using VSS.API.DA.ViewModels.Billing;
 
 namespace VSS.API.Controllers
 {
-    //[MyAuth]
+    [MyAuth]
     public class PayController : ApiController
     {
         // GET: api/Pay

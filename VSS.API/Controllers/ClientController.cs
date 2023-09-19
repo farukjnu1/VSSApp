@@ -17,7 +17,7 @@ namespace VSS.API.Controllers
 {
     //[EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     //[VssCorsAttribute]
-    //[MyAuth]
+    [MyAuth]
     public class ClientController : ApiController
     {
         // GET: api/Client

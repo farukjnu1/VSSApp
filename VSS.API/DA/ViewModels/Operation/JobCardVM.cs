@@ -10,10 +10,10 @@ using VSS.API.DA.EF.VssDb;
 
 namespace VSS.API.DA.ViewModels.Operation
 {
-    public class JobCardVM:Pager
+    public class JobCardVM : Pager
     {
         public long Id { get; set; }
-        public string MembershipNo { get;set;}
+        public string MembershipNo { get; set; }
         public string JcNo { get; set; }
         public DateTime? CreateDate { get; set; }
         public int? CreateBy { get; set; }
@@ -44,12 +44,14 @@ namespace VSS.API.DA.ViewModels.Operation
         public int? IsInvoice { get; set; }
         public decimal? GrandTotal { get; set; }
         public bool? IsPaid { get; set; }
-        public List<JobDetailVm> JobDetails { get; set; }  = new List<JobDetailVm>();
+        public List<JobDetailVm> JobDetails { get; set; } = new List<JobDetailVm>();
         public List<JcSpareVm> JcSpares { get; set; } = new List<JcSpareVm>();
         public List<JcHRVM> Resources { get; set; } = new List<JcHRVM>();
         public decimal? BalanceAmount { get; set; }
         public List<PaySettleVM> PaySettles { get; set; } = new List<PaySettleVM>();
         public DateTime? InvoiceDate { get; set; }
+        public string CreateByName { get; set; }
+        public DateTime? UpdateDate { get; set; }
     }
 
     public class JobDetailVm

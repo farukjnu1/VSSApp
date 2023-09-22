@@ -404,6 +404,7 @@ namespace VSS.API.BL.Operation
                             MembershipNo = bp.MembershipNo,
                             ContactPerson = jc.ContactPerson,
                             ContactPersonNo = jc.ContactPersonNo,
+                            UpdateDate = jc.UpdateDate,
                             JobDetails = (from j in _vssDb.JcJobs
                                           join jg in _vssDb.JobGroups on j.JobGroupId equals jg.GroupId
                                           join es in _vssDb.EngineSizes on j.EngineSizeId equals es.EngineSizeId
@@ -441,7 +442,7 @@ namespace VSS.API.BL.Operation
                                             Quantity = s.Quantity,
                                             SpareAmount = s.SpareAmount,
                                             ItemStatus = s.ItemStatus,
-                                            ItemStatusName = s.ItemStatus == 1 ? "USED" : "REFUND"
+                                            ItemStatusName = s.ItemStatus == 1 ? "Used" : "Refund"
                                         }).ToList(),
                             Resources = (from hr in _vssDb.JcHRs
                                          join e in _vssDb.Employees on hr.EmployeeId equals e.EmployeeId
@@ -467,6 +468,14 @@ namespace VSS.API.BL.Operation
                                               PayMethodName = pm.Name
                                           }).ToList()
                         }).FirstOrDefault();
+            if (oJobCard != null)
+            {
+                var oUser = (from u in _vssDb.Users where u.UserID == oJobCard.CreateBy select u).FirstOrDefault();
+                if (oUser != null) 
+                {
+                    oJobCard.CreateByName = oUser != null ? oUser.FirstName + " " + oUser.MiddleName + " " + oUser.LastName : "";
+                }
+            }
             return oJobCard;
         }
     }

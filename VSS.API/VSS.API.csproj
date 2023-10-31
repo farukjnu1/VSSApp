@@ -267,6 +267,7 @@
     <Compile Include="DA\EF\VssDb\BusinessPartner.cs" />
     <Compile Include="DA\EF\VssDb\BusinessPartnerBalance.cs" />
     <Compile Include="DA\EF\VssDb\BusinessPartnerType.cs" />
+    <Compile Include="DA\EF\VssDb\ClientVehicle.cs" />
     <Compile Include="DA\EF\VssDb\Company.cs" />
     <Compile Include="DA\EF\VssDb\CompanyLogo.cs" />
     <Compile Include="DA\EF\VssDb\Designation.cs" />
@@ -300,6 +301,8 @@
     <Compile Include="DA\EF\VssDb\Role.cs" />
     <Compile Include="DA\EF\VssDb\Size.cs" />
     <Compile Include="DA\EF\VssDb\StoreReq.cs" />
+    <Compile Include="DA\EF\VssDb\Team.cs" />
+    <Compile Include="DA\EF\VssDb\TeamMember.cs" />
     <Compile Include="DA\EF\VssDb\Unit.cs" />
     <Compile Include="DA\EF\VssDb\User.cs" />
     <Compile Include="DA\EF\VssDb\UserRole.cs" />

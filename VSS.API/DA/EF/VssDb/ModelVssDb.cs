@@ -17,6 +17,7 @@ namespace VSS.API.DA.EF.VssDb
         public virtual DbSet<BusinessPartner> BusinessPartners { get; set; }
         public virtual DbSet<BusinessPartnerBalance> BusinessPartnerBalances { get; set; }
         public virtual DbSet<BusinessPartnerType> BusinessPartnerTypes { get; set; }
+        public virtual DbSet<ClientVehicle> ClientVehicles { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<CompanyLogo> CompanyLogoes { get; set; }
         public virtual DbSet<Designation> Designations { get; set; }
@@ -49,6 +50,8 @@ namespace VSS.API.DA.EF.VssDb
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<StoreReq> StoreReqs { get; set; }
+        public virtual DbSet<Team> Teams { get; set; }
+        public virtual DbSet<TeamMember> TeamMembers { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
@@ -88,6 +91,14 @@ namespace VSS.API.DA.EF.VssDb
                 .IsUnicode(false);
 
             modelBuilder.Entity<BusinessPartner>()
+                .Property(e => e.ContactPerson)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<BusinessPartner>()
+                .Property(e => e.ContactPersonNo)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<BusinessPartner>()
                 .HasMany(e => e.PayTrans)
                 .WithOptional(e => e.BusinessPartner)
                 .HasForeignKey(e => e.BusinessPartnerId);
@@ -100,6 +111,14 @@ namespace VSS.API.DA.EF.VssDb
                 .HasMany(e => e.BusinessPartners)
                 .WithOptional(e => e.BusinessPartnerType)
                 .HasForeignKey(e => e.BpTypeId);
+
+            modelBuilder.Entity<ClientVehicle>()
+                .Property(e => e.Model)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ClientVehicle>()
+                .Property(e => e.Vin)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Company>()
                 .Property(e => e.CompanyCode)

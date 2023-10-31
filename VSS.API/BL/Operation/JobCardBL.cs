@@ -372,7 +372,7 @@ namespace VSS.API.BL.Operation
             long invoiceId = oI == null ? 0 : oI.Id;
             JobCardVM oJobCard = null;
             oJobCard = (from jc in _vssDb.JobCards
-                        join bp in _vssDb.BusinessPartners on jc.ClientId equals bp.BpId
+                        //join bp in _vssDb.BusinessPartners on jc.ClientId equals bp.BpId
                         where jc.Id == id
                         select new JobCardVM
                         {
@@ -397,11 +397,6 @@ namespace VSS.API.BL.Operation
                             Description = jc.ClientInfo,
                             CreateBy = jc.CreateBy,
                             CreateDate = jc.CreateDate,
-                            ClientAddress = bp.Address,
-                            ClientEmail = bp.Email,
-                            ClientName = bp.Name,
-                            ClientPhone = bp.Phone,
-                            MembershipNo = bp.MembershipNo,
                             ContactPerson = jc.ContactPerson,
                             ContactPersonNo = jc.ContactPersonNo,
                             UpdateDate = jc.UpdateDate,
@@ -470,11 +465,25 @@ namespace VSS.API.BL.Operation
                         }).FirstOrDefault();
             if (oJobCard != null)
             {
-                var oUser = (from u in _vssDb.Users where u.UserID == oJobCard.CreateBy select u).FirstOrDefault();
-                if (oUser != null) 
+                #region jc created by
+                var oUser = (from x in _vssDb.Users where x.UserID == oJobCard.CreateBy select x).FirstOrDefault();
+                if (oUser != null)
                 {
                     oJobCard.CreateByName = oUser != null ? oUser.FirstName + " " + oUser.MiddleName + " " + oUser.LastName : "";
                 }
+                #endregion
+                #region Client
+                var oClient = (from x in _vssDb.BusinessPartners where x.BpId == oJobCard.ClientId && x.BpTypeId == 1 select x).FirstOrDefault();
+                if (oClient != null)
+                {
+                    oJobCard.ClientAddress = oClient.Address;
+                    oJobCard.ClientEmail = oClient.Email;
+                    oJobCard.ClientId = oClient.BpId;
+                    oJobCard.ClientName = oClient.Name;
+                    oJobCard.ClientPhone = oClient.Phone;
+                    oJobCard.MembershipNo = oClient.MembershipNo;
+                }
+                #endregion
             }
             return oJobCard;
         }

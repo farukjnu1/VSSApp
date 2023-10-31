@@ -35,6 +35,15 @@ namespace VSS.API.DA.EF.VssDb
         [StringLength(10)]
         public string MembershipNo { get; set; }
 
+        [StringLength(200)]
+        public string ClientInfo { get; set; }
+
+        [StringLength(50)]
+        public string ContactPerson { get; set; }
+
+        [StringLength(20)]
+        public string ContactPersonNo { get; set; }
+
         public bool? IsActive { get; set; }
 
         public DateTime? CreateDate { get; set; }

@@ -19,11 +19,25 @@ namespace VSS.API.Controllers
     [MyAuth]
     public class ClientVehicleController : ApiController
     {
-        // GET: ClientVehicle
+        // GET: api/ClientVehicle
         public IEnumerable<ClientVehicleVM> Get()
         {
             ClientVehicleBL _BL = new ClientVehicleBL();
             return _BL.Get();
+        }
+
+        // POST: api/ClientVehicle
+        public bool Post([FromBody] ClientVehicle model)
+        {
+            ClientVehicleBL _BL = new ClientVehicleBL();
+            return _BL.Add(model);
+        }
+
+        // PUT: api/ClientVehicle/5
+        public bool Put([FromBody] ClientVehicle model)
+        {
+            ClientVehicleBL _BL = new ClientVehicleBL();
+            return _BL.Update(model);
         }
 
     }

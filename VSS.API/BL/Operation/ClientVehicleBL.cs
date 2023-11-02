@@ -31,5 +31,44 @@ namespace VSS.API.BL.Operation
             }
             return listClientVehicle;
         }
+
+        public bool Add(ClientVehicle model)
+        {
+            try
+            {
+                //model.Id = GetNewId();
+                _vssDb.ClientVehicles.Add(model);
+                _vssDb.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool Update(ClientVehicle model)
+        {
+            try
+            {
+                var selectedClientVehicle = _vssDb.ClientVehicles
+                 .Where(x => x.Id == model.Id).FirstOrDefault();
+                if (selectedClientVehicle != null)
+                {
+                    selectedClientVehicle.Id = model.Id;
+                    selectedClientVehicle.VehicleNo = model.VehicleNo;
+                    selectedClientVehicle.Model = model.Model;
+                    selectedClientVehicle.Vin = model.Vin;
+                    selectedClientVehicle.ClientId = model.ClientId;
+                    _vssDb.SaveChanges();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return false;
+        }
     }
 }

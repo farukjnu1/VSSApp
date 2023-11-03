@@ -18,7 +18,6 @@ namespace VSS.API.BL.Operation
         {
             listClientVehicle = new List<ClientVehicleVM>();
             var listCV = _vssDb.ClientVehicles.ToList();
-
             foreach (ClientVehicle oCV in listCV)
             {
                 ClientVehicleVM oClientVehicle = new ClientVehicleVM();
@@ -32,11 +31,28 @@ namespace VSS.API.BL.Operation
             return listClientVehicle;
         }
 
+        public ClientVehicleVM Get(long id)
+        {
+            listClientVehicle = new List<ClientVehicleVM>();
+            var oCV = (from x in _vssDb.ClientVehicles
+                       where x.Id == id
+                       select new ClientVehicleVM
+                       {
+                           Id = x.Id,
+                           VehicleNo = x.VehicleNo,
+                           Model = x.Model,
+                           Vin = x.Vin,
+                           ClientId = x.ClientId,
+                       }).FirstOrDefault();
+            return oCV;
+        }
+
         public bool Add(ClientVehicle model)
         {
             try
             {
-                //model.Id = GetNewId();
+                model.CreateBy = model.CreateBy;
+                model.CreateDate = DateTime.Now;
                 _vssDb.ClientVehicles.Add(model);
                 _vssDb.SaveChanges();
                 return true;
@@ -51,15 +67,17 @@ namespace VSS.API.BL.Operation
         {
             try
             {
-                var selectedClientVehicle = _vssDb.ClientVehicles
+                var oClientVehicle = _vssDb.ClientVehicles
                  .Where(x => x.Id == model.Id).FirstOrDefault();
-                if (selectedClientVehicle != null)
+                if (oClientVehicle != null)
                 {
-                    selectedClientVehicle.Id = model.Id;
-                    selectedClientVehicle.VehicleNo = model.VehicleNo;
-                    selectedClientVehicle.Model = model.Model;
-                    selectedClientVehicle.Vin = model.Vin;
-                    selectedClientVehicle.ClientId = model.ClientId;
+                    oClientVehicle.Id = model.Id;
+                    oClientVehicle.VehicleNo = model.VehicleNo;
+                    oClientVehicle.Model = model.Model;
+                    oClientVehicle.Vin = model.Vin;
+                    oClientVehicle.ClientId = model.ClientId;
+                    oClientVehicle.CreateBy = model.CreateBy;
+                    oClientVehicle.CreateDate = DateTime.Now;
                     _vssDb.SaveChanges();
                     return true;
                 }
@@ -70,5 +88,22 @@ namespace VSS.API.BL.Operation
             }
             return false;
         }
+
+        public List<ClientVehicleVM> GetVehiclesByClient(long id)
+        {
+            listClientVehicle = new List<ClientVehicleVM>();
+            var listCV = (from x in _vssDb.ClientVehicles
+                       where x.ClientId == id
+                       select new ClientVehicleVM
+                       {
+                           Id = x.Id,
+                           VehicleNo = x.VehicleNo,
+                           Model = x.Model,
+                           Vin = x.Vin,
+                           ClientId = x.ClientId,
+                       }).ToList();
+            return listCV;
+        }
+
     }
 }

@@ -16,6 +16,7 @@ namespace VSS.API.DA.ADO
         public const string sp_GetEngineSize = "[dbo].[sp_GetEngineSize]";
         public const string sp_GetJobGroup = "[dbo].[sp_GetJobGroup]";
         public const string sp_GetItemByParts = "[dbo].[sp_GetItemByParts]";
+        public const string sp_GetClinetByPhone = "[dbo].[sp_GetClinetByPhone]";
         public const string sp_GetJobCard = "[dbo].[sp_GetJobCard]";
         public const string sp_GetUserRole = "[dbo].[sp_GetUserRole]";
         public const string sp_GetJcInvoice = "[dbo].[sp_GetJcInvoice]";

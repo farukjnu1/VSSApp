@@ -15,31 +15,38 @@ namespace VSS.API.BL.Stores
         public IEnumerable<ItemVM> Get(int pageIndex = 0, int pageSize = 10)
         {
             int nRow = _vssDb.Items.Count();
-            var listItem = _vssDb.Items
-                .Select(x => new ItemVM
-                {
-                    Id = x.Id,
-                    ItemCode = x.ItemCode,
-                    ItemName = x.ItemName,
-                    BrandId = x.BrandId,
-                    PartNoOld = x.PartNoOld,
-                    PartNoNew = x.PartNoNew,
-                    Remarks = x.Remarks,
-                    PageIndex = pageIndex,
-                    PageSize = pageSize,
-                    RowCount = nRow
-                })
+            var listItem = (from i in _vssDb.Items
+                            join ic in _vssDb.ItemCategories on i.ItemCategoryId equals ic.Id
+                            join b in _vssDb.Brands on i.BrandId equals b.Id
+                            select new ItemVM
+                            {
+                                Id = i.Id,
+                                ItemCode = i.ItemCode,
+                                ItemName = i.ItemName,
+                                PartNoOld = i.PartNoOld,
+                                PartNoNew = i.PartNoNew,
+                                Remarks = i.Remarks,
+                                BrandId = i.BrandId,
+                                ItemCategoryId = i.ItemCategoryId,
+                                CategoryName = ic.Name,
+                                BrandName = b.Name,
+                                PageIndex = pageIndex,
+                                PageSize = pageSize,
+                                RowCount = nRow
+                            })
                 .OrderByDescending(s => s.ItemCode)
                 .Skip(pageIndex * pageSize)
                 .Take(pageSize)
                 .ToList();
             return listItem;
         }
+
         public bool AddItem(Item model)
         {
             try
             {
                 model.CreateAt = DateTime.Now;
+                model.CreateBy = model.CreateBy;
                 model.IsActive = true;
                 _vssDb.Items.Add(model);
                 _vssDb.SaveChanges();
@@ -55,21 +62,23 @@ namespace VSS.API.BL.Stores
         {
             try
             {
+                model.UpdateBy = model.CreateBy;
                 model.UpdateAt = DateTime.Now;
                 model.IsActive = true;
-                var selectedItem = _vssDb.Items
+                var oItem = _vssDb.Items
                  .Where(x => x.Id == model.Id).FirstOrDefault();
-                if (selectedItem != null)
+                if (oItem != null)
                 {
-                    selectedItem.ItemCode = model.ItemCode;
-                    selectedItem.ItemName = model.ItemName;
-                    selectedItem.BrandId = model.BrandId;
-                    selectedItem.PartNoOld = model.PartNoOld;
-                    selectedItem.PartNoNew = model.PartNoNew;
-                    selectedItem.Remarks = model.Remarks;
-                    selectedItem.UpdateAt = DateTime.Now;
-                    selectedItem.UpdateBy = model.UpdateBy;
-                    selectedItem.IsActive = true;
+                    oItem.ItemCode = model.ItemCode;
+                    oItem.ItemName = model.ItemName;
+                    oItem.PartNoOld = model.PartNoOld;
+                    oItem.PartNoNew = model.PartNoNew;
+                    oItem.Remarks = model.Remarks;
+                    oItem.UpdateAt = DateTime.Now;
+                    oItem.UpdateBy = model.UpdateBy;
+                    oItem.BrandId = model.BrandId;
+                    oItem.ItemCategoryId = model.ItemCategoryId;
+                    oItem.IsActive = true;
                     _vssDb.SaveChanges();
                     return true;
                 }

@@ -7,6 +7,7 @@ using System.Web.Http;
 using VSS.API.Attributes;
 using VSS.API.BL.Stores;
 using VSS.API.DA.EF.VssDb;
+using VSS.API.DA.ViewModels.Operation;
 using VSS.API.DA.ViewModels.Stores;
 
 
@@ -16,10 +17,16 @@ namespace VSS.API.Controllers
     public class SRController : ApiController
     {
         // GET: api/SR
-        public IEnumerable<StoreReq> Get()
+        /*public IEnumerable<StoreReq> Get()
         {
            SRBL _BL = new SRBL();
            return _BL.Get();
+        }*/
+
+        public IEnumerable<SRVM> Get(int pi = 0, int ps = 10)
+        {
+            SRBL _BL = new SRBL();
+            return _BL.Get(pi, ps);
         }
 
         // GET: api/SR/5

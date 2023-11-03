@@ -44,6 +44,8 @@ namespace VSS.BL.Operation
             try
             {
                 model.JobId = GetNewId();
+                model.CreateDate = DateTime.Now;
+                model.CreateBy = model.CreateBy;
                 _vssDb.Jobs.Add(model);
                 _vssDb.SaveChanges();
                 return true;
@@ -70,6 +72,8 @@ namespace VSS.BL.Operation
                     selectedJob.DurationA = model.DurationA;
                     selectedJob.DurationB = model.DurationB;
                     selectedJob.DurationC = model.DurationC;
+                    model.UpdateDate = DateTime.Now;
+                    model.UpdateBy = model.CreateBy;
                     _vssDb.SaveChanges();
                     return true;
                 }

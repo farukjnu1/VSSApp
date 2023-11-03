@@ -43,6 +43,7 @@ namespace VSS.API.BL.Billing
                             oInvoice.CreateBy = model.CreateBy;
                             oInvoice.CreateDate = DateTime.Now;
                             oInvoice.GrandTotal = model.GrandTotal;
+                            oInvoice.CreateBy = model.CreateBy;
                             _vssDb.Invoices.Add(oInvoice);
                             _vssDb.SaveChanges();
                             model.Id = oInvoice.Id;
@@ -68,7 +69,7 @@ namespace VSS.API.BL.Billing
                                 oInvoiceItem.Vat = oII.Vat;
                                 oInvoiceItem.TotalVat = oII.TotalVat;
                                 oInvoiceItem.TotalAmount = oII.TotalAmount;
-                                oInvoiceItem.DoneBy = oII.DoneBy;
+                                oInvoiceItem.DoneBy = model.CreateBy;
                                 oInvoiceItem.DoneDate = DateTime.Now;
                                 listInvoiceItem.Add(oInvoiceItem);
                             }
@@ -118,6 +119,7 @@ namespace VSS.API.BL.Billing
                             oInvoice.CreateBy = model.CreateBy;
                             oInvoice.CreateDate = DateTime.Now;
                             oInvoice.GrandTotal = model.GrandTotal;
+                            oInvoice.CreateBy = model.CreateBy;
                             _vssDb.SaveChanges();
                             model.Id = oInvoice.Id;
                             #endregion
@@ -142,7 +144,7 @@ namespace VSS.API.BL.Billing
                                 oInvoiceItem.Vat = oII.Vat;
                                 oInvoiceItem.TotalVat = oII.TotalVat;
                                 oInvoiceItem.TotalAmount = oII.TotalAmount;
-                                oInvoiceItem.DoneBy = oII.DoneBy;
+                                oInvoiceItem.DoneBy = model.CreateBy;
                                 oInvoiceItem.DoneDate = DateTime.Now;
                                 listInvoiceItem.Add(oInvoiceItem);
                             }

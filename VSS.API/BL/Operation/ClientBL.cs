@@ -30,6 +30,10 @@ namespace VSS.BL.Operation
                 oClient.Phone = oBP.Phone;
                 oClient.Email = oBP.Email;
                 oClient.Address = oBP.Address;
+                oClient.ContactPerson = oBP.ContactPerson;
+                oClient.ContactPersonNo = oBP.ContactPersonNo;
+                oClient.ClientInfo = oBP.ClientInfo;
+                oClient.MembershipNo = oBP.MembershipNo;
                 listClient.Add(oClient);
             }
             return listClient;
@@ -48,6 +52,10 @@ namespace VSS.BL.Operation
                 oClient.Phone = oBP.Phone;
                 oClient.Email = oBP.Email;
                 oClient.Address = oBP.Address;
+                oClient.ContactPerson = oBP.ContactPerson;
+                oClient.ContactPersonNo = oBP.ContactPersonNo;
+                oClient.ClientInfo = oBP.ClientInfo;
+                oClient.MembershipNo = oBP.MembershipNo;
             }
             return oClient;
         }
@@ -93,6 +101,10 @@ namespace VSS.BL.Operation
                     oBP.Phone = model.Phone;
                     oBP.Email = model.Email;
                     oBP.Address = model.Address;
+                    oBP.ContactPerson = model.ContactPerson;
+                    oBP.ContactPersonNo = model.ContactPersonNo;
+                    oBP.ClientInfo = model.ClientInfo;
+                    oBP.MembershipNo = model.MembershipNo;
                     oBP.UpdateBy = model.UpdateBy;
                     oBP.UpdateDate = DateTime.Now;
                     _vssDb.SaveChanges();

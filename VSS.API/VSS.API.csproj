@@ -303,8 +303,6 @@
     <Compile Include="DA\EF\VssDb\Role.cs" />
     <Compile Include="DA\EF\VssDb\Size.cs" />
     <Compile Include="DA\EF\VssDb\StoreReq.cs" />
-    <Compile Include="DA\EF\VssDb\Team.cs" />
-    <Compile Include="DA\EF\VssDb\TeamMember.cs" />
     <Compile Include="DA\EF\VssDb\Unit.cs" />
     <Compile Include="DA\EF\VssDb\User.cs" />
     <Compile Include="DA\EF\VssDb\UserRole.cs" />
@@ -325,6 +323,7 @@
     <Compile Include="DA\ViewModels\Operation\JobGroupVM.cs" />
     <Compile Include="DA\ViewModels\Operation\JobVM.cs" />
     <Compile Include="DA\ViewModels\Operation\VehicleReceiverVM.cs" />
+    <Compile Include="DA\ViewModels\Stores\ItemCategoryVM.cs" />
     <Compile Include="DA\ViewModels\Stores\BrandVM.cs" />
     <Compile Include="DA\ViewModels\Stores\SRVM.cs" />
     <Compile Include="DA\ViewModels\Stores\WarehouseVM.cs" />

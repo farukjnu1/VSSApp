@@ -15,7 +15,6 @@ namespace VSS.API.DA.EF.VssDb
             Items = new HashSet<Item>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [StringLength(50)]

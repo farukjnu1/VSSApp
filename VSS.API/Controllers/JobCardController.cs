@@ -12,6 +12,7 @@ using VSS.API.DA.EF.VssDb;
 using VSS.API.DA.ViewModels.Operation;
 using VSS.API.DA.ViewModels.System;
 using VSS.BL.Operation;
+using VSS.DA.ViewModels.Operation;
 using ZstdSharp.Unsafe;
 
 namespace VSS.API.Controllers
@@ -116,6 +117,14 @@ namespace VSS.API.Controllers
         {
             JobCardBL jobCardBL = new JobCardBL();
             return jobCardBL.GetItemByParts(value);
+        }
+
+        [HttpGet]
+        [Route("api/JobCard/GetClientByPhone")]
+        public List<ClientVM> GetClientByPhone([FromUri] string value)
+        {
+            JobCardBL jobCardBL = new JobCardBL();
+            return jobCardBL.GetClientByPhone(value);
         }
 
     }

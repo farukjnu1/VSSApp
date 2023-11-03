@@ -69,6 +69,12 @@ namespace VSS.API.BL.Operation
             Generic_ItemVM = new GenericFactory<ItemVM>();
             return Generic_ItemVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetItemByParts, new Hashtable() { { "value", value } }, vssDb);
         }
+        public List<ClientVM> GetClientByPhone(string value)
+        {
+            string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
+            Generic_T = new GenericFactory<ClientVM>();
+            return Generic_T.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetClinetByPhone, new Hashtable() { { "value", value } }, vssDb);
+        }
 
         ModelVssDb _vssDb = null;
         public bool Add(JobCardVM model)
@@ -79,40 +85,6 @@ namespace VSS.API.BL.Operation
                 {
                     try
                     {
-                        #region Client
-                        BusinessPartner oBP = null;
-                        if (model.ClientId > 0)
-                        {
-                            oBP = _vssDb.BusinessPartners.Where(x=>x.BpId == model.ClientId).FirstOrDefault();
-                            if (oBP != null)
-                            {
-                                oBP.BpTypeId = 1;
-                                oBP.MembershipNo = model.MembershipNo;
-                                oBP.Name = model.ClientName;
-                                oBP.Address = model.ClientAddress;
-                                oBP.CreateBy = model.CreateBy;
-                                oBP.CreateDate = DateTime.Now;
-                                oBP.Email = model.ClientEmail;
-                                oBP.IsActive = true;
-                                oBP.Phone = model.ClientPhone;                            }
-                        }
-                        else
-                        {
-                            oBP = new BusinessPartner();
-                            oBP.BpTypeId = 1;
-                            oBP.MembershipNo = model.MembershipNo;
-                            oBP.Name = model.ClientName;
-                            oBP.Address = model.ClientAddress;
-                            oBP.CreateBy = model.CreateBy;
-                            oBP.CreateDate = DateTime.Now;
-                            oBP.Email = model.ClientEmail;
-                            oBP.IsActive = true;
-                            oBP.Phone = model.ClientPhone;
-                            _vssDb.BusinessPartners.Add(oBP);
-                        }
-                        _vssDb.SaveChanges();
-                        model.ClientId = oBP.BpId;
-                        #endregion
                         #region Vehicle Info
                         JobCard oJobCard = new JobCard();
                         oJobCard.JcNo = model.JcNo;
@@ -221,41 +193,6 @@ namespace VSS.API.BL.Operation
                             _tran.Rollback();
                             return false;
                         }
-                        #endregion
-                        #region Client
-                        BusinessPartner oBP = null;
-                        if (model.ClientId > 0)
-                        {
-                            oBP = _vssDb.BusinessPartners.Where(x => x.BpId == model.ClientId).FirstOrDefault();
-                            if (oBP != null)
-                            {
-                                oBP.BpTypeId = 1;
-                                oBP.MembershipNo = model.MembershipNo;
-                                oBP.Name = model.ClientName;
-                                oBP.Address = model.ClientAddress;
-                                oBP.CreateBy = model.CreateBy;
-                                oBP.CreateDate = DateTime.Now;
-                                oBP.Email = model.ClientEmail;
-                                oBP.IsActive = true;
-                                oBP.Phone = model.ClientPhone;
-                            }
-                        }
-                        else
-                        {
-                            oBP = new BusinessPartner();
-                            oBP.BpTypeId = 1;
-                            oBP.MembershipNo = model.MembershipNo;
-                            oBP.Name = model.ClientName;
-                            oBP.Address = model.ClientAddress;
-                            oBP.CreateBy = model.CreateBy;
-                            oBP.CreateDate = DateTime.Now;
-                            oBP.Email = model.ClientEmail;
-                            oBP.IsActive = true;
-                            oBP.Phone = model.ClientPhone;
-                            _vssDb.BusinessPartners.Add(oBP);
-                        }
-                        _vssDb.SaveChanges();
-                        model.ClientId = oBP.BpId;
                         #endregion
                         #region Vehicle Info
                         JobCard oJobCard = (from x in _vssDb.JobCards where x.Id == model.Id select x).FirstOrDefault();

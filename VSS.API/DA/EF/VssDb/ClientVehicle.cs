@@ -21,5 +21,9 @@ namespace VSS.API.DA.EF.VssDb
         public string Vin { get; set; }
 
         public int? ClientId { get; set; }
+
+        public DateTime? CreateDate { get; set; }
+
+        public int? CreateBy { get; set; }
     }
 }

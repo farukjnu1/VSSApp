@@ -26,6 +26,12 @@ namespace VSS.API.Controllers
             return _BL.Get();
         }
 
+        public ClientVehicleVM GetById(long id)
+        {
+            ClientVehicleBL _BL = new ClientVehicleBL();
+            return _BL.Get(id);
+        }
+
         // POST: api/ClientVehicle
         public bool Post([FromBody] ClientVehicle model)
         {
@@ -38,6 +44,14 @@ namespace VSS.API.Controllers
         {
             ClientVehicleBL _BL = new ClientVehicleBL();
             return _BL.Update(model);
+        }
+
+        [HttpGet]
+        [Route("api/ClientVehicle/GetVehiclesByClient")]
+        public IEnumerable<ClientVehicleVM> GetVehiclesByClient(long id)
+        {
+            ClientVehicleBL _BL = new ClientVehicleBL();
+            return _BL.GetVehiclesByClient(id);
         }
 
     }

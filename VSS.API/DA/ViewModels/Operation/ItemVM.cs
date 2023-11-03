@@ -9,7 +9,7 @@ namespace VSS.API.DA.ViewModels.Operation
 {
     public class ItemVM:Pager
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [StringLength(50)]
         public string ItemCode { get; set; }

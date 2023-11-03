@@ -25,5 +25,8 @@ namespace VSS.API.DA.ViewModels.Stores
 
         [StringLength(50)]
         public string Remark { get; set; }
+        public string ItemName { get; set; }
+        public string SupplierName { get; set; }
+        public string WHName { get; set; }
     }
 }

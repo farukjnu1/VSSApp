@@ -59,6 +59,14 @@ namespace VSS.API.Controllers
         }
 
         [HttpGet]
+        [Route("api/Item/GetItemCategory")]
+        public IEnumerable<ItemCategoryVM> GetItemCategory()
+        {
+            BrandBL _BL = new BrandBL();
+            return _BL.GetItemCategory();
+        }
+
+        [HttpGet]
         [Route("api/Item/getItemName")]
         public IEnumerable<ItemVM> getWareHouse()
         {

@@ -11,9 +11,10 @@ namespace VSS.API.BL.Stores
 {
     public class BrandBL
     {
-        ModelVssDb _vssDb = new ModelVssDb();
+        ModelVssDb _vssDb = null;
         public IEnumerable<BrandVM> GetBrand()
         {
+            _vssDb = new ModelVssDb();
             var listBrand = _vssDb.Brands
                 .Select(x => new BrandVM
                 {
@@ -21,6 +22,18 @@ namespace VSS.API.BL.Stores
                     Name = x.Name
                 }).OrderBy(s=>s.Name).ToList();
             return listBrand;
+        }
+        public IEnumerable<ItemCategoryVM> GetItemCategory()
+        {
+            _vssDb = new ModelVssDb();
+            var listItemCategory = _vssDb.ItemCategories
+                .Select(x => new ItemCategoryVM
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Code = x.Code
+                }).OrderBy(s => s.Name).ToList();
+            return listItemCategory;
         }
     }
 }

@@ -41,5 +41,18 @@ namespace VSS.DA.ViewModels.Operation
         public int? DeleteDate { get; set; }
 
         public int? DeleteBy { get; set; }
+        [StringLength(50)]
+        public string BPTypeName { get; set; }
+        [StringLength(10)]
+        public string MembershipNo { get; set; }
+
+        [StringLength(200)]
+        public string ClientInfo { get; set; }
+
+        [StringLength(50)]
+        public string ContactPerson { get; set; }
+
+        [StringLength(20)]
+        public string ContactPersonNo { get; set; }
     }
 }

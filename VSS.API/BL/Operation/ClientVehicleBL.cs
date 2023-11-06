@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Web;
+using VSS.API.DA.ADO;
 using VSS.API.DA.EF.VssDb;
 using VSS.API.DA.ViewModels.Operation;
+using VSS.DA.ADO;
 using VSS.DA.ViewModels.Operation;
 
 namespace VSS.API.BL.Operation
@@ -13,22 +19,20 @@ namespace VSS.API.BL.Operation
         ModelVssDb _vssDb = new ModelVssDb();
         List<ClientVehicleVM> listClientVehicle = null;
         ClientVehicleVM oClientVehicle = null;
+        private IGenericFactory<ClientVehicleVM> Generic_ClientVehicle = null;
 
-        public IEnumerable<ClientVehicleVM> Get()
+        public IEnumerable<ClientVehicleVM> Get(string phone, string vehicle, int pageIndex, int pageSize)
         {
-            listClientVehicle = new List<ClientVehicleVM>();
-            var listCV = _vssDb.ClientVehicles.ToList();
-            foreach (ClientVehicle oCV in listCV)
+            string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
+            Generic_ClientVehicle = new GenericFactory<ClientVehicleVM>();
+            var oHashTable = new Hashtable()
             {
-                ClientVehicleVM oClientVehicle = new ClientVehicleVM();
-                oClientVehicle.Id = oCV.Id;
-                oClientVehicle.VehicleNo = oCV.VehicleNo;
-                oClientVehicle.Model = oCV.Model;
-                oClientVehicle.Vin = oCV.Vin;
-                oClientVehicle.ClientId = oCV.ClientId;
-                listClientVehicle.Add(oClientVehicle);
-            }
-            return listClientVehicle;
+                { "PageIndex", pageIndex },
+                { "PageSize", pageSize },
+                { "phone", phone },
+                { "vehicle", vehicle }
+            };
+            return Generic_ClientVehicle.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetClientVehicle, oHashTable, vssDb);
         }
 
         public ClientVehicleVM Get(long id)

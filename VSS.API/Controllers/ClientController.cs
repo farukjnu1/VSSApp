@@ -21,10 +21,10 @@ namespace VSS.API.Controllers
     public class ClientController : ApiController
     {
         // GET: api/Client
-        public IEnumerable<ClientVM> Get()
+        public IEnumerable<ClientVM> Get([FromUri] string phone, int pi = 0, int ps = 10)
         {
             ClientBL _BL = new ClientBL();
-            return _BL.Get();
+            return _BL.Get(phone, pi, ps);
         }
 
         // GET: api/Client/5

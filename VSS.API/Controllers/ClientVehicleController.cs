@@ -20,10 +20,10 @@ namespace VSS.API.Controllers
     public class ClientVehicleController : ApiController
     {
         // GET: api/ClientVehicle
-        public IEnumerable<ClientVehicleVM> Get()
+        public IEnumerable<ClientVehicleVM> Get([FromUri] string phone, string vehicle, int pi = 0, int ps = 10)
         {
             ClientVehicleBL _BL = new ClientVehicleBL();
-            return _BL.Get();
+            return _BL.Get(phone, vehicle, pi, ps);
         }
 
         public ClientVehicleVM GetById(long id)

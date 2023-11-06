@@ -12,6 +12,8 @@ using System.Collections.Specialized;
 using System.Configuration;
 using Newtonsoft.Json;
 using VSS.API.DA.ViewModels.System;
+using System.Web.Configuration;
+using System.Text;
 
 namespace VSS.API.Attributes
 {
@@ -34,7 +36,13 @@ namespace VSS.API.Attributes
                     var TokenExpireDate = oUserPayload.CreateDate.AddMinutes(oUserPayload.TokenExpire);
                     if (TokenExpireDate < DateTime.Now)
                     {
-                        actionContext.Response = new HttpResponseMessage(HttpStatusCode.ExpectationFailed);
+                        //actionContext.Response = new HttpResponseMessage(HttpStatusCode.ExpectationFailed);
+                        actionContext.Response = new HttpResponseMessage(HttpStatusCode.OK);
+                        /*HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+                        var stringPayload = JsonConvert.SerializeObject(new { message = "Session expired, please login"});
+                        var httpContent = new StringContent(stringPayload, Encoding.UTF8, "application/json");
+                        response.Content = httpContent;
+                        actionContext.Response = response;*/
                     }
                 }
                 else

@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VSS.API.DA.ADO;
 using VSS.API.DA.EF.VssDb;
 using VSS.API.DA.ViewModels.Operation;
+using VSS.DA.ADO;
 using VSS.DA.ViewModels.Operation;
 
 namespace VSS.BL.Operation
@@ -14,29 +19,19 @@ namespace VSS.BL.Operation
         ModelVssDb _vssDb = new ModelVssDb();
         List<ClientVM> listClient = null;
         ClientVM oClient = null;
+        private IGenericFactory<ClientVM> Generic_Client = null;
         public ClientBL() { }
-        public IEnumerable<ClientVM> Get()
+        public IEnumerable<ClientVM> Get(string phone, int pageIndex, int pageSize)
         {
-            listClient = new List<ClientVM>();
-            var listBP = _vssDb.BusinessPartners
-                .Where(x => x.BpTypeId == 1)
-                .ToList();
-            foreach (BusinessPartner oBP in listBP) 
+            string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
+            Generic_Client = new GenericFactory<ClientVM>();
+            var oHashTable = new Hashtable()
             {
-                ClientVM oClient = new ClientVM();
-                oClient.BpId = oBP.BpId;
-                oClient.BpTypeId = oBP.BpTypeId;
-                oClient.Name = oBP.Name;
-                oClient.Phone = oBP.Phone;
-                oClient.Email = oBP.Email;
-                oClient.Address = oBP.Address;
-                oClient.ContactPerson = oBP.ContactPerson;
-                oClient.ContactPersonNo = oBP.ContactPersonNo;
-                oClient.ClientInfo = oBP.ClientInfo;
-                oClient.MembershipNo = oBP.MembershipNo;
-                listClient.Add(oClient);
-            }
-            return listClient;
+                { "PageIndex", pageIndex },
+                { "PageSize", pageSize },
+                { "phone", phone }
+            };
+            return Generic_Client.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetClient, oHashTable, vssDb);
         }
         public ClientVM Get(int id)
         {

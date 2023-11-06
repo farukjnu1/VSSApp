@@ -20,5 +20,7 @@ namespace VSS.API.DA.ViewModels.Operation
         public string Vin { get; set; }
 
         public int? ClientId { get; set; }
+        public string ClientName { get; set; }
+        public string Phone { get; set; }
     }
 }

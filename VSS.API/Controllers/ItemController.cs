@@ -50,13 +50,13 @@ namespace VSS.API.Controllers
             return _BL.RemoveItem(id);
         }
 
-        [HttpGet]
-        [Route("api/Item/GetBrand")]
-        public IEnumerable<BrandVM> GetBrand()
-        {
-            BrandBL _BL = new BrandBL();
-            return _BL.GetBrand();
-        }
+        //[HttpGet]
+        //[Route("api/Item/GetBrand")]
+        //public IEnumerable<BrandVM> GetBrand()
+        //{
+        //    BrandBL _BL = new BrandBL();
+        //    return _BL.GetBrand();
+        //}
 
         [HttpGet]
         [Route("api/Item/GetItemCategory")]

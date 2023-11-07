@@ -122,6 +122,20 @@ namespace VSS.API.BL.Stores
             return listItemCategory;
         }
 
+        public IEnumerable<BrandModelVM> GetBrandModel(int brandId)
+        {
+            _vssDb = new ModelVssDb();
+            var listBrandModel = _vssDb.BrandModels.Where(y=>y.BrandId== brandId)
+                .Select(x => new BrandModelVM
+                {
+                    Id = x.Id,
+                    Remarks = x.Remarks,
+                    BrandId = x.BrandId,
+                    ModelCode = x.ModelCode
+                }).OrderBy(s => s.ModelCode).ToList();
+            return listBrandModel;
+        }
+
         private int GetNewId()
         {
             try
@@ -134,5 +148,19 @@ namespace VSS.API.BL.Stores
                 return 0;
             }
         }
+
+        public IEnumerable<BrandVM> GetBrand()
+        {
+            _vssDb = new ModelVssDb();
+            var listBrand = _vssDb.Brands
+                .Select(x => new BrandVM
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Code = x.Code
+                }).OrderBy(s => s.Name).ToList();
+            return listBrand;
+        }
+
     }
 }

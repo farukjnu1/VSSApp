@@ -27,9 +27,7 @@ namespace VSS.API.DA.ViewModels.Operation
         public int? ItemCategoryId { get; set; }
 
         public int? BrandId { get; set; }
-
-        [StringLength(150)]
-        public string Model { get; set; }
+        public int? ModelId { get; set; }
 
         public int? ManufacturerId { get; set; }
 
@@ -47,6 +45,7 @@ namespace VSS.API.DA.ViewModels.Operation
         public decimal SalePrice { get; set; }
         public string CategoryName { get; set; }
         public string BrandName { get; set; }
-        
+        public string ModelCode { get; set; }
+
     }
 }

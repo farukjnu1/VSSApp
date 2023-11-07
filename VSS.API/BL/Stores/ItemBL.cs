@@ -16,8 +16,8 @@ namespace VSS.API.BL.Stores
         {
             int nRow = _vssDb.Items.Count();
             var listItem = (from i in _vssDb.Items
-                            join ic in _vssDb.ItemCategories on i.ItemCategoryId equals ic.Id
                             join b in _vssDb.Brands on i.BrandId equals b.Id
+                            join bm in _vssDb.BrandModels on i.ModelId equals bm.Id
                             select new ItemVM
                             {
                                 Id = i.Id,
@@ -27,9 +27,9 @@ namespace VSS.API.BL.Stores
                                 PartNoNew = i.PartNoNew,
                                 Remarks = i.Remarks,
                                 BrandId = i.BrandId,
-                                ItemCategoryId = i.ItemCategoryId,
-                                CategoryName = ic.Name,
                                 BrandName = b.Name,
+                                ModelId = i.ModelId,
+                                ModelCode = bm.ModelCode,
                                 PageIndex = pageIndex,
                                 PageSize = pageSize,
                                 RowCount = nRow
@@ -41,7 +41,7 @@ namespace VSS.API.BL.Stores
             return listItem;
         }
 
-        public bool AddItem(Item model)
+        public bool Add(Item model)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace VSS.API.BL.Stores
             }
         }
 
-        public bool UpdateItem(Item model)
+        public bool Update(Item model)
         {
             try
             {
@@ -77,6 +77,7 @@ namespace VSS.API.BL.Stores
                     oItem.UpdateAt = DateTime.Now;
                     oItem.UpdateBy = model.UpdateBy;
                     oItem.BrandId = model.BrandId;
+                    oItem.ModelId = model.ModelId;
                     oItem.ItemCategoryId = model.ItemCategoryId;
                     oItem.IsActive = true;
                     _vssDb.SaveChanges();
@@ -90,7 +91,7 @@ namespace VSS.API.BL.Stores
             return false;
         }
 
-        public bool RemoveItem(int id)
+        public bool Remove(int id)
         {
             try
             {

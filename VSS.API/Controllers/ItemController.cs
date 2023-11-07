@@ -33,30 +33,30 @@ namespace VSS.API.Controllers
         public bool Post([FromBody] Item model)
         {
             ItemBL _BL = new ItemBL();
-            return _BL.AddItem(model);
+            return _BL.Add(model);
         }
 
         // PUT: api/Item/5
         public bool Put([FromBody] Item model)
         {
             ItemBL _BL = new ItemBL();
-            return _BL.UpdateItem(model);
+            return _BL.Update(model);
         }
 
         // DELETE: api/Item/5
         public bool Delete(int id)
         {
             ItemBL _BL = new ItemBL();
-            return _BL.RemoveItem(id);
+            return _BL.Remove(id);
         }
 
-        //[HttpGet]
-        //[Route("api/Item/GetBrand")]
-        //public IEnumerable<BrandVM> GetBrand()
-        //{
-        //    BrandBL _BL = new BrandBL();
-        //    return _BL.GetBrand();
-        //}
+        [HttpGet]
+        [Route("api/Item/GetBrand")]
+        public IEnumerable<BrandVM> GetBrand()
+        {
+            BrandBL _BL = new BrandBL();
+            return _BL.GetBrand();
+        }
 
         [HttpGet]
         [Route("api/Item/GetItemCategory")]
@@ -73,5 +73,14 @@ namespace VSS.API.Controllers
             ItemBL _BL = new ItemBL();
             return _BL.getItemName();
         }
+
+        [HttpGet]
+        [Route("api/Item/GetBrandModel")]
+        public IEnumerable<BrandModelVM> GetBrandModel([FromUri]int id)
+        {
+            BrandBL _BL = new BrandBL();
+            return _BL.GetBrandModel(id);
+        }
+
     }
 }

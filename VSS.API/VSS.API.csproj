@@ -331,6 +331,7 @@
     <Compile Include="DA\ViewModels\Operation\JobGroupVM.cs" />
     <Compile Include="DA\ViewModels\Operation\JobVM.cs" />
     <Compile Include="DA\ViewModels\Operation\VehicleReceiverVM.cs" />
+    <Compile Include="DA\ViewModels\Stores\BrandModelVM.cs" />
     <Compile Include="DA\ViewModels\Stores\ItemCategoryVM.cs" />
     <Compile Include="DA\ViewModels\Stores\BrandVM.cs" />
     <Compile Include="DA\ViewModels\Stores\SRVM.cs" />

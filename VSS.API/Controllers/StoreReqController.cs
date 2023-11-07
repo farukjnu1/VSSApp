@@ -7,14 +7,12 @@ using System.Web.Http;
 using VSS.API.Attributes;
 using VSS.API.BL.Stores;
 using VSS.API.DA.EF.VssDb;
-using VSS.API.DA.ViewModels.Operation;
 using VSS.API.DA.ViewModels.Stores;
-
 
 namespace VSS.API.Controllers
 {
     [MyAuth]
-    public class SRController : ApiController
+    public class StoreReqController : ApiController
     {
         // GET: api/SR
         /*public IEnumerable<StoreReq> Get()
@@ -55,6 +53,5 @@ namespace VSS.API.Controllers
             SRBL _BL = new SRBL();
             return _BL.Remove(id);
         }
-
     }
 }

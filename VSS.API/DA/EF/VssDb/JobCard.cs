@@ -58,6 +58,10 @@ namespace VSS.API.DA.EF.VssDb
         [StringLength(20)]
         public string ContactPersonNo { get; set; }
 
+        public bool? IsDelivered { get; set; }
+
+        public bool? IsPaid { get; set; }
+
         public bool? IsActive { get; set; }
 
         public DateTime? CreateDate { get; set; }

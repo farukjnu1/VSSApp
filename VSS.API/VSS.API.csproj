@@ -255,6 +255,7 @@
     <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SRController.cs" />
+    <Compile Include="Controllers\StoreReqController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserRoleController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -266,6 +267,7 @@
     <Compile Include="DA\ADO\StoredProcedure.cs" />
     <Compile Include="DA\EF\VssDb\BloodGroup.cs" />
     <Compile Include="DA\EF\VssDb\Brand.cs" />
+    <Compile Include="DA\EF\VssDb\BrandModel.cs" />
     <Compile Include="DA\EF\VssDb\BusinessPartner.cs" />
     <Compile Include="DA\EF\VssDb\BusinessPartnerBalance.cs" />
     <Compile Include="DA\EF\VssDb\BusinessPartnerType.cs" />
@@ -300,8 +302,13 @@
     <Compile Include="DA\EF\VssDb\PayStatu.cs" />
     <Compile Include="DA\EF\VssDb\PayTran.cs" />
     <Compile Include="DA\EF\VssDb\Religion.cs" />
+    <Compile Include="DA\EF\VssDb\ReqUrgent.cs" />
     <Compile Include="DA\EF\VssDb\Role.cs" />
+    <Compile Include="DA\EF\VssDb\SalesPrice.cs" />
     <Compile Include="DA\EF\VssDb\Size.cs" />
+    <Compile Include="DA\EF\VssDb\Stock.cs" />
+    <Compile Include="DA\EF\VssDb\StoreRec.cs" />
+    <Compile Include="DA\EF\VssDb\StoreRecType.cs" />
     <Compile Include="DA\EF\VssDb\StoreReq.cs" />
     <Compile Include="DA\EF\VssDb\Unit.cs" />
     <Compile Include="DA\EF\VssDb\User.cs" />

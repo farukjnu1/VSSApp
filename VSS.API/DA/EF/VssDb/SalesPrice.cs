@@ -6,29 +6,21 @@ namespace VSS.API.DA.EF.VssDb
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("StoreReq")]
-    public partial class StoreReq
+    [Table("SalesPrice")]
+    public partial class SalesPrice
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
-        public int? WhId { get; set; }
+        public decimal? SalePrice { get; set; }
 
         public int? ItemId { get; set; }
 
-        public int? SupplierId { get; set; }
-
-        public int? Qty { get; set; }
-
         [StringLength(50)]
-        public string Remark { get; set; }
+        public string Remarks { get; set; }
 
         public DateTime? CreateDate { get; set; }
 
         public int? CreateBy { get; set; }
-
-        public DateTime? UpdateDate { get; set; }
-
-        public int? UpdateBy { get; set; }
     }
 }

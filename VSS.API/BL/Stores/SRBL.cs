@@ -26,10 +26,10 @@ namespace VSS.API.BL.Stores
                               Id = sr.Id,
                               ItemId = sr.ItemId,
                               ItemName = i.ItemName,
-                              PurPrice = sr.PurPrice,
+                              //PurPrice = sr.PurPrice,
                               Qty = sr.Qty,
                               Remark = sr.Remark,
-                              SalePrice = sr.SalePrice,
+                              //SalePrice = sr.SalePrice,
                               SupplierId = sr.SupplierId,
                               SupplierName = s.Name,
                               WhId = sr.WhId,
@@ -72,8 +72,8 @@ namespace VSS.API.BL.Stores
                     oSR.WhId = model.WhId;
                     oSR.ItemId = model.ItemId;
                     oSR.SupplierId = model.SupplierId;
-                    oSR.PurPrice = model.PurPrice;
-                    oSR.SalePrice = model.SalePrice;
+                    //oSR.PurPrice = model.PurPrice;
+                    //oSR.SalePrice = model.SalePrice;
                     oSR.Remark = model.Remark;
                     oSR.UpdateBy = model.CreateBy;
                     oSR.UpdateDate = DateTime.Now;

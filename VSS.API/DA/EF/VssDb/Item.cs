@@ -34,8 +34,7 @@ namespace VSS.API.DA.EF.VssDb
 
         public int? BrandId { get; set; }
 
-        [StringLength(150)]
-        public string Model { get; set; }
+        public int? ModelId { get; set; }
 
         public int? ManufacturerId { get; set; }
 

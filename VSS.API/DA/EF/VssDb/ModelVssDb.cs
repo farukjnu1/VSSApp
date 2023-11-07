@@ -14,6 +14,7 @@ namespace VSS.API.DA.EF.VssDb
 
         public virtual DbSet<BloodGroup> BloodGroups { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
+        public virtual DbSet<BrandModel> BrandModels { get; set; }
         public virtual DbSet<BusinessPartner> BusinessPartners { get; set; }
         public virtual DbSet<BusinessPartnerBalance> BusinessPartnerBalances { get; set; }
         public virtual DbSet<BusinessPartnerType> BusinessPartnerTypes { get; set; }
@@ -47,8 +48,13 @@ namespace VSS.API.DA.EF.VssDb
         public virtual DbSet<PayStatu> PayStatus { get; set; }
         public virtual DbSet<PayTran> PayTrans { get; set; }
         public virtual DbSet<Religion> Religions { get; set; }
+        public virtual DbSet<ReqUrgent> ReqUrgents { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<SalesPrice> SalesPrices { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
+        public virtual DbSet<Stock> Stocks { get; set; }
+        public virtual DbSet<StoreRec> StoreRecs { get; set; }
+        public virtual DbSet<StoreRecType> StoreRecTypes { get; set; }
         public virtual DbSet<StoreReq> StoreReqs { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -74,6 +80,14 @@ namespace VSS.API.DA.EF.VssDb
 
             modelBuilder.Entity<Brand>()
                 .Property(e => e.Country)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<BrandModel>()
+                .Property(e => e.ModelCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<BrandModel>()
+                .Property(e => e.Remarks)
                 .IsUnicode(false);
 
             modelBuilder.Entity<BusinessPartner>()
@@ -249,10 +263,6 @@ namespace VSS.API.DA.EF.VssDb
                 .IsUnicode(false);
 
             modelBuilder.Entity<Item>()
-                .Property(e => e.Model)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Item>()
                 .Property(e => e.PartNoOld)
                 .IsUnicode(false);
 
@@ -423,21 +433,37 @@ namespace VSS.API.DA.EF.VssDb
                 .Property(e => e.ChequeNo)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<ReqUrgent>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Role>()
                 .Property(e => e.RoleName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<SalesPrice>()
+                .Property(e => e.SalePrice)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<SalesPrice>()
+                .Property(e => e.Remarks)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Size>()
                 .Property(e => e.Size1)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<StoreReq>()
-                .Property(e => e.PurPrice)
+            modelBuilder.Entity<Stock>()
+                .Property(e => e.Qty)
                 .HasPrecision(18, 0);
 
-            modelBuilder.Entity<StoreReq>()
-                .Property(e => e.SalePrice)
+            modelBuilder.Entity<StoreRec>()
+                .Property(e => e.PurchasePrice)
                 .HasPrecision(18, 0);
+
+            modelBuilder.Entity<StoreRecType>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Unit>()
                 .Property(e => e.Code)

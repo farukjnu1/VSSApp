@@ -240,6 +240,7 @@
     <Compile Include="BL\System\RoleBL.cs" />
     <Compile Include="BL\System\UserBL.cs" />
     <Compile Include="BL\System\UserRoleBL.cs" />
+    <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\ClientVehicleController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />

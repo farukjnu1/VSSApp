@@ -1,28 +1,114 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Web;
+using VSS.API.DA.ADO;
 using VSS.API.DA.EF.VssDb;
 using VSS.API.DA.ViewModels.Operation;
 using VSS.API.DA.ViewModels.Stores;
+using VSS.DA.ADO;
+using VSS.DA.ViewModels.Operation;
 
 namespace VSS.API.BL.Stores
 {
     public class BrandBL
     {
-        ModelVssDb _vssDb = null;
-        public IEnumerable<BrandVM> GetBrand()
+        ModelVssDb _vssDb = new ModelVssDb();
+        public IEnumerable<BrandVM> Get(string phone, int pageIndex, int pageSize)
         {
-            _vssDb = new ModelVssDb();
+            int nRow = _vssDb.Brands.Count();
             var listBrand = _vssDb.Brands
                 .Select(x => new BrandVM
                 {
                     Id = x.Id,
-                    Name = x.Name
-                }).OrderBy(s=>s.Name).ToList();
+                    Code = x.Code,
+                    Name = x.Name,
+                    Country = x.Country,
+                    Remarks = x.Remarks,
+
+                    PageIndex = pageIndex,
+                    PageSize = pageSize,
+                    RowCount = nRow
+                })
+                .OrderByDescending(s => s.Id)
+                .Skip(pageIndex * pageSize)
+                .Take(pageSize)
+                .ToList();
             return listBrand;
         }
+
+        public bool Add(Brand model)
+        {
+            try
+            {
+                model.Id = GetNewId();
+                model.Code = model.Code;
+                model.Name = model.Name;
+                model.Country = model.Country;
+                model.Remarks = model.Remarks;
+                model.CreateDate = DateTime.Now;
+                model.CreateBy = model.CreateBy;
+                _vssDb.Brands.Add(model);
+                _vssDb.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool Update(Brand model)
+        {
+            try
+            {
+                var oB = _vssDb.Brands
+                 .Where(x => x.Id == model.Id)
+                 .FirstOrDefault();
+                if (oB != null)
+                {
+                    oB.Id = model.Id;
+                    oB.Name = model.Name;
+                    oB.Country = model.Country;
+                    oB.Remarks = model.Remarks;
+                    oB.UpdateBy = model.UpdateBy;
+                    oB.UpdateDate = DateTime.Now;
+                    _vssDb.SaveChanges();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return false;
+        }
+
+        public bool Remove(int id)
+        {
+            try
+            {
+                var selectedBrand = _vssDb.Brands
+                 .Where(x => x.Id == id)
+                 .FirstOrDefault();
+                if (selectedBrand != null)
+                {
+                    _vssDb.Brands.Remove(selectedBrand);
+                    _vssDb.SaveChanges();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return false;
+        }
+
         public IEnumerable<ItemCategoryVM> GetItemCategory()
         {
             _vssDb = new ModelVssDb();
@@ -34,6 +120,19 @@ namespace VSS.API.BL.Stores
                     Code = x.Code
                 }).OrderBy(s => s.Name).ToList();
             return listItemCategory;
+        }
+
+        private int GetNewId()
+        {
+            try
+            {
+                var Id = Convert.ToInt32(_vssDb.Brands.Max(x => x.Id)) + 1;
+                return Id;
+            }
+            catch
+            {
+                return 0;
+            }
         }
     }
 }

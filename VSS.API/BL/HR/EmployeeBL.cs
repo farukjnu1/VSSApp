@@ -23,6 +23,7 @@ namespace VSS.API.BL.HR
                     Mobile  = x.Mobile,
                     Email = x.Email,
                     NID = x.NID,
+                    DesignateId = x.DesignateId,
 
                     PageIndex = pageIndex,
                     PageSize = pageSize,
@@ -47,8 +48,8 @@ namespace VSS.API.BL.HR
                 model.Email = model.Email;
                 model.NID = model.NID;
                 model.DesignateId = model.DesignateId;
-                //model.CreatedBy = model.CreatedBy;
-                //model.CreateDate = DateTime.Now;
+                model.CreatedBy = model.CreatedBy;
+                model.CreateDate = DateTime.Now;
                 _vssDb.Employees.Add(model);
                 _vssDb.SaveChanges();
                 return true;

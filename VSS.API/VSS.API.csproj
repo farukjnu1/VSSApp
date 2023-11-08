@@ -224,6 +224,8 @@
     <Compile Include="Attributes\MyAuth.cs" />
     <Compile Include="BL\Billing\InvoiceBL.cs" />
     <Compile Include="BL\Billing\PayBL.cs" />
+    <Compile Include="BL\HR\DesignationBL.cs" />
+    <Compile Include="BL\HR\EmployeeBL.cs" />
     <Compile Include="BL\Operation\ClientBL.cs" />
     <Compile Include="BL\Operation\ClientVehicleBL.cs" />
     <Compile Include="BL\Operation\EngineSizeBL.cs" />
@@ -244,6 +246,8 @@
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\ClientVehicleController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\DesignationController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EngineSizeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
@@ -324,6 +328,8 @@
     <Compile Include="DA\ViewModels\Billing\PaySettleVM.cs" />
     <Compile Include="DA\ViewModels\Billing\PayTranVM.cs" />
     <Compile Include="DA\ViewModels\Common\Pager.cs" />
+    <Compile Include="DA\ViewModels\HR\DesignationVM.cs" />
+    <Compile Include="DA\ViewModels\HR\EmployeeVM.cs" />
     <Compile Include="DA\ViewModels\Operation\ClientVehicleVM.cs" />
     <Compile Include="DA\ViewModels\Operation\ClientVM.cs" />
     <Compile Include="DA\ViewModels\Operation\EngineSizeVM.cs" />

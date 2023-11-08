@@ -6,8 +6,8 @@ namespace VSS.API.DA.EF.VssDb
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("StoreRecType")]
-    public partial class StoreRecType
+    [Table("RecType")]
+    public partial class RecType
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }

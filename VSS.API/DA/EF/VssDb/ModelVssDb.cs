@@ -47,14 +47,15 @@ namespace VSS.API.DA.EF.VssDb
         public virtual DbSet<PaySettle> PaySettles { get; set; }
         public virtual DbSet<PayStatu> PayStatus { get; set; }
         public virtual DbSet<PayTran> PayTrans { get; set; }
+        public virtual DbSet<RecType> RecTypes { get; set; }
         public virtual DbSet<Religion> Religions { get; set; }
+        public virtual DbSet<ReqStatu> ReqStatus { get; set; }
         public virtual DbSet<ReqUrgent> ReqUrgents { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<SalesPrice> SalesPrices { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<Stock> Stocks { get; set; }
         public virtual DbSet<StoreRec> StoreRecs { get; set; }
-        public virtual DbSet<StoreRecType> StoreRecTypes { get; set; }
         public virtual DbSet<StoreReq> StoreReqs { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -68,11 +69,6 @@ namespace VSS.API.DA.EF.VssDb
             modelBuilder.Entity<BloodGroup>()
                 .Property(e => e.Name)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<BloodGroup>()
-                .HasMany(e => e.Employees)
-                .WithOptional(e => e.BloodGroup1)
-                .HasForeignKey(e => e.BloodGroup);
 
             modelBuilder.Entity<Brand>()
                 .Property(e => e.Code)
@@ -184,15 +180,6 @@ namespace VSS.API.DA.EF.VssDb
                 .Property(e => e.Nationality)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Employee>()
-                .HasOptional(e => e.Employee1)
-                .WithRequired(e => e.Employee2);
-
-            modelBuilder.Entity<Employee>()
-                .HasMany(e => e.InvoiceItems)
-                .WithOptional(e => e.Employee)
-                .HasForeignKey(e => e.DoneBy);
-
             modelBuilder.Entity<EngineSize>()
                 .Property(e => e.Code)
                 .IsUnicode(false);
@@ -204,11 +191,6 @@ namespace VSS.API.DA.EF.VssDb
             modelBuilder.Entity<EngineSize>()
                 .Property(e => e.CC)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<Gender>()
-                .HasMany(e => e.Employees)
-                .WithOptional(e => e.Gender1)
-                .HasForeignKey(e => e.Gender);
 
             modelBuilder.Entity<Invoice>()
                 .Property(e => e.GrandTotal)
@@ -362,11 +344,6 @@ namespace VSS.API.DA.EF.VssDb
                 .Property(e => e.Email)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<MaritalStatu>()
-                .HasMany(e => e.Employees)
-                .WithOptional(e => e.MaritalStatu)
-                .HasForeignKey(e => e.MaritalStatus);
-
             modelBuilder.Entity<Menu>()
                 .Property(e => e.MenuCode)
                 .IsUnicode(false);
@@ -433,6 +410,14 @@ namespace VSS.API.DA.EF.VssDb
                 .Property(e => e.ChequeNo)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<RecType>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ReqStatu>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
+
             modelBuilder.Entity<ReqUrgent>()
                 .Property(e => e.Name)
                 .IsUnicode(false);
@@ -461,9 +446,13 @@ namespace VSS.API.DA.EF.VssDb
                 .Property(e => e.PurchasePrice)
                 .HasPrecision(18, 0);
 
-            modelBuilder.Entity<StoreRecType>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
+            modelBuilder.Entity<StoreRec>()
+                .Property(e => e.Qty)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<StoreReq>()
+                .Property(e => e.Qty)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<Unit>()
                 .Property(e => e.Code)

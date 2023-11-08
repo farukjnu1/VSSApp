@@ -7,7 +7,7 @@ using VSS.API.DA.ViewModels.Common;
 
 namespace VSS.API.DA.ViewModels.Stores
 {
-    public class SRVM:Pager
+    public class StoreReqVM:Pager
     {
         public long Id { get; set; }
 
@@ -19,14 +19,17 @@ namespace VSS.API.DA.ViewModels.Stores
 
         public int? Qty { get; set; }
 
-        public decimal? PurPrice { get; set; }
-
-        public decimal? SalePrice { get; set; }
-
         [StringLength(50)]
         public string Remark { get; set; }
+        public int? ReqStatus { get; set; }
+
+        public DateTime? CreateDate { get; set; }
+
+        public int? CreateBy { get; set; }
         public string ItemName { get; set; }
         public string SupplierName { get; set; }
         public string WHName { get; set; }
+        public string ReqStatusName { get; set; }
+        
     }
 }

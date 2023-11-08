@@ -6,17 +6,12 @@ namespace VSS.API.DA.EF.VssDb
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Designation")]
-    public partial class Designation
+    public partial class ReqStatu
     {
-        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int DesignateId { get; set; }
+        public int Id { get; set; }
 
-        [StringLength(50)]
+        [StringLength(25)]
         public string Name { get; set; }
-
-        [StringLength(10)]
-        public string Short { get; set; }
     }
 }

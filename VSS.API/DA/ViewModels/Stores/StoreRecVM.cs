@@ -1,13 +1,12 @@
-namespace VSS.API.DA.EF.VssDb
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
-    [Table("StoreRec")]
-    public partial class StoreRec
+namespace VSS.API.DA.ViewModels.Stores
+{
+    public class StoreRecVM
     {
         public long Id { get; set; }
 
@@ -28,12 +27,6 @@ namespace VSS.API.DA.EF.VssDb
 
         public int? ReqId { get; set; }
 
-        public DateTime? CreateDate { get; set; }
-
         public int? CreateBy { get; set; }
-
-        public DateTime? UpdateDate { get; set; }
-
-        public int? UpdateBy { get; set; }
     }
 }

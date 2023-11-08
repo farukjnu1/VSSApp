@@ -9,7 +9,6 @@ namespace VSS.API.DA.EF.VssDb
     [Table("StoreReq")]
     public partial class StoreReq
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long Id { get; set; }
 
         public int? WhId { get; set; }
@@ -18,10 +17,12 @@ namespace VSS.API.DA.EF.VssDb
 
         public int? SupplierId { get; set; }
 
-        public int? Qty { get; set; }
+        public decimal? Qty { get; set; }
 
         [StringLength(50)]
         public string Remark { get; set; }
+
+        public int? ReqStatus { get; set; }
 
         public DateTime? CreateDate { get; set; }
 

@@ -14,44 +14,41 @@ namespace VSS.API.Controllers
     [MyAuth]
     public class StoreReqController : ApiController
     {
-        // GET: api/SR
-        /*public IEnumerable<StoreReq> Get()
-        {
-           SRBL _BL = new SRBL();
-           return _BL.Get();
-        }*/
+        // GET: api/StoreReq
 
-        public IEnumerable<SRVM> Get(int pi = 0, int ps = 10)
+        [HttpGet]
+        public IEnumerable<StoreReqVM> Get(int reqStatus,int pi = 0, int ps = 10)
         {
-            SRBL _BL = new SRBL();
-            return _BL.Get(pi, ps);
+            StoreReqBL _BL = new StoreReqBL();
+            return _BL.Get(reqStatus, pi, ps);
         }
 
-        // GET: api/SR/5
+        // GET: api/StoreReq/5
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST: api/SR
+        // POST: api/StoreReq
         public bool Post([FromBody] StoreReq model)
         {
-            SRBL _BL = new SRBL();
+            StoreReqBL _BL = new StoreReqBL();
             return _BL.Add(model);
         }
 
-        // PUT: api/SR/5
+        // PUT: api/StoreReq/5
         public bool Put([FromBody] StoreReq model)
         {
-            SRBL _BL = new SRBL();
-            return (_BL.Update(model));
+            StoreReqBL _BL = new StoreReqBL();
+            return _BL.Update(model);
         }
 
-        // DELETE: api/SR/5
+        // DELETE: api/StoreReq/5
         public bool Delete(int id)
         {
-            SRBL _BL = new SRBL();
+            StoreReqBL _BL = new StoreReqBL();
             return _BL.Remove(id);
         }
+
     }
 }

@@ -232,7 +232,7 @@
     <Compile Include="BL\Operation\JobGroupBL.cs" />
     <Compile Include="BL\Stores\BrandBL.cs" />
     <Compile Include="BL\Stores\ItemBL.cs" />
-    <Compile Include="BL\Stores\SRBL.cs" />
+    <Compile Include="BL\Stores\StoreReqBL.cs" />
     <Compile Include="BL\Stores\WarehouseBL.cs" />
     <Compile Include="BL\System\CompanyBL.cs" />
     <Compile Include="BL\System\LoginBL.cs" />
@@ -255,7 +255,7 @@
     <Compile Include="Controllers\MenuPermissionController.cs" />
     <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
-    <Compile Include="Controllers\SRController.cs" />
+    <Compile Include="Controllers\StoreRecController.cs" />
     <Compile Include="Controllers\StoreReqController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserRoleController.cs" />
@@ -302,14 +302,15 @@
     <Compile Include="DA\EF\VssDb\PaySettle.cs" />
     <Compile Include="DA\EF\VssDb\PayStatu.cs" />
     <Compile Include="DA\EF\VssDb\PayTran.cs" />
+    <Compile Include="DA\EF\VssDb\RecType.cs" />
     <Compile Include="DA\EF\VssDb\Religion.cs" />
+    <Compile Include="DA\EF\VssDb\ReqStatu.cs" />
     <Compile Include="DA\EF\VssDb\ReqUrgent.cs" />
     <Compile Include="DA\EF\VssDb\Role.cs" />
     <Compile Include="DA\EF\VssDb\SalesPrice.cs" />
     <Compile Include="DA\EF\VssDb\Size.cs" />
     <Compile Include="DA\EF\VssDb\Stock.cs" />
     <Compile Include="DA\EF\VssDb\StoreRec.cs" />
-    <Compile Include="DA\EF\VssDb\StoreRecType.cs" />
     <Compile Include="DA\EF\VssDb\StoreReq.cs" />
     <Compile Include="DA\EF\VssDb\Unit.cs" />
     <Compile Include="DA\EF\VssDb\User.cs" />
@@ -317,6 +318,7 @@
     <Compile Include="DA\EF\VssDb\Warehouse.cs" />
     <Compile Include="DA\EF\VssDb\WorkGroup.cs" />
     <Compile Include="DA\EF\VssDb\WorkGroupEmp.cs" />
+    <Compile Include="DA\Utilities\BLStatus.cs" />
     <Compile Include="DA\Utilities\Logs.cs" />
     <Compile Include="DA\ViewModels\Billing\InvoiceVM.cs" />
     <Compile Include="DA\ViewModels\Billing\PaySettleVM.cs" />
@@ -334,7 +336,8 @@
     <Compile Include="DA\ViewModels\Stores\BrandModelVM.cs" />
     <Compile Include="DA\ViewModels\Stores\ItemCategoryVM.cs" />
     <Compile Include="DA\ViewModels\Stores\BrandVM.cs" />
-    <Compile Include="DA\ViewModels\Stores\SRVM.cs" />
+    <Compile Include="DA\ViewModels\Stores\StoreRecVM.cs" />
+    <Compile Include="DA\ViewModels\Stores\StoreReqVM.cs" />
     <Compile Include="DA\ViewModels\Stores\WarehouseVM.cs" />
     <Compile Include="DA\ViewModels\System\CompanyVM.cs" />
     <Compile Include="DA\ViewModels\System\MenuPermissionVM.cs" />
@@ -419,6 +422,7 @@
     <Folder Include="Views\ClientVehicle\" />
     <Folder Include="Views\Client\" />
     <Folder Include="Views\Company\" />
+    <Folder Include="Views\StoreRec\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\bootstrap.min.js.map" />

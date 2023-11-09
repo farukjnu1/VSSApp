@@ -65,19 +65,6 @@ namespace VSS.API.DA.ViewModels.HR
         public DateTime? CreateDate { get; set; }
 
         public int? CreatedBy { get; set; }
-
-        public virtual BloodGroup BloodGroup1 { get; set; }
-
-        public virtual Designation Designation { get; set; }
-
-        public virtual Employee Employee1 { get; set; }
-
-        public virtual Employee Employee2 { get; set; }
-
-        public virtual Gender Gender1 { get; set; }
-
-        public virtual MaritalStatu MaritalStatu { get; set; }
-
-        public virtual Religion Religion { get; set; }
+        public string DesignationName { get; set; }
     }
 }

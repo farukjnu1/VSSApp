@@ -54,6 +54,21 @@ namespace VSS.BL.Operation
             }
             return oClient;
         }
+        public IEnumerable<ClientVM> GetClient()
+        {
+            //oClient = new ClientVM();
+            //var listClient = _vssDb.BusinessPartners
+            //    .Where(x => x.BpTypeId == 1)
+            //    .ToList();
+            var listClient = from x in _vssDb.BusinessPartners
+                             where x.BpTypeId == 1
+                             select new ClientVM
+                             {
+                                 BpId = x.BpId,
+                                 Name = x.Name
+                             };
+            return listClient;
+        }
         public bool Add(BusinessPartner model)
         {
             try

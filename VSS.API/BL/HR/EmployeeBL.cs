@@ -20,11 +20,11 @@ namespace VSS.API.BL.HR
                     FirstName = x.FirstName,
                     MiddleName = x.MiddleName,
                     LastName = x.LastName,
-                    Mobile  = x.Mobile,
+                    Mobile = x.Mobile,
                     Email = x.Email,
                     NID = x.NID,
                     DesignateId = x.DesignateId,
-
+                    DesignationName = (from y in _vssDb.Designations where y.DesignateId == x.DesignateId select y).FirstOrDefault() == null ? "" : (from y in _vssDb.Designations where y.DesignateId == x.DesignateId select y).FirstOrDefault().Name,
                     PageIndex = pageIndex,
                     PageSize = pageSize,
                     RowCount = nRow

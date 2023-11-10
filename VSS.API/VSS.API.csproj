@@ -234,6 +234,8 @@
     <Compile Include="BL\Operation\JobGroupBL.cs" />
     <Compile Include="BL\Stores\BrandBL.cs" />
     <Compile Include="BL\Stores\ItemBL.cs" />
+    <Compile Include="BL\Stores\StoreRecBL.cs" />
+    <Compile Include="BL\Stores\StoreRetBL.cs" />
     <Compile Include="BL\Stores\StoreReqBL.cs" />
     <Compile Include="BL\Stores\WarehouseBL.cs" />
     <Compile Include="BL\System\CompanyBL.cs" />
@@ -259,6 +261,7 @@
     <Compile Include="Controllers\MenuPermissionController.cs" />
     <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\StoreRetController.cs" />
     <Compile Include="Controllers\StoreRecController.cs" />
     <Compile Include="Controllers\StoreReqController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -306,7 +309,6 @@
     <Compile Include="DA\EF\VssDb\PaySettle.cs" />
     <Compile Include="DA\EF\VssDb\PayStatu.cs" />
     <Compile Include="DA\EF\VssDb\PayTran.cs" />
-    <Compile Include="DA\EF\VssDb\RecType.cs" />
     <Compile Include="DA\EF\VssDb\Religion.cs" />
     <Compile Include="DA\EF\VssDb\ReqStatu.cs" />
     <Compile Include="DA\EF\VssDb\ReqUrgent.cs" />
@@ -314,8 +316,9 @@
     <Compile Include="DA\EF\VssDb\SalesPrice.cs" />
     <Compile Include="DA\EF\VssDb\Size.cs" />
     <Compile Include="DA\EF\VssDb\Stock.cs" />
-    <Compile Include="DA\EF\VssDb\StoreRec.cs" />
     <Compile Include="DA\EF\VssDb\StoreReq.cs" />
+    <Compile Include="DA\EF\VssDb\StoreTran.cs" />
+    <Compile Include="DA\EF\VssDb\StoreTranType.cs" />
     <Compile Include="DA\EF\VssDb\Unit.cs" />
     <Compile Include="DA\EF\VssDb\User.cs" />
     <Compile Include="DA\EF\VssDb\UserRole.cs" />

@@ -4,20 +4,18 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using VSS.API.Attributes;
 using VSS.API.BL.Stores;
 using VSS.API.DA.EF.VssDb;
 using VSS.API.DA.ViewModels.Stores;
 
 namespace VSS.API.Controllers
 {
-    [MyAuth]
-    public class StoreReqController : ApiController
+    public class StoreRetController : ApiController
     {
         // GET: api/StoreReq
 
         [HttpGet]
-        public IEnumerable<StoreReqVM> Get(int reqStatus,int pi = 0, int ps = 10)
+        public IEnumerable<StoreReqVM> Get(int reqStatus, int pi = 0, int ps = 10)
         {
             StoreReqBL _BL = new StoreReqBL();
             return _BL.Get(reqStatus, pi, ps);
@@ -43,6 +41,5 @@ namespace VSS.API.Controllers
             StoreReqBL _BL = new StoreReqBL();
             return _BL.Remove(id);
         }
-
     }
 }

@@ -4,36 +4,42 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using VSS.API.BL.Stores;
+using VSS.API.DA.EF.VssDb;
+using VSS.API.DA.ViewModels.Stores;
 
 namespace VSS.API.Controllers
 {
     public class StoreRecController : ApiController
     {
-        // GET: api/StoreRec
-        public IEnumerable<string> Get()
+        [HttpGet]
+        [Route("api/StoreRec/GetRecByReqId")]
+        public StoreTranVM GetByReqid([FromUri] int reqId)
         {
-            return new string[] { "value1", "value2" };
+            StoreTranBL _BL = new StoreTranBL();
+            return _BL.GetRecByReqId(reqId);
         }
 
-        // GET: api/StoreRec/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
+        //Approve Requisition & Store Receive
         // POST: api/StoreRec
-        public void Post([FromBody]string value)
+        public bool Post([FromBody] StoreTran model)
         {
+            StoreTranBL _BL = new StoreTranBL();
+            return _BL.ApproveReqRecStore(model);
         }
 
         // PUT: api/StoreRec/5
-        public void Put(int id, [FromBody]string value)
+        public bool Put([FromBody] StoreTran model)
         {
+            StoreTranBL _BL = new StoreTranBL();
+            return _BL.Update(model);
         }
 
         // DELETE: api/StoreRec/5
-        public void Delete(int id)
+        public bool Delete(int id)
         {
+            StoreTranBL _BL = new StoreTranBL();
+            return _BL.Remove(id);
         }
     }
 }

@@ -47,7 +47,6 @@ namespace VSS.API.DA.EF.VssDb
         public virtual DbSet<PaySettle> PaySettles { get; set; }
         public virtual DbSet<PayStatu> PayStatus { get; set; }
         public virtual DbSet<PayTran> PayTrans { get; set; }
-        public virtual DbSet<RecType> RecTypes { get; set; }
         public virtual DbSet<Religion> Religions { get; set; }
         public virtual DbSet<ReqStatu> ReqStatus { get; set; }
         public virtual DbSet<ReqUrgent> ReqUrgents { get; set; }
@@ -55,8 +54,9 @@ namespace VSS.API.DA.EF.VssDb
         public virtual DbSet<SalesPrice> SalesPrices { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<Stock> Stocks { get; set; }
-        public virtual DbSet<StoreRec> StoreRecs { get; set; }
         public virtual DbSet<StoreReq> StoreReqs { get; set; }
+        public virtual DbSet<StoreTran> StoreTrans { get; set; }
+        public virtual DbSet<StoreTranType> StoreTranTypes { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
@@ -410,10 +410,6 @@ namespace VSS.API.DA.EF.VssDb
                 .Property(e => e.ChequeNo)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<RecType>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
             modelBuilder.Entity<ReqStatu>()
                 .Property(e => e.Name)
                 .IsUnicode(false);
@@ -442,17 +438,25 @@ namespace VSS.API.DA.EF.VssDb
                 .Property(e => e.Qty)
                 .HasPrecision(18, 0);
 
-            modelBuilder.Entity<StoreRec>()
-                .Property(e => e.PurchasePrice)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<StoreRec>()
-                .Property(e => e.Qty)
-                .HasPrecision(18, 0);
-
             modelBuilder.Entity<StoreReq>()
                 .Property(e => e.Qty)
                 .HasPrecision(18, 0);
+
+            modelBuilder.Entity<StoreTran>()
+                .Property(e => e.PurchasePrice)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<StoreTran>()
+                .Property(e => e.Qty)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<StoreTranType>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<StoreTranType>()
+                .Property(e => e.TranType)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Unit>()
                 .Property(e => e.Code)

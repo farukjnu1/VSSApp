@@ -16,9 +16,10 @@ using VSS.DA.ViewModels.Operation;
 
 namespace VSS.API.BL.Stores
 {
-    public class StoreReqBL
+    public class StoreRetBL
     {
         ModelVssDb _vssDb = new ModelVssDb();
+        List<StoreReq> listEngineSize = null;
         private IGenericFactory<StoreReqVM> Generic_StoreReq = null;
 
         public List<StoreReqVM> Get(int reqStatus, int pageIndex = 0, int pageSize = 10)

@@ -17,7 +17,7 @@ namespace VSS.API.DA.ViewModels.Stores
 
         public int? SupplierId { get; set; }
 
-        public int? Qty { get; set; }
+        public decimal? Qty { get; set; }
 
         [StringLength(50)]
         public string Remark { get; set; }
@@ -30,6 +30,7 @@ namespace VSS.API.DA.ViewModels.Stores
         public string SupplierName { get; set; }
         public string WHName { get; set; }
         public string ReqStatusName { get; set; }
-        
+        public decimal? RecQty { get; set; }
+        public decimal? PurchasePrice { get; set; }
     }
 }

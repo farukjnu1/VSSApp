@@ -6,7 +6,7 @@ using System.Web;
 
 namespace VSS.API.DA.ViewModels.Stores
 {
-    public class StoreRecVM
+    public class StoreTranVM
     {
         public long Id { get; set; }
 

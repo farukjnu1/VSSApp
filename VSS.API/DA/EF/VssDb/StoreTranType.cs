@@ -6,13 +6,16 @@ namespace VSS.API.DA.EF.VssDb
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("RecType")]
-    public partial class RecType
+    [Table("StoreTranType")]
+    public partial class StoreTranType
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [StringLength(50)]
         public string Name { get; set; }
+
+        [StringLength(1)]
+        public string TranType { get; set; }
     }
 }

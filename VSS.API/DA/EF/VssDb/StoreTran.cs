@@ -6,8 +6,8 @@ namespace VSS.API.DA.EF.VssDb
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("StoreRec")]
-    public partial class StoreRec
+    [Table("StoreTran")]
+    public partial class StoreTran
     {
         public long Id { get; set; }
 
@@ -24,7 +24,7 @@ namespace VSS.API.DA.EF.VssDb
         [StringLength(50)]
         public string Remark { get; set; }
 
-        public int? StoreRecTypeId { get; set; }
+        public int? StoreTranTypeId { get; set; }
 
         public int? ReqId { get; set; }
 

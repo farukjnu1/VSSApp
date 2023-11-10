@@ -232,6 +232,7 @@
     <Compile Include="BL\Operation\JobBL.cs" />
     <Compile Include="BL\Operation\JobCardBL.cs" />
     <Compile Include="BL\Operation\JobGroupBL.cs" />
+    <Compile Include="BL\Operation\WorkGroupBL.cs" />
     <Compile Include="BL\Stores\BrandBL.cs" />
     <Compile Include="BL\Stores\BrandModelBL.cs" />
     <Compile Include="BL\Stores\ItemBL.cs" />
@@ -271,6 +272,7 @@
     <Compile Include="Controllers\UserRoleController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WarehouseController.cs" />
+    <Compile Include="Controllers\WorkGroupController.cs" />
     <Compile Include="DA\ADO\GenericFactory.cs" />
     <Compile Include="DA\ADO\GenericFactoryMySql.cs" />
     <Compile Include="DA\ADO\IGenericFactory.cs" />

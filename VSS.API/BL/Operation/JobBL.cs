@@ -21,6 +21,7 @@ namespace VSS.BL.Operation
                     JobId = x.JobId,
                     Description = x.Description,
                     JobGroupId = x.JobGroupId,
+                    JobGroupName = (from y in _vssDb.JobGroups where y.GroupId == x.JobGroupId select y).FirstOrDefault() == null ? "" : (from y in _vssDb.JobGroups where y.GroupId == x.JobGroupId select y).FirstOrDefault().Name,
                     A = x.A,
                     B = x.B,
                     C = x.C,

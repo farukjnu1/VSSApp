@@ -15,6 +15,7 @@ namespace VSS.API.DA.ViewModels.Operation
         public string Description { get; set; }
 
         public int? JobGroupId { get; set; }
+        public string JobGroupName { get; set; }
 
         public int? A { get; set; }
 

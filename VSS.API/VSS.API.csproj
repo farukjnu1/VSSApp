@@ -232,7 +232,9 @@
     <Compile Include="BL\Operation\JobBL.cs" />
     <Compile Include="BL\Operation\JobCardBL.cs" />
     <Compile Include="BL\Operation\JobGroupBL.cs" />
+    <Compile Include="BL\Operation\WorkGroupBL.cs" />
     <Compile Include="BL\Stores\BrandBL.cs" />
+    <Compile Include="BL\Stores\BrandModelBL.cs" />
     <Compile Include="BL\Stores\ItemBL.cs" />
     <Compile Include="BL\Stores\StoreRecBL.cs" />
     <Compile Include="BL\Stores\StoreRetBL.cs" />
@@ -240,11 +242,14 @@
     <Compile Include="BL\Stores\WarehouseBL.cs" />
     <Compile Include="BL\System\CompanyBL.cs" />
     <Compile Include="BL\System\LoginBL.cs" />
+    <Compile Include="BL\System\MenuBL.cs" />
     <Compile Include="BL\System\MenuPermissionBL.cs" />
+    <Compile Include="BL\System\ModuleBL.cs" />
     <Compile Include="BL\System\RoleBL.cs" />
     <Compile Include="BL\System\UserBL.cs" />
     <Compile Include="BL\System\UserRoleBL.cs" />
     <Compile Include="Controllers\BrandController.cs" />
+    <Compile Include="Controllers\BrandModelController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\ClientVehicleController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
@@ -258,7 +263,9 @@
     <Compile Include="Controllers\JobController.cs" />
     <Compile Include="Controllers\JobGroupController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\MenuPermissionController.cs" />
+    <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\StoreRetController.cs" />
@@ -268,6 +275,7 @@
     <Compile Include="Controllers\UserRoleController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WarehouseController.cs" />
+    <Compile Include="Controllers\WorkGroupController.cs" />
     <Compile Include="DA\ADO\GenericFactory.cs" />
     <Compile Include="DA\ADO\GenericFactoryMySql.cs" />
     <Compile Include="DA\ADO\IGenericFactory.cs" />
@@ -350,6 +358,8 @@
     <Compile Include="DA\ViewModels\Stores\WarehouseVM.cs" />
     <Compile Include="DA\ViewModels\System\CompanyVM.cs" />
     <Compile Include="DA\ViewModels\System\MenuPermissionVM.cs" />
+    <Compile Include="DA\ViewModels\System\MenuVM.cs" />
+    <Compile Include="DA\ViewModels\System\ModuleVM.cs" />
     <Compile Include="DA\ViewModels\System\RoleVM.cs" />
     <Compile Include="DA\ViewModels\System\UserPayload.cs" />
     <Compile Include="DA\ViewModels\System\UserRoleVM.cs" />

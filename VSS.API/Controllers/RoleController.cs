@@ -5,7 +5,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using VSS.API.Attributes;
+using VSS.API.BL.HR;
 using VSS.API.BL.System;
+using VSS.API.DA.EF.VssDb;
 using VSS.API.DA.ViewModels.System;
 
 namespace VSS.API.Controllers
@@ -27,18 +29,25 @@ namespace VSS.API.Controllers
         }
 
         // POST: api/Role
-        public void Post([FromBody]string value)
+        public bool Post([FromBody] Role model)
         {
+            RoleBL _BL = new RoleBL();
+            return _BL.Add(model);
         }
 
         // PUT: api/Role/5
-        public void Put(int id, [FromBody]string value)
+        public bool Put([FromBody] Role model)
         {
+            RoleBL _BL = new RoleBL();
+            return _BL.Update(model);
         }
 
         // DELETE: api/Role/5
-        public void Delete(int id)
+        public bool Delete(int id)
         {
+            RoleBL _BL = new RoleBL();
+
+            return _BL.Remove(id);
         }
     }
 }

@@ -63,5 +63,13 @@ namespace VSS.API.Controllers
             ClientBL _BL = new ClientBL();
             return _BL.getSName();
         }
+
+        [HttpGet]
+        [Route("api/Client/GetClient")]
+        public IEnumerable<ClientVM> GetClient()
+        {
+            ClientBL _BL = new ClientBL();
+            return _BL.GetClient();
+        }
     }
 }

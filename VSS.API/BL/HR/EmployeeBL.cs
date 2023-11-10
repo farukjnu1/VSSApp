@@ -20,10 +20,11 @@ namespace VSS.API.BL.HR
                     FirstName = x.FirstName,
                     MiddleName = x.MiddleName,
                     LastName = x.LastName,
-                    Mobile  = x.Mobile,
+                    Mobile = x.Mobile,
                     Email = x.Email,
                     NID = x.NID,
-
+                    DesignateId = x.DesignateId,
+                    DesignationName = (from y in _vssDb.Designations where y.DesignateId == x.DesignateId select y).FirstOrDefault() == null ? "" : (from y in _vssDb.Designations where y.DesignateId == x.DesignateId select y).FirstOrDefault().Name,
                     PageIndex = pageIndex,
                     PageSize = pageSize,
                     RowCount = nRow
@@ -47,8 +48,8 @@ namespace VSS.API.BL.HR
                 model.Email = model.Email;
                 model.NID = model.NID;
                 model.DesignateId = model.DesignateId;
-                //model.CreatedBy = model.CreatedBy;
-                //model.CreateDate = DateTime.Now;
+                model.CreatedBy = model.CreatedBy;
+                model.CreateDate = DateTime.Now;
                 _vssDb.Employees.Add(model);
                 _vssDb.SaveChanges();
                 return true;

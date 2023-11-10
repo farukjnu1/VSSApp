@@ -20,5 +20,77 @@ namespace VSS.API.BL.System
                 }).OrderBy(s => s.RoleId).ToList();
             return listRole;
         }
+
+        public bool Add(Role model)
+        {
+            try
+            {
+                model.RoleId = GetNewId();
+                model.RoleName = model.RoleName;
+                _vssDb.Roles.Add(model);
+                _vssDb.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool Update(Role model)
+        {
+            try
+            {
+                var oRole = _vssDb.Roles
+                 .Where(x => x.RoleId == model.RoleId)
+                 .FirstOrDefault();
+                if (oRole != null)
+                {
+                    oRole.RoleId = model.RoleId;
+                    oRole.RoleName = model.RoleName;
+                    _vssDb.SaveChanges();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return false;
+        }
+
+        public bool Remove(int id)
+        {
+            try
+            {
+                var selectedRole = _vssDb.Roles
+                 .Where(x => x.RoleId == id)
+                 .FirstOrDefault();
+                if (selectedRole != null)
+                {
+                    _vssDb.Roles.Remove(selectedRole);
+                    _vssDb.SaveChanges();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return false;
+        }
+
+        private int GetNewId()
+        {
+            try
+            {
+                var Id = Convert.ToInt32(_vssDb.Roles.Max(x => x.RoleId)) + 1;
+                return Id;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
     }
 }

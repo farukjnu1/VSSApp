@@ -24,6 +24,7 @@ namespace VSS.API.Controllers
         }
 
         // GET: api/Brand/5
+        //Test for push to github
         public string Get(int id)
         {
             return "value";

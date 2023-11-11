@@ -9,12 +9,17 @@ namespace VSS.API.DA.EF.VssDb
     [Table("SalesPrice")]
     public partial class SalesPrice
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         public decimal? SalePrice { get; set; }
 
         public int? ItemId { get; set; }
+
+        public decimal? MinPurchasePrice { get; set; }
+
+        public decimal? AvgPurchasePrice { get; set; }
+
+        public decimal? MaxPurchasePrice { get; set; }
 
         [StringLength(50)]
         public string Remarks { get; set; }

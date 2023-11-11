@@ -427,6 +427,18 @@ namespace VSS.API.DA.EF.VssDb
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<SalesPrice>()
+                .Property(e => e.MinPurchasePrice)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<SalesPrice>()
+                .Property(e => e.AvgPurchasePrice)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<SalesPrice>()
+                .Property(e => e.MaxPurchasePrice)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<SalesPrice>()
                 .Property(e => e.Remarks)
                 .IsUnicode(false);
 

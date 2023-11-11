@@ -42,7 +42,7 @@ namespace VSS.API.DA.ViewModels.Operation
 
         public bool? IsActive { get; set; }
 
-        public decimal SalePrice { get; set; }
+        public decimal? SalePrice { get; set; }
         public string CategoryName { get; set; }
         public string BrandName { get; set; }
         public string ModelCode { get; set; }

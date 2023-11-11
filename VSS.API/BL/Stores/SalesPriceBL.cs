@@ -8,18 +8,27 @@ using VSS.API.DA.ViewModels.Stores;
 
 namespace VSS.API.BL.Stores
 {
-    public class ItemBL
+    public class SalesPriceBL
     {
         ModelVssDb _vssDb = null;
 
-        public IEnumerable<ItemVM> Get(int pageIndex = 0, int pageSize = 10)
+        public IEnumerable<ItemVM> Get(string partNo,int pageIndex = 0, int pageSize = 10)
         {
             _vssDb = new ModelVssDb();
-            int nRow = _vssDb.Items.Count();
-            var listItem = (from i in _vssDb.Items
+            int nRow = (from sp in _vssDb.SalesPrices
+                        join i in _vssDb.Items on sp.ItemId equals i.Id
+                        join b in _vssDb.Brands on i.BrandId equals b.Id
+                        join bm in _vssDb.BrandModels on i.ModelId equals bm.Id
+                        where i.PartNoOld == (string.IsNullOrEmpty(partNo) ? i.PartNoOld : partNo)
+                        || i.PartNoNew == (string.IsNullOrEmpty(partNo) ? i.PartNoNew : partNo)
+                        select sp).Count();
+            var listItem = (from sp in _vssDb.SalesPrices
+                            join i in _vssDb.Items on sp.ItemId equals i.Id
                             join b in _vssDb.Brands on i.BrandId equals b.Id
                             join bm in _vssDb.BrandModels on i.ModelId equals bm.Id
-                            select new ItemVM
+                            where i.PartNoOld == (string.IsNullOrEmpty(partNo) ? i.PartNoOld : partNo)
+                            || i.PartNoNew == (string.IsNullOrEmpty(partNo) ? i.PartNoNew : partNo)
+                            select new SalesPriceVM
                             {
                                 Id = i.Id,
                                 ItemCode = i.ItemCode,
@@ -31,6 +40,10 @@ namespace VSS.API.BL.Stores
                                 BrandName = b.Name,
                                 ModelId = i.ModelId,
                                 ModelCode = bm.ModelCode,
+                                SalePrice = sp.SalePrice,
+                                AvgPurchasePrice = sp.AvgPurchasePrice,
+                                MinPurchasePrice = sp.MinPurchasePrice,
+                                MaxPurchasePrice = sp.MaxPurchasePrice,
                                 PageIndex = pageIndex,
                                 PageSize = pageSize,
                                 RowCount = nRow

@@ -237,6 +237,7 @@
     <Compile Include="BL\Stores\BrandBL.cs" />
     <Compile Include="BL\Stores\BrandModelBL.cs" />
     <Compile Include="BL\Stores\ItemBL.cs" />
+    <Compile Include="BL\Stores\SalesPriceBL.cs" />
     <Compile Include="BL\Stores\StoreReqBL.cs" />
     <Compile Include="BL\Stores\StoreTranBL.cs" />
     <Compile Include="BL\Stores\SupplierBL.cs" />
@@ -356,6 +357,7 @@
     <Compile Include="DA\ViewModels\Stores\BrandModelVM.cs" />
     <Compile Include="DA\ViewModels\Stores\ItemCategoryVM.cs" />
     <Compile Include="DA\ViewModels\Stores\BrandVM.cs" />
+    <Compile Include="DA\ViewModels\Stores\SalesPriceVM.cs" />
     <Compile Include="DA\ViewModels\Stores\StoreRecVM.cs" />
     <Compile Include="DA\ViewModels\Stores\StoreReqVM.cs" />
     <Compile Include="DA\ViewModels\Stores\SupplierVM.cs" />

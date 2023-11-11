@@ -110,6 +110,22 @@ namespace VSS.API.BL.HR
             }
             return false;
         }
+
+        public IEnumerable<EmployeeVM> GetEmployee()
+        {
+            var listEmployee = _vssDb.Employees
+                .Select(x => new EmployeeVM
+                {
+                    EmployeeId = x.EmployeeId,
+                    FirstName = x.FirstName,
+                    MiddleName = x.MiddleName,
+                    LastName = x.LastName,
+                })
+                .OrderBy(s => s.EmployeeId)
+                .ToList();
+            return listEmployee;
+        }
+
         private int GetNewId()
         {
             try

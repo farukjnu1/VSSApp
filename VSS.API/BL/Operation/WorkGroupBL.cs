@@ -91,6 +91,17 @@ namespace VSS.API.BL.Operation
             return false;
         }
 
+        public IEnumerable<WorkGroupVM> GetWorkGroup()
+        {
+            var listWorkGroup = _vssDb.WorkGroups
+                .Select(x => new WorkGroupVM
+                {
+                    WgId = x.WgId,
+                    WgName = x.WgName
+                }).OrderBy(s => s.WgId).ToList();
+            return listWorkGroup;
+        }
+
         private int GetNewId()
         {
             try

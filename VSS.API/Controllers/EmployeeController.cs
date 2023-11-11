@@ -48,5 +48,14 @@ namespace VSS.API.Controllers
 
             return _BL.Remove(id);
         }
+
+        [HttpGet]
+        [Route("api/Employee/GetEmployee")]
+        public IEnumerable<EmployeeVM> GetEmployee()
+        {
+            EmployeeBL _BL = new EmployeeBL();
+            return _BL.GetEmployee();
+        }
+
     }
 }

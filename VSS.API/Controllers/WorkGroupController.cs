@@ -50,5 +50,13 @@ namespace VSS.API.Controllers
             WorkGroupBL _BL = new WorkGroupBL();
             return _BL.Remove(id);
         }
+
+        [HttpGet]
+        [Route("api/WorkGroup/GetWorkGroup")]
+        public IEnumerable<WorkGroupVM> GetWorkGroup()
+        {
+            WorkGroupBL _BL = new WorkGroupBL();
+            return _BL.GetWorkGroup();
+        }
     }
 }

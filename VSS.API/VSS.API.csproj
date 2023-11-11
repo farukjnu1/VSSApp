@@ -236,8 +236,7 @@
     <Compile Include="BL\Stores\BrandBL.cs" />
     <Compile Include="BL\Stores\BrandModelBL.cs" />
     <Compile Include="BL\Stores\ItemBL.cs" />
-    <Compile Include="BL\Stores\StoreRecBL.cs" />
-    <Compile Include="BL\Stores\StoreRetBL.cs" />
+    <Compile Include="BL\Stores\StoreTranBL.cs" />
     <Compile Include="BL\Stores\StoreReqBL.cs" />
     <Compile Include="BL\Stores\WarehouseBL.cs" />
     <Compile Include="BL\System\CompanyBL.cs" />
@@ -268,8 +267,7 @@
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
-    <Compile Include="Controllers\StoreRetController.cs" />
-    <Compile Include="Controllers\StoreRecController.cs" />
+    <Compile Include="Controllers\StoreTranController.cs" />
     <Compile Include="Controllers\StoreReqController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserRoleController.cs" />

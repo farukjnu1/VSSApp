@@ -21,11 +21,11 @@ namespace VSS.API.BL.Stores
         ModelVssDb _vssDb = new ModelVssDb();
         private IGenericFactory<StoreReqVM> Generic_StoreReq = null;
 
-        public List<StoreReqVM> Get(int reqStatus, int pageIndex = 0, int pageSize = 10)
+        public List<StoreReqVM> Get(int reqStatus, int storeTranTypeId, int pageIndex = 0, int pageSize = 10)
         {
             string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
             Generic_StoreReq = new GenericFactory<StoreReqVM>();
-            return Generic_StoreReq.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetStoreReq, new Hashtable() { { "PageIndex", pageIndex }, { "PageSize", pageSize }, { "ReqStatus", reqStatus } }, vssDb);
+            return Generic_StoreReq.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetStoreReq, new Hashtable() { { "PageIndex", pageIndex }, { "PageSize", pageSize }, { "ReqStatus", reqStatus }, { "StoreTranTypeId", storeTranTypeId } }, vssDb);
         }
 
         public bool Add(StoreReq model)

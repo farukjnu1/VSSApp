@@ -26,6 +26,8 @@ namespace VSS.API.DA.EF.VssDb
 
         public int? StoreTranTypeId { get; set; }
 
+        public int? ReqUrgentType { get; set; }
+
         public DateTime? CreateDate { get; set; }
 
         public int? CreateBy { get; set; }

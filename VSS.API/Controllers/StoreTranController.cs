@@ -10,7 +10,7 @@ using VSS.API.DA.ViewModels.Stores;
 
 namespace VSS.API.Controllers
 {
-    public class StoreRecController : ApiController
+    public class StoreTranController : ApiController
     {
         [HttpGet]
         [Route("api/StoreRec/GetRecByReqId")]
@@ -25,7 +25,7 @@ namespace VSS.API.Controllers
         public bool Post([FromBody] StoreTran model)
         {
             StoreTranBL _BL = new StoreTranBL();
-            return _BL.ApproveReqRecStore(model);
+            return _BL.ApproveReqStoreTran(model);
         }
 
         // PUT: api/StoreRec/5

@@ -17,10 +17,10 @@ namespace VSS.API.Controllers
         // GET: api/StoreReq
 
         [HttpGet]
-        public IEnumerable<StoreReqVM> Get(int reqStatus,int pi = 0, int ps = 10)
+        public IEnumerable<StoreReqVM> Get(int reqStatus, int storeTranTypeId, int pi = 0, int ps = 10)
         {
             StoreReqBL _BL = new StoreReqBL();
-            return _BL.Get(reqStatus, pi, ps);
+            return _BL.Get(reqStatus, storeTranTypeId, pi, ps);
         }
 
         // POST: api/StoreReq

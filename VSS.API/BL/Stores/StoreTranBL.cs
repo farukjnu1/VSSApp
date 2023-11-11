@@ -23,11 +23,11 @@ namespace VSS.API.BL.Stores
         List<StoreReq> listEngineSize = null;
         private IGenericFactory<StoreReqVM> Generic_StoreReq = null;
 
-        public List<StoreReqVM> Get(int reqStatus, int pageIndex = 0, int pageSize = 10)
+        public List<StoreReqVM> Get(int reqStatus, int storeTranTypeId, int pageIndex = 0, int pageSize = 10)
         {
             string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
             Generic_StoreReq = new GenericFactory<StoreReqVM>();
-            return Generic_StoreReq.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetStoreReq, new Hashtable() { { "PageIndex", pageIndex }, { "PageSize", pageSize }, { "ReqStatus", reqStatus } }, vssDb);
+            return Generic_StoreReq.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetStoreReq, new Hashtable() { { "PageIndex", pageIndex }, { "PageSize", pageSize }, { "ReqStatus", reqStatus }, { "StoreTranTypeId", storeTranTypeId } }, vssDb);
         }
 
         public StoreTranVM GetRecByReqId(int reqid)
@@ -46,12 +46,12 @@ namespace VSS.API.BL.Stores
                                  Qty = x.Qty,
                                  Remark = x.Remark,
                                  StoreRecTypeId = x.StoreTranTypeId,
-                                 WhId = x.WhId
+                                 WhId = x.WhId,
                              }).FirstOrDefault();
             return oStoreRec;
         }
 
-        public bool ApproveReqRecStore(StoreTran model)
+        public bool ApproveReqStoreTran(StoreTran model)
         {
             bool isSuccess = false;
             using (_vssDb = new ModelVssDb())
@@ -66,7 +66,6 @@ namespace VSS.API.BL.Stores
                             oStoreReq.ReqStatus = 2;
                         }
                         model.CreateDate = DateTime.Now;
-                        model.StoreTranTypeId = 1;
                         _vssDb.StoreTrans.Add(model);
                         _vssDb.SaveChanges();
                         #region Add / Update Stock
@@ -141,7 +140,6 @@ namespace VSS.API.BL.Stores
                                 oStoreRec.PurchasePrice = model.PurchasePrice;
                                 oStoreRec.UpdateDate = DateTime.Now;
                                 oStoreRec.UpdateBy = model.CreateBy;
-                                oStoreRec.StoreTranTypeId = 1;
                                 _vssDb.SaveChanges();
                                 #region Update Stock
                                 var oStockUP = (from x in _vssDb.Stocks where x.ItemId == model.ItemId select x).FirstOrDefault();

@@ -46,6 +46,12 @@ namespace VSS.API.DA.ViewModels.Operation
         public string CategoryName { get; set; }
         public string BrandName { get; set; }
         public string ModelCode { get; set; }
+        public decimal? MinPurchasePrice { get; set; }
+
+        public decimal? AvgPurchasePrice { get; set; }
+
+        public decimal? MaxPurchasePrice { get; set; }
+        public decimal? Qty { get; set; }
 
     }
 }

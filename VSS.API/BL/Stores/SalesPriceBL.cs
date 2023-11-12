@@ -12,7 +12,7 @@ namespace VSS.API.BL.Stores
     {
         ModelVssDb _vssDb = null;
 
-        public IEnumerable<ItemVM> Get(string partNo,int pageIndex = 0, int pageSize = 10)
+        public IEnumerable<SalesPriceVM> Get(string partNo,int pageIndex = 0, int pageSize = 10)
         {
             _vssDb = new ModelVssDb();
             int nRow = (from sp in _vssDb.SalesPrices
@@ -30,7 +30,8 @@ namespace VSS.API.BL.Stores
                             || i.PartNoNew == (string.IsNullOrEmpty(partNo) ? i.PartNoNew : partNo)
                             select new SalesPriceVM
                             {
-                                Id = i.Id,
+                                Id = sp.Id,
+                                ItemId = i.Id,
                                 ItemCode = i.ItemCode,
                                 ItemName = i.ItemName,
                                 PartNoOld = i.PartNoOld,
@@ -44,101 +45,67 @@ namespace VSS.API.BL.Stores
                                 AvgPurchasePrice = sp.AvgPurchasePrice,
                                 MinPurchasePrice = sp.MinPurchasePrice,
                                 MaxPurchasePrice = sp.MaxPurchasePrice,
+                                CreateDate = sp.CreateDate,
                                 PageIndex = pageIndex,
                                 PageSize = pageSize,
                                 RowCount = nRow
                             })
-                .OrderByDescending(s => s.ItemCode)
+                .OrderByDescending(x => x.ItemId)
+                .OrderByDescending(y => y.Id)
                 .Skip(pageIndex * pageSize)
                 .Take(pageSize)
                 .ToList();
             return listItem;
         }
 
-        public bool Add(Item model)
+        public bool Add(SalesPriceVM model)
         {
-            try
+            bool isSuccess = false;
+            using (_vssDb = new ModelVssDb())
             {
-                _vssDb = new ModelVssDb();
-                model.CreateAt = DateTime.Now;
-                model.CreateBy = model.CreateBy;
-                model.IsActive = true;
-                _vssDb.Items.Add(model);
-                _vssDb.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public bool Update(Item model)
-        {
-            try
-            {
-                _vssDb = new ModelVssDb();
-                model.UpdateBy = model.CreateBy;
-                model.UpdateAt = DateTime.Now;
-                model.IsActive = true;
-                var oItem = _vssDb.Items
-                 .Where(x => x.Id == model.Id).FirstOrDefault();
-                if (oItem != null)
+                using (var _tran = _vssDb.Database.BeginTransaction())
                 {
-                    oItem.ItemCode = model.ItemCode;
-                    oItem.ItemName = model.ItemName;
-                    oItem.PartNoOld = model.PartNoOld;
-                    oItem.PartNoNew = model.PartNoNew;
-                    oItem.Remarks = model.Remarks;
-                    oItem.UpdateAt = DateTime.Now;
-                    oItem.UpdateBy = model.UpdateBy;
-                    oItem.BrandId = model.BrandId;
-                    oItem.ModelId = model.ModelId;
-                    oItem.ItemCategoryId = model.ItemCategoryId;
-                    oItem.IsActive = true;
-                    _vssDb.SaveChanges();
-                    return true;
+                    try
+                    {
+                        _vssDb = new ModelVssDb();
+                        var listSalePrice = (from x in _vssDb.SalesPrices where x.ItemId == model.ItemId && x.IsActive == true select x).ToList();
+                        foreach (var item in listSalePrice)
+                        {
+                            item.IsActive = false;
+                            _vssDb.SaveChanges();
+                        }
+                        var oSalePrice = new SalesPrice();
+                        oSalePrice.CreateDate = DateTime.Now;
+                        oSalePrice.CreateBy = model.CreateBy;
+                        oSalePrice.IsActive = true;
+                        oSalePrice.AvgPurchasePrice = model.AvgPurchasePrice;
+                        oSalePrice.MinPurchasePrice = model.MinPurchasePrice;
+                        oSalePrice.MaxPurchasePrice = model.MaxPurchasePrice;
+                        oSalePrice.SalePrice = model.SalePrice;
+                        oSalePrice.ItemId = model.ItemId;
+                        oSalePrice.Remarks = model.Remarks;
+                        _vssDb.SalesPrices.Add(oSalePrice);
+                        _vssDb.SaveChanges();
+                        _tran.Commit();
+                        isSuccess = true;
+                    }
+                    catch
+                    {
+                        _tran.Rollback();
+                    }
                 }
             }
-            catch
-            {
-                return false;
-            }
+            return isSuccess;
+        }
+
+        public bool Update(SalesPriceVM model)
+        {
             return false;
         }
 
         public bool Remove(int id)
         {
-            try
-            {
-                _vssDb = new ModelVssDb();
-                var selectedItem = _vssDb.Items
-                 .Where(x => x.Id == id)
-                 .FirstOrDefault();
-                if (selectedItem != null)
-                {
-                    _vssDb.Items.Remove(selectedItem);
-                    _vssDb.SaveChanges();
-                    return true;
-                }
-            }
-            catch
-            {
-                return false;
-            }
             return false;
-        }
-
-        public IEnumerable<ItemVM> getItemName()
-        {
-            _vssDb = new ModelVssDb();
-            var listItemName = _vssDb.Items
-                .Select(x => new ItemVM
-                {
-                    Id = x.Id,
-                    ItemName = x.ItemName
-                }).OrderBy(s => s.ItemName).ToList();
-            return listItemName;
         }
     }
 }

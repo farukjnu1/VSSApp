@@ -27,5 +27,7 @@ namespace VSS.API.DA.EF.VssDb
         public DateTime? CreateDate { get; set; }
 
         public int? CreateBy { get; set; }
+
+        public bool? IsActive { get; set; }
     }
 }

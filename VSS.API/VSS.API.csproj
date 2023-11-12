@@ -238,6 +238,7 @@
     <Compile Include="BL\Stores\BrandModelBL.cs" />
     <Compile Include="BL\Stores\ItemBL.cs" />
     <Compile Include="BL\Stores\SalesPriceBL.cs" />
+    <Compile Include="BL\Stores\StockBL.cs" />
     <Compile Include="BL\Stores\StoreReqBL.cs" />
     <Compile Include="BL\Stores\StoreTranBL.cs" />
     <Compile Include="BL\Stores\SupplierBL.cs" />
@@ -270,6 +271,8 @@
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\PayController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\StockController.cs" />
+    <Compile Include="Controllers\SalePriceController.cs" />
     <Compile Include="Controllers\StoreReqController.cs" />
     <Compile Include="Controllers\StoreTranController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
@@ -358,6 +361,7 @@
     <Compile Include="DA\ViewModels\Stores\ItemCategoryVM.cs" />
     <Compile Include="DA\ViewModels\Stores\BrandVM.cs" />
     <Compile Include="DA\ViewModels\Stores\SalesPriceVM.cs" />
+    <Compile Include="DA\ViewModels\Stores\StockVM.cs" />
     <Compile Include="DA\ViewModels\Stores\StoreRecVM.cs" />
     <Compile Include="DA\ViewModels\Stores\StoreReqVM.cs" />
     <Compile Include="DA\ViewModels\Stores\SupplierVM.cs" />

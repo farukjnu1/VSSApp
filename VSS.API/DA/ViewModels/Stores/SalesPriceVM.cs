@@ -16,11 +16,11 @@ namespace VSS.API.DA.ViewModels.Stores
 
         public int? ItemId { get; set; }
 
-        public decimal? MinPurchasePrice { get; set; }
+        //public decimal? MinPurchasePrice { get; set; }
 
-        public decimal? AvgPurchasePrice { get; set; }
+        //public decimal? AvgPurchasePrice { get; set; }
 
-        public decimal? MaxPurchasePrice { get; set; }
+        //public decimal? MaxPurchasePrice { get; set; }
 
         //[StringLength(50)]
         //public string Remarks { get; set; }

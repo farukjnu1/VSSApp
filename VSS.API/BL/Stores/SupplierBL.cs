@@ -30,7 +30,7 @@ namespace VSS.API.BL.Stores
                 { "PageSize", pageSize },
                 { "phone", phone }
             };
-            return Generic_Client.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetClient, oHashTable, vssDb);
+            return Generic_Client.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetSupplier, oHashTable, vssDb);
         }
 
         public bool Add(BusinessPartner model)

@@ -19,6 +19,7 @@ namespace VSS.API.DA.ADO
         public const string sp_GetClinetByPhone = "[dbo].[sp_GetClinetByPhone]";
         public const string sp_GetJobCard = "[dbo].[sp_GetJobCard]";
         public const string sp_GetClient = "[dbo].[sp_GetClient]";
+        public const string sp_GetSupplier = "[dbo].[sp_GetSupplier]";
         public const string sp_GetClientVehicle = "[dbo].[sp_GetClientVehicle]";
         public const string sp_GetUserRole = "[dbo].[sp_GetUserRole]";
         public const string sp_GetJcInvoice = "[dbo].[sp_GetJcInvoice]";

@@ -12,6 +12,8 @@ namespace VSS.API.DA.ViewModels.Stores
         public int Id { get; set; }
 
         public int? BrandId { get; set; }
+        [StringLength(50)]
+        public string Name { get; set; }
 
         [StringLength(25)]
         public string ModelCode { get; set; }

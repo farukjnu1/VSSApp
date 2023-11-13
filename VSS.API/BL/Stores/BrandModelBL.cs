@@ -10,26 +10,33 @@ namespace VSS.API.BL.Stores
     public class BrandModelBL
     {
         ModelVssDb _vssDb = new ModelVssDb();
-        public IEnumerable<BrandModelVM> Get(string phone, int pageIndex, int pageSize)
+        public IEnumerable<BrandModelVM> Get(int brandId, int pageIndex, int pageSize)
         {
-            int nRow = _vssDb.BrandModels.Count();
-            var listBrandModel = _vssDb.BrandModels
-                .Select(x => new BrandModelVM
-                {
-                    Id = x.Id,
-                    BrandId = x.BrandId,
-                    ModelCode = x.ModelCode,
-                    Remarks = x.Remarks,
-
-                    PageIndex = pageIndex,
-                    PageSize = pageSize,
-                    RowCount = nRow
-                })
-                .OrderBy(s => s.Id)
+            int nRow = (from bm in _vssDb.BrandModels
+                        join b in _vssDb.Brands on bm.BrandId equals b.Id
+                        where bm.BrandId == (brandId == 0 ? bm.BrandId : brandId)
+                        select new BrandModelVM
+                        {
+                            Id = bm.Id,
+                        }).Count();
+            var listBranModel = (from bm in _vssDb.BrandModels
+                                 join b in _vssDb.Brands on bm.BrandId equals b.Id
+                                 where bm.BrandId == (brandId == 0 ? bm.BrandId : brandId)
+                                 select new BrandModelVM
+                                 {
+                                     BrandId = bm.BrandId,
+                                     Id = bm.Id,
+                                     ModelCode = bm.ModelCode,
+                                     Remarks = bm.Remarks,
+                                     Name = b.Name,
+                                     PageIndex = pageIndex,
+                                     PageSize = pageSize,
+                                     RowCount = nRow
+                                 }).OrderBy(s => s.Id)
                 .Skip(pageIndex * pageSize)
                 .Take(pageSize)
                 .ToList();
-            return listBrandModel;
+            return listBranModel;
         }
 
         public bool Add(BrandModel model)

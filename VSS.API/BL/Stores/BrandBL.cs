@@ -18,7 +18,7 @@ namespace VSS.API.BL.Stores
     public class BrandBL
     {
         ModelVssDb _vssDb = new ModelVssDb();
-        public IEnumerable<BrandVM> Get(string phone, int pageIndex, int pageSize)
+        public IEnumerable<BrandVM> Get(int pageIndex, int pageSize)
         {
             int nRow = _vssDb.Brands.Count();
             var listBrand = _vssDb.Brands

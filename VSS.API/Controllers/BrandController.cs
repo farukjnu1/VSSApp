@@ -17,10 +17,10 @@ namespace VSS.API.Controllers
     public class BrandController : ApiController
     {
         // GET: api/Brand
-        public IEnumerable<BrandVM> Get([FromUri] string phone, int pi = 0, int ps = 10)
+        public IEnumerable<BrandVM> Get([FromUri] int pi = 0, int ps = 10)
         {
             BrandBL _BL = new BrandBL();
-            return _BL.Get(phone, pi, ps);
+            return _BL.Get(pi, ps);
         }
 
         // GET: api/Brand/5

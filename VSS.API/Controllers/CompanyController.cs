@@ -5,9 +5,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using VSS.API.Attributes;
+using VSS.API.BL.Operation;
 using VSS.API.BL.System;
+using VSS.API.DA.EF.VssDb;
 using VSS.API.DA.ViewModels.Operation;
 using VSS.API.DA.ViewModels.System;
+using VSS.BL.Operation;
+using VSS.DA.ViewModels.Operation;
 
 namespace VSS.API.Controllers
 {
@@ -15,9 +19,12 @@ namespace VSS.API.Controllers
     public class CompanyController : ApiController
     {
         // GET: api/Company
-        public IEnumerable<string> Get()
+        [HttpGet]
+        [Route("api/Company/GetCompany")]
+        public IEnumerable<CompanyVM> GetCompany()
         {
-            return new string[] { "value1", "value2" };
+            CompanyBL _BL = new CompanyBL();
+            return _BL.GetCompany();
         }
 
         // GET: api/Company/5
@@ -32,8 +39,10 @@ namespace VSS.API.Controllers
         }
 
         // PUT: api/Company/5
-        public void Put(int id, [FromBody]string value)
+        public bool Put([FromBody] Company model)
         {
+            CompanyBL _BL = new CompanyBL();
+            return _BL.Update(model);
         }
 
         // DELETE: api/Company/5

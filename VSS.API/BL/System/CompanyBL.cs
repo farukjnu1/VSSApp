@@ -1,15 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Web;
 using VSS.API.DA.EF.VssDb;
 using VSS.API.DA.ViewModels.System;
+using VSS.DA.ViewModels.Operation;
 
 namespace VSS.API.BL.System
 {
     public class CompanyBL
     {
-        ModelVssDb _vssDb = null;
+        ModelVssDb _vssDb = new ModelVssDb();
+
+        public IEnumerable<CompanyVM> GetCompany()
+        {
+            //oClient = new ClientVM();
+            //var listClient = _vssDb.BusinessPartners
+            //    .Where(x => x.BpTypeId == 1)
+            //    .ToList();
+            var listCompanies = from x in _vssDb.Companies
+                             select new CompanyVM
+                             {
+                                 CompanyId = x.CompanyId,
+                                 CompanyCode = x.CompanyCode,
+                                 CompanyName = x.CompanyName,
+                                 Description = x.Description,
+                                 DateFormat = x.DateFormat,
+                                 DecimalPlace = x.DecimalPlace,
+                                 Bay = x.Bay,
+                                 Vat = x.Vat,
+                                 Address = x.Address,
+                                 Email = x.Email,
+                                 Phone = x.Phone,
+                                 IsActive = x.IsActive,
+                                 Website = x.Website,
+                             };
+            return listCompanies;
+        }
+
         public CompanyVM Get(int CompanyId)
         {
             _vssDb = new ModelVssDb();
@@ -36,10 +65,42 @@ namespace VSS.API.BL.System
                                  CompanyId = x.CompanyId,
                                  LogoId = z.LogoId,
                                  LogoUrl = z.LogoUrl,
-                                 Name = z.Name   
+                                 Name = z.Name
                              }).ToList()
                 }).FirstOrDefault();
             return oCompany;
+        }
+
+        public bool Update(Company model)
+        {
+            try
+            {
+                var oCompany = _vssDb.Companies
+                 .Where(x => x.CompanyId == model.CompanyId)
+                 .FirstOrDefault();
+                if (oCompany != null)
+                {
+                    oCompany.CompanyId = model.CompanyId;
+                    oCompany.CompanyName = model.CompanyName;
+                    oCompany.Bay = model.Bay;
+                    oCompany.Vat = model.Vat;
+                    oCompany.DateFormat = model.DateFormat;
+                    oCompany.DecimalPlace = model.DecimalPlace;
+                    oCompany.Phone = model.Phone;
+                    oCompany.Email = model.Email;
+                    oCompany.Website = model.Website;
+                    oCompany.Address = model.Address;
+                    oCompany.Description = model.Description;
+
+                    _vssDb.SaveChanges();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return false;
         }
     }
 }

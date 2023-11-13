@@ -134,6 +134,17 @@ namespace VSS.API.BL.Operation
                         #endregion
                         #region Spare-Parts
                         var listJcSpareRe = _vssDb.JcSpares.Where(x => x.JcId == model.Id).ToList();
+                        foreach(var item in listJcSpareRe) 
+                        {
+                            #region Stock in
+                            var oStock = (from x in _vssDb.Stocks where x.ItemId == item.ItemId select x).FirstOrDefault();
+                            if (oStock != null)
+                            {
+                                oStock.Qty += item.Quantity;
+                                _vssDb.SaveChanges();
+                            }
+                            #endregion
+                        }
                         _vssDb.JcSpares.RemoveRange(listJcSpareRe);
                         _vssDb.SaveChanges();
                         List<JcSpare> listJcSpare = new List<JcSpare>();
@@ -147,6 +158,14 @@ namespace VSS.API.BL.Operation
                             oJcSpare.SpareAmount = jcSpare.SpareAmount;
                             oJcSpare.JcId = oJobCard.Id;
                             listJcSpare.Add(oJcSpare);
+                            #region Stock out
+                            var oStock = (from x in _vssDb.Stocks where x.ItemId == jcSpare.ItemId select x).FirstOrDefault();
+                            if (oStock != null)
+                            {
+                                oStock.Qty -= jcSpare.Quantity;
+                                _vssDb.SaveChanges();
+                            }
+                            #endregion
                         }
                         _vssDb.JcSpares.AddRange(listJcSpare);
                         _vssDb.SaveChanges();
@@ -244,6 +263,17 @@ namespace VSS.API.BL.Operation
                         #endregion
                         #region Spare-Parts
                         var listJcSpareRe = _vssDb.JcSpares.Where(x => x.JcId == model.Id).ToList();
+                        foreach (var item in listJcSpareRe)
+                        {
+                            #region Stock in
+                            var oStock = (from x in _vssDb.Stocks where x.ItemId == item.ItemId select x).FirstOrDefault();
+                            if (oStock != null)
+                            {
+                                oStock.Qty += item.Quantity;
+                                _vssDb.SaveChanges();
+                            }
+                            #endregion
+                        }
                         _vssDb.JcSpares.RemoveRange(listJcSpareRe);
                         _vssDb.SaveChanges();
                         List<JcSpare> listJcSpare = new List<JcSpare>();
@@ -257,6 +287,14 @@ namespace VSS.API.BL.Operation
                             oJcSpare.SpareAmount = jcSpare.SpareAmount;
                             oJcSpare.JcId = oJobCard.Id;
                             listJcSpare.Add(oJcSpare);
+                            #region Stock out
+                            var oStock = (from x in _vssDb.Stocks where x.ItemId == jcSpare.ItemId select x).FirstOrDefault();
+                            if (oStock != null)
+                            {
+                                oStock.Qty -= jcSpare.Quantity;
+                                _vssDb.SaveChanges();
+                            }
+                            #endregion
                         }
                         _vssDb.JcSpares.AddRange(listJcSpare);
                         _vssDb.SaveChanges();

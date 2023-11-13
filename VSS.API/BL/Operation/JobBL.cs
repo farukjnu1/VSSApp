@@ -1,21 +1,36 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VSS.API.DA.ADO;
 using VSS.API.DA.EF.VssDb;
 using VSS.API.DA.ViewModels.Operation;
+using VSS.API.DA.ViewModels.Stores;
+using VSS.DA.ADO;
 
 namespace VSS.BL.Operation
 {
     public class JobBL
     {
-        ModelVssDb _vssDb = new ModelVssDb();
+        ModelVssDb _vssDb = null;
+        private IGenericFactory<JobVM> Generic_Job = null;
 
-        public IEnumerable<JobVM> Get(int pageIndex = 0, int pageSize = 10)
+        public List<JobVM> Get(string description, int jobGroupId, int pageIndex = 0, int pageSize = 10)
         {
-            int nRow = _vssDb.Jobs.Count();
-            var listJob = _vssDb.Jobs
+            string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
+            Generic_Job = new GenericFactory<JobVM>();
+            return Generic_Job.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetJobs, new Hashtable() { { "PageIndex", pageIndex }, { "PageSize", pageSize }, { "description", description }, { "jobGroupId", jobGroupId } }, vssDb);
+        }
+
+        /*public IEnumerable<JobVM> Get(string description, int jobGroupId, int pageIndex = 0, int pageSize = 10)
+        {
+            List<JobVM> listJob = null;
+            int nRow = _vssDb.Jobs.Where(x => x.JobGroupId == (jobGroupId == 0 ? x.JobGroupId : jobGroupId)).Count();
+            listJob = _vssDb.Jobs.Where(x => x.JobGroupId == (jobGroupId == 0 ? x.JobGroupId : jobGroupId))
                 .Select(x => new JobVM
                 {
                     JobId = x.JobId,
@@ -28,7 +43,6 @@ namespace VSS.BL.Operation
                     DurationA = x.DurationA,
                     DurationB = x.DurationB,
                     DurationC = x.DurationC,
-
                     PageIndex = pageIndex,
                     PageSize = pageSize,
                     RowCount = nRow
@@ -38,7 +52,7 @@ namespace VSS.BL.Operation
                 .Take(pageSize)
                 .ToList();
             return listJob;
-        }
+        }*/
 
         public bool AddJob(Job model)
         {
@@ -61,6 +75,7 @@ namespace VSS.BL.Operation
         {
             try
             {
+                _vssDb = new ModelVssDb();
                 var selectedJob = _vssDb.Jobs
                  .Where(x =>x.JobId == model.JobId).FirstOrDefault();
                 if (selectedJob != null)
@@ -90,6 +105,7 @@ namespace VSS.BL.Operation
         {
             try
             {
+                _vssDb = new ModelVssDb();
                 var selectedJob = _vssDb.Jobs
                  .Where(x => x.JobId == id)
                  .FirstOrDefault();
@@ -111,6 +127,7 @@ namespace VSS.BL.Operation
         {
             try
             {
+                _vssDb = new ModelVssDb();
                 var jobId = Convert.ToInt32(_vssDb.Jobs.Max(x => x.JobId)) + 1;
                 return jobId;
             }

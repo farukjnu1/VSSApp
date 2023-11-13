@@ -20,7 +20,7 @@ namespace VSS.API.BL.Stores
     public class StoreTranBL
     {
         ModelVssDb _vssDb = null;
-        List<StoreReq> listEngineSize = null;
+        //List<StoreReq> listEngineSize = null;
         private IGenericFactory<StoreReqVM> Generic_StoreReq = null;
 
         public List<StoreReqVM> Get(int reqStatus, int storeTranTypeId, int pageIndex = 0, int pageSize = 10)
@@ -155,9 +155,7 @@ namespace VSS.API.BL.Stores
                                 isSuccess = true;
                             }
                             #endregion
-                            
                         }
-                        
                     }
                     catch (Exception ex)
                     {
@@ -167,6 +165,7 @@ namespace VSS.API.BL.Stores
             }
             return isSuccess;
         }
+
         public bool Remove(int id)
         {
             bool isSuccess = false;

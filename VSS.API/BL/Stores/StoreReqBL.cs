@@ -95,17 +95,6 @@ namespace VSS.API.BL.Stores
             }
             return false;
         }
-        private int GetNewId()
-        {
-            try
-            {
-                var Id = Convert.ToInt32(_vssDb.StoreReqs.Max(x => x.Id)) + 1;
-                return Id;
-            }
-            catch
-            {
-                return 0;
-            }
-        }
+        
     }
 }

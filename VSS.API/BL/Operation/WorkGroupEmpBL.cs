@@ -40,7 +40,6 @@ namespace VSS.API.BL.Operation
         {
             try
             {
-                model.Id = GetNewId();
                 model.WgId = model.WgId;
                 model.EmpId = model.EmpId;
                 _vssDb.WorkGroupEmps.Add(model);
@@ -104,7 +103,7 @@ namespace VSS.API.BL.Operation
                 var Id = Convert.ToInt32(_vssDb.WorkGroupEmps.Max(x => x.Id)) + 1;
                 return Id;
             }
-            catch
+            catch(Exception ex)
             {
                 return 0;
             }

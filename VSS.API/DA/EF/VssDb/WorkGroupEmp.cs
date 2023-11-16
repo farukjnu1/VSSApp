@@ -9,7 +9,6 @@ namespace VSS.API.DA.EF.VssDb
     [Table("WorkGroupEmp")]
     public partial class WorkGroupEmp
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         public int? WgId { get; set; }

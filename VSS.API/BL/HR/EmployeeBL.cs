@@ -40,7 +40,6 @@ namespace VSS.API.BL.HR
         {
             try
             {
-                model.EmployeeId = GetNewId();
                 model.FirstName = model.FirstName;
                 model.MiddleName = model.MiddleName;
                 model.LastName = model.LastName;

@@ -17,7 +17,7 @@ namespace VSS.API.BL.System
         {
             UserVM oUser = null;
             _vssDb = new ModelVssDb();
-            oUser = _vssDb.Users.Where(x => x.UserName == model.UserName && x.UserPass == model.UserPass).Select(y => new UserVM()
+            oUser = _vssDb.Users.Where(x => x.UserName == model.UserName && x.UserPass == model.UserPass && x.IsActive == true).Select(y => new UserVM()
             {
                 UserName = y.UserName,
                 UserPass = y.UserPass,

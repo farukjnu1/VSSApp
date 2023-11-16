@@ -85,6 +85,12 @@ namespace VSS.API.BL.Operation
                 {
                     try
                     {
+                        var oJC = (from x in _vssDb.JobCards where x.JcNo == model.JcNo.Trim() select x).FirstOrDefault();
+                        if (oJC != null)
+                        {
+                            _tran.Rollback();
+                            return false;
+                        }
                         #region Vehicle Info
                         JobCard oJobCard = new JobCard();
                         oJobCard.JcNo = model.JcNo;

@@ -9,7 +9,6 @@ namespace VSS.API.DA.EF.VssDb
     [Table("Employee")]
     public partial class Employee
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int EmployeeId { get; set; }
 
         public int? UserId { get; set; }

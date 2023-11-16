@@ -13,6 +13,7 @@ namespace VSS.API.BL.System
         public IEnumerable<UserVM> Get()
         {
             var listUser = _vssDb.Users
+                .Where(y=>y.UserID!=1)
                 .Select(x => new UserVM
                 {
                     UserID = x.UserID,
@@ -43,7 +44,7 @@ namespace VSS.API.BL.System
                 model.PhoneNo = model.PhoneNo;
                 model.CreateBy = model.CreateBy;
                 model.CreateDate = DateTime.Now;
-
+                model.UserPass = string.IsNullOrEmpty(model.UserPass) ? "123" : model.UserPass;
                 _vssDb.Users.Add(model);
                 _vssDb.SaveChanges();
                 return true;
@@ -72,6 +73,7 @@ namespace VSS.API.BL.System
                     oUser.PhoneNo = model.PhoneNo;
                     oUser.UpdateBy = model.UpdateBy;
                     oUser.UpdateDate = DateTime.Now;
+                    model.UserPass = string.IsNullOrEmpty(model.UserPass) ? "123" : model.UserPass;
                     _vssDb.SaveChanges();
                     return true;
                 }

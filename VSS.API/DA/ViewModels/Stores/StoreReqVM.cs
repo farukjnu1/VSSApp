@@ -32,5 +32,9 @@ namespace VSS.API.DA.ViewModels.Stores
         public string ReqStatusName { get; set; }
         public decimal? RecQty { get; set; }
         public decimal? PurchasePrice { get; set; }
+        public int? StoreTranTypeId { get; set; }
+        public int? ReqUrgentType { get; set; }
+
+        public int? DeliveryTime { get; set; }
     }
 }

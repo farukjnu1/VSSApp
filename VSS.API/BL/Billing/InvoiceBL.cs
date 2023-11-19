@@ -10,6 +10,7 @@ using System.Web.Http;
 using VSS.API.BL.Stores;
 using VSS.API.DA.ADO;
 using VSS.API.DA.EF.VssDb;
+using VSS.API.DA.Utilities;
 using VSS.API.DA.ViewModels.Billing;
 using VSS.API.DA.ViewModels.Operation;
 using VSS.DA.ADO;
@@ -238,8 +239,11 @@ namespace VSS.API.BL.Billing
                                               PayMethodName = pm.Name
                                           }).ToList()
                         }).FirstOrDefault();
+            oInvoice = oInvoice != null ? oInvoice : new InvoiceVM();
+            oInvoice.GrandTotalWord = NumberToWord.ConvertAmount((double)oInvoice.GrandTotal);
             return oInvoice;
         }
 
+        
     }
 }

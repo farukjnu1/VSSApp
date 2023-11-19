@@ -239,6 +239,7 @@
     <Compile Include="BL\Stores\ItemBL.cs" />
     <Compile Include="BL\Stores\SalesPriceBL.cs" />
     <Compile Include="BL\Stores\StockBL.cs" />
+    <Compile Include="BL\Stores\JcReqBL.cs" />
     <Compile Include="BL\Stores\StoreReqBL.cs" />
     <Compile Include="BL\Stores\StoreTranBL.cs" />
     <Compile Include="BL\Stores\SupplierBL.cs" />
@@ -262,6 +263,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\JcReqController.cs" />
     <Compile Include="Controllers\JobCardController.cs" />
     <Compile Include="Controllers\JobController.cs" />
     <Compile Include="Controllers\JobGroupController.cs" />
@@ -309,6 +311,7 @@
     <Compile Include="DA\EF\VssDb\ItemPrice.cs" />
     <Compile Include="DA\EF\VssDb\JcHR.cs" />
     <Compile Include="DA\EF\VssDb\JcJob.cs" />
+    <Compile Include="DA\EF\VssDb\JcReq.cs" />
     <Compile Include="DA\EF\VssDb\JcSpare.cs" />
     <Compile Include="DA\EF\VssDb\Job.cs" />
     <Compile Include="DA\EF\VssDb\JobCard.cs" />
@@ -341,6 +344,7 @@
     <Compile Include="DA\EF\VssDb\WorkGroupEmp.cs" />
     <Compile Include="DA\Utilities\BLStatus.cs" />
     <Compile Include="DA\Utilities\Logs.cs" />
+    <Compile Include="DA\Utilities\NumberToWord.cs" />
     <Compile Include="DA\ViewModels\Billing\InvoiceVM.cs" />
     <Compile Include="DA\ViewModels\Billing\PaySettleVM.cs" />
     <Compile Include="DA\ViewModels\Billing\PayTranVM.cs" />
@@ -360,6 +364,7 @@
     <Compile Include="DA\ViewModels\Stores\BrandModelVM.cs" />
     <Compile Include="DA\ViewModels\Stores\ItemCategoryVM.cs" />
     <Compile Include="DA\ViewModels\Stores\BrandVM.cs" />
+    <Compile Include="DA\ViewModels\Stores\JcReqVM.cs" />
     <Compile Include="DA\ViewModels\Stores\SalesPriceVM.cs" />
     <Compile Include="DA\ViewModels\Stores\StockVM.cs" />
     <Compile Include="DA\ViewModels\Stores\StoreRecVM.cs" />

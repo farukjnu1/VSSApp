@@ -34,6 +34,7 @@ namespace VSS.API.DA.ViewModels.Billing
         public string Description { get; set; }
         public int? IsInvoice { get; set; }
         public decimal? BalanceAmount { get; set; }
+        public string GrandTotalWord { get; set; }
         public List<PaySettleVM> PaySettles { get; set; } = new List<PaySettleVM>();
     }
 

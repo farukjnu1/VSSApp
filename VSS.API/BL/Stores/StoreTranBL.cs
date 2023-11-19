@@ -140,6 +140,7 @@ namespace VSS.API.BL.Stores
                                 oStoreRec.PurchasePrice = model.PurchasePrice;
                                 oStoreRec.UpdateDate = DateTime.Now;
                                 oStoreRec.UpdateBy = model.CreateBy;
+                                oStoreRec.DeliveryTime = model.DeliveryTime;
                                 _vssDb.SaveChanges();
                                 #region Update Stock
                                 var oStockUP = (from x in _vssDb.Stocks where x.ItemId == model.ItemId select x).FirstOrDefault();

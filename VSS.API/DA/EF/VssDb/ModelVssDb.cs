@@ -34,6 +34,7 @@ namespace VSS.API.DA.EF.VssDb
         public virtual DbSet<ItemPrice> ItemPrices { get; set; }
         public virtual DbSet<JcHR> JcHRs { get; set; }
         public virtual DbSet<JcJob> JcJobs { get; set; }
+        public virtual DbSet<JcReq> JcReqs { get; set; }
         public virtual DbSet<JcSpare> JcSpares { get; set; }
         public virtual DbSet<Job> Jobs { get; set; }
         public virtual DbSet<JobCard> JobCards { get; set; }
@@ -262,6 +263,30 @@ namespace VSS.API.DA.EF.VssDb
 
             modelBuilder.Entity<JcJob>()
                 .Property(e => e.Price)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<JcReq>()
+                .Property(e => e.JcNo)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<JcReq>()
+                .Property(e => e.Brand)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<JcReq>()
+                .Property(e => e.BrandModel)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<JcReq>()
+                .Property(e => e.PartName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<JcReq>()
+                .Property(e => e.PartNo)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<JcReq>()
+                .Property(e => e.Qty)
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<JcSpare>()

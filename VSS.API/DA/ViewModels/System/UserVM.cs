@@ -41,5 +41,6 @@ namespace VSS.API.DA.ViewModels.System
         public List<MenuPermissionVM> Permissions { get; set; }
         [StringLength(500)]
         public string Token { get; set; }
+        public int nNotify { get; set; }
     }
 }

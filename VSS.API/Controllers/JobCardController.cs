@@ -127,5 +127,21 @@ namespace VSS.API.Controllers
             return jobCardBL.GetClientByPhone(value);
         }
 
+        [HttpPost]
+        [Route("api/JobCard/AddJcReq")]
+        public bool AddJcReq([FromBody] JcReq model)
+        {
+            JobCardBL _jobCardBL = new JobCardBL();
+            return _jobCardBL.AddJcReq(model);
+        }
+
+        [HttpPost]
+        [Route("api/JobCard/UpdateJcReq")]
+        public bool UpdateJcReq([FromBody] JcReq model)
+        {
+            JobCardBL _jobCardBL = new JobCardBL();
+            return _jobCardBL.UpdateJcReq(model);
+        }
+
     }
 }

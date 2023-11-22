@@ -12,12 +12,13 @@ namespace VSS.API.BL.System
 {
     public class LoginBL
     {
-        ModelVssDb _vssDb = null;
+        ModelVssDb _Db = null;
         public UserVM Login(UserVM model)
         {
             UserVM oUser = null;
-            _vssDb = new ModelVssDb();
-            oUser = _vssDb.Users.Where(x => x.UserName == model.UserName && x.UserPass == model.UserPass && x.IsActive == true).Select(y => new UserVM()
+            _Db = new ModelVssDb();
+            #region User Credential
+            oUser = _Db.Users.Where(x => x.UserName == model.UserName && x.UserPass == model.UserPass && x.IsActive == true).Select(y => new UserVM()
             {
                 UserName = y.UserName,
                 UserPass = y.UserPass,
@@ -29,14 +30,20 @@ namespace VSS.API.BL.System
                 Email = y.Email,
                 MobileNo = y.MobileNo
             }).FirstOrDefault();
+            #endregion
             if (oUser != null) 
             {
+                #region Token
                 NameValueCollection myKeys = ConfigurationManager.AppSettings;
                 int tokenExpire = Convert.ToInt32(myKeys["TokenExpire"]);
                 string VSS = myKeys["VSS"];
                 oUser.Permissions = new MenuPermissionBL().GetMenuByUser(oUser.UserID);
                 oUser.Token = JsonWebToken.Encode(new UserPayload() { CreateDate = DateTime.Now, UserId = oUser.UserID, TokenExpire = tokenExpire, UserName = oUser.UserName }, VSS, JwtHashAlgorithm.HS512);
-            }          
+                #endregion
+                #region Notification
+                oUser.nNotify = _Db.JcReqs.Where(x => x.IsRead != true).Count();
+                #endregion
+            }
             return oUser;
         }
     }

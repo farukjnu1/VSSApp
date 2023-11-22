@@ -14,10 +14,10 @@ namespace VSS.API.Controllers
     {
         // GET: api/JcReq
         [HttpGet]
-        public IEnumerable<JcReqVM> Get(int reqStatus, int storeTranTypeId, int pi = 0, int ps = 10)
+        public IEnumerable<JcReqVM> Get(int pi = 0, int ps = 10)
         {
             JcReqBL _BL = new JcReqBL();
-            return _BL.Get(reqStatus, storeTranTypeId, pi, ps);
+            return _BL.Get(pi, ps);
         }
 
         // POST: api/StoreReq

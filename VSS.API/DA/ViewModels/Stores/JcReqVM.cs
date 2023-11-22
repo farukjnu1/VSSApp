@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using VSS.API.DA.ViewModels.Common;
 
 namespace VSS.API.DA.ViewModels.Stores
 {
-    public class JcReqVM
+    public class JcReqVM:Pager
     {
         public long Id { get; set; }
 
@@ -37,5 +38,6 @@ namespace VSS.API.DA.ViewModels.Stores
         public bool? IsRead { get; set; }
 
         public int? ReadBy { get; set; }
+        public string UserName { get; set; }
     }
 }

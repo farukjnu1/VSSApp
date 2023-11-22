@@ -21,11 +21,11 @@ namespace VSS.API.BL.Stores
         ModelVssDb _vssDb = new ModelVssDb();
         private IGenericFactory<JcReqVM> Generic_JcReq = null;
 
-        public List<JcReqVM> Get(int reqStatus, int storeTranTypeId, int pageIndex = 0, int pageSize = 10)
+        public List<JcReqVM> Get(int pageIndex = 0, int pageSize = 10)
         {
             string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
             Generic_JcReq = new GenericFactory<JcReqVM>();
-            return Generic_JcReq.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetStoreReq, new Hashtable() { { "PageIndex", pageIndex }, { "PageSize", pageSize }, { "ReqStatus", reqStatus }, { "StoreTranTypeId", storeTranTypeId } }, vssDb);
+            return Generic_JcReq.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetJcReq, new Hashtable() { { "PageIndex", pageIndex }, { "PageSize", pageSize } }, vssDb);
         }
 
         public bool Add(JcReq model)
@@ -53,6 +53,27 @@ namespace VSS.API.BL.Stores
                 {
                     oJcReq.IsRead = model.IsRead;
                     oJcReq.ReadBy = model.ReadBy;
+                    _vssDb.SaveChanges();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return false;
+        }
+
+        /*public bool Update(JcReq model)
+        {
+            try
+            {
+                var oJcReq = _vssDb.JcReqs
+                 .Where(x => x.Id == model.Id).FirstOrDefault();
+                if (oJcReq != null)
+                {
+                    oJcReq.IsRead = model.IsRead;
+                    oJcReq.ReadBy = model.ReadBy;
                     oJcReq.CreateBy = model.CreateBy;
                     oJcReq.CreateDate = DateTime.Now;
                     oJcReq.Remark = model.Remark;
@@ -71,7 +92,8 @@ namespace VSS.API.BL.Stores
                 return false;
             }
             return false;
-        }
+        }*/
+
         public bool Remove(int id)
         {
             bool isSuccess = false;

@@ -27,5 +27,6 @@ namespace VSS.API.DA.ADO
         public const string sp_GetMenuPermissionByUserId = "[dbo].[sp_GetMenuPermissionByUserId]";
         public const string sp_GetStoreReq = "[dbo].[sp_GetStoreReq]";
         public const string sp_GetJobs = "[dbo].[sp_GetJobs]";
+        public const string sp_GetJcReq = "[dbo].[sp_GetJcReq]";
     }
 }

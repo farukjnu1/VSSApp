@@ -468,5 +468,56 @@ namespace VSS.API.BL.Operation
             }
             return oJobCard;
         }
+
+        public bool AddJcReq(JcReq model)
+        {
+            bool isSuccess = false;
+            using (_vssDb = new ModelVssDb())
+            {
+                using (var _tran = _vssDb.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        model.CreateDate = DateTime.Now;
+                        _vssDb.JcReqs.Add(model);
+                        _vssDb.SaveChanges();
+                        _tran.Commit();
+                        isSuccess = true;
+                    }
+                    catch
+                    {
+                        _tran.Rollback();
+                    }
+                }
+            }
+            return isSuccess;
+        }
+
+        public bool UpdateJcReq(JcReq model)
+        {
+            bool isSuccess = false;
+            using (_vssDb = new ModelVssDb())
+            {
+                using (var _tran = _vssDb.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var oJcReq = (from x in _vssDb.JcReqs where x.Id == model.Id select x).FirstOrDefault();
+                        if (oJcReq != null)
+                        {
+                            oJcReq.CreateDate = DateTime.Now;
+                            _vssDb.SaveChanges();
+                            _tran.Commit();
+                            isSuccess = true;
+                        }
+                    }
+                    catch
+                    {
+                        _tran.Rollback();
+                    }
+                }
+            }
+            return isSuccess;
+        }
     }
 }

@@ -33,7 +33,6 @@ namespace VSS.API.BL.System
         {
             try
             {
-                model.UserID = GetNewId();
                 model.UserCode = model.UserCode;
                 model.UserName = model.UserName;
                 model.FirstName = model.FirstName;
@@ -71,6 +70,7 @@ namespace VSS.API.BL.System
                     oUser.Email = model.Email;
                     oUser.MobileNo = model.MobileNo;
                     oUser.PhoneNo = model.PhoneNo;
+                    oUser.IsActive = model.IsActive;
                     oUser.UpdateBy = model.UpdateBy;
                     oUser.UpdateDate = DateTime.Now;
                     model.UserPass = string.IsNullOrEmpty(model.UserPass) ? "123" : model.UserPass;
@@ -104,18 +104,6 @@ namespace VSS.API.BL.System
                 return false;
             }
             return false;
-        }
-        private int GetNewId()
-        {
-            try
-            {
-                var Id = Convert.ToInt32(_vssDb.Users.Max(x => x.UserID)) + 1;
-                return Id;
-            }
-            catch
-            {
-                return 0;
-            }
         }
     }
 }

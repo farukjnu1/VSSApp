@@ -26,6 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,6 +36,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,6 +46,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
@@ -82,6 +85,7 @@
       <HintPath>..\packages\System.Configuration.ConfigurationManager.4.4.1\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=7.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.7.0.2\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -108,15 +112,14 @@
     <Reference Include="System.Web.Cors, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.9\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Http.Cors, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.9\lib\net45\System.Web.Http.Cors.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
@@ -170,6 +173,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -239,6 +243,7 @@
     <Compile Include="BL\Stores\ItemBL.cs" />
     <Compile Include="BL\Stores\SalesPriceBL.cs" />
     <Compile Include="BL\Stores\StockBL.cs" />
+    <Compile Include="BL\Stores\JcReqBL.cs" />
     <Compile Include="BL\Stores\StoreReqBL.cs" />
     <Compile Include="BL\Stores\StoreTranBL.cs" />
     <Compile Include="BL\Stores\SupplierBL.cs" />
@@ -262,6 +267,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\JcReqController.cs" />
     <Compile Include="Controllers\JobCardController.cs" />
     <Compile Include="Controllers\JobController.cs" />
     <Compile Include="Controllers\JobGroupController.cs" />
@@ -309,6 +315,7 @@
     <Compile Include="DA\EF\VssDb\ItemPrice.cs" />
     <Compile Include="DA\EF\VssDb\JcHR.cs" />
     <Compile Include="DA\EF\VssDb\JcJob.cs" />
+    <Compile Include="DA\EF\VssDb\JcReq.cs" />
     <Compile Include="DA\EF\VssDb\JcSpare.cs" />
     <Compile Include="DA\EF\VssDb\Job.cs" />
     <Compile Include="DA\EF\VssDb\JobCard.cs" />
@@ -341,6 +348,7 @@
     <Compile Include="DA\EF\VssDb\WorkGroupEmp.cs" />
     <Compile Include="DA\Utilities\BLStatus.cs" />
     <Compile Include="DA\Utilities\Logs.cs" />
+    <Compile Include="DA\Utilities\NumberToWord.cs" />
     <Compile Include="DA\ViewModels\Billing\InvoiceVM.cs" />
     <Compile Include="DA\ViewModels\Billing\PaySettleVM.cs" />
     <Compile Include="DA\ViewModels\Billing\PayTranVM.cs" />
@@ -360,6 +368,7 @@
     <Compile Include="DA\ViewModels\Stores\BrandModelVM.cs" />
     <Compile Include="DA\ViewModels\Stores\ItemCategoryVM.cs" />
     <Compile Include="DA\ViewModels\Stores\BrandVM.cs" />
+    <Compile Include="DA\ViewModels\Stores\JcReqVM.cs" />
     <Compile Include="DA\ViewModels\Stores\SalesPriceVM.cs" />
     <Compile Include="DA\ViewModels\Stores\StockVM.cs" />
     <Compile Include="DA\ViewModels\Stores\StoreRecVM.cs" />

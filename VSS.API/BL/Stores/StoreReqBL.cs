@@ -61,6 +61,8 @@ namespace VSS.API.BL.Stores
                         oStoreReq.ReqStatus = model.ReqStatus;
                         oStoreReq.UpdateBy = model.CreateBy;
                         oStoreReq.UpdateDate = DateTime.Now;
+                        oStoreReq.DeliveryTime = model.DeliveryTime;
+                        oStoreReq.ReqUrgentType = model.ReqUrgentType;
                         _vssDb.SaveChanges();
                         return true;
                     }

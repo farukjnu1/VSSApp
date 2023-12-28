@@ -6,36 +6,37 @@ namespace VSS.API.DA.EF.VssDb
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("StoreTran")]
-    public partial class StoreTran
+    [Table("JcReq")]
+    public partial class JcReq
     {
         public long Id { get; set; }
 
-        public int? WhId { get; set; }
+        [StringLength(20)]
+        public string JcNo { get; set; }
 
-        public decimal? PurchasePrice { get; set; }
+        [StringLength(50)]
+        public string Brand { get; set; }
 
-        public int BusinessPartnerId { get; set; }
+        [StringLength(50)]
+        public string BrandModel { get; set; }
 
-        public int? ItemId { get; set; }
+        [StringLength(50)]
+        public string PartName { get; set; }
+
+        [StringLength(50)]
+        public string PartNo { get; set; }
 
         public decimal? Qty { get; set; }
 
         [StringLength(50)]
         public string Remark { get; set; }
 
-        public int? StoreTranTypeId { get; set; }
-
-        public int? ReqId { get; set; }
-
-        public int? DeliveryTime { get; set; }
-
         public DateTime? CreateDate { get; set; }
 
         public int? CreateBy { get; set; }
 
-        public DateTime? UpdateDate { get; set; }
+        public bool? IsRead { get; set; }
 
-        public int? UpdateBy { get; set; }
+        public int? ReadBy { get; set; }
     }
 }

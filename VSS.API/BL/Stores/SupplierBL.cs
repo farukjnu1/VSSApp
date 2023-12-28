@@ -86,7 +86,7 @@ namespace VSS.API.BL.Stores
             try
             {
                 var oBP = _vssDb.BusinessPartners
-                 .Where(x => x.BpTypeId == 1 && x.BpId == id)
+                 .Where(x => x.BpTypeId == 2 && x.BpId == id)
                  .FirstOrDefault();
                 if (oBP != null)
                 {

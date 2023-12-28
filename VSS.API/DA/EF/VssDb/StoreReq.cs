@@ -28,6 +28,8 @@ namespace VSS.API.DA.EF.VssDb
 
         public int? ReqUrgentType { get; set; }
 
+        public int? DeliveryTime { get; set; }
+
         public DateTime? CreateDate { get; set; }
 
         public int? CreateBy { get; set; }

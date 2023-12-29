@@ -519,9 +519,5 @@ namespace VSS.API.BL.Operation
             }
             return isSuccess;
         }
-<<<<<<< HEAD
-
-=======
->>>>>>> 58edc0a07179ed228073046e5a223b6486d31bdb
     }
 }

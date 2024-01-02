@@ -80,6 +80,22 @@ namespace VSS.API.Controllers
         }
 
         [HttpGet]
+        [Route("api/JobCard/GetReceiver")]
+        public List<WorkGroupVM> GetReceiver()
+        {
+            JobCardBL jobCardBL = new JobCardBL();
+            return jobCardBL.GetReceiver();
+        }
+
+        [HttpGet]
+        [Route("api/JobCard/GetManPower")]
+        public List<WorkGroupVM> GetManPower()
+        {
+            JobCardBL jobCardBL = new JobCardBL();
+            return jobCardBL.GetManPower();
+        }
+
+        [HttpGet]
         [Route("api/JobCard/GetCompany")]
         public CompanyVM GetCompany(int id = 1)
         {

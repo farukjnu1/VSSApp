@@ -45,6 +45,21 @@ namespace VSS.API.BL.Operation
             Generic_WorkGroupVM = new GenericFactory<WorkGroupVM>();
             return Generic_WorkGroupVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetWorkGroupById, new Hashtable() { { "WorkGroupId", workGroupId } }, vssDb);
         }
+
+        public List<WorkGroupVM> GetReceiver()
+        {
+            string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
+            Generic_WorkGroupVM = new GenericFactory<WorkGroupVM>();
+            return Generic_WorkGroupVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetReceiver, new Hashtable(), vssDb);
+        }
+
+        public List<WorkGroupVM> GetManPower()
+        {
+            string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
+            Generic_WorkGroupVM = new GenericFactory<WorkGroupVM>();
+            return Generic_WorkGroupVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetReceiver, new Hashtable(), vssDb);
+        }
+
         public List<JobVM> GetJob()
         {
             string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;

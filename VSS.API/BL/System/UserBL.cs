@@ -13,7 +13,7 @@ namespace VSS.API.BL.System
         public IEnumerable<UserVM> Get()
         {
             var listUser = _vssDb.Users
-                .Where(y=>y.UserID > 1)
+                .Where(y=>y.UserID > 2)
                 .Select(x => new UserVM
                 {
                     UserID = x.UserID,

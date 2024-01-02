@@ -73,12 +73,18 @@ namespace VSS.BL.Operation
         {
             try
             {
-                model.BpId = GetNewId();
-                model.BpTypeId = 1;
-                model.CreateDate = DateTime.Now;
-                _vssDb.BusinessPartners.Add(model);
-                _vssDb.SaveChanges();
-                return true;
+                var oClient = (from x in _vssDb.BusinessPartners where x.Phone == model.Phone.Trim() select x).FirstOrDefault();
+                if (oClient == null)
+                {
+                    model.Phone = model.Phone.Trim();
+                    model.BpId = GetNewId();
+                    model.BpTypeId = 1;
+                    model.CreateDate = DateTime.Now;
+                    _vssDb.BusinessPartners.Add(model);
+                    _vssDb.SaveChanges();
+                    return true;
+                }
+                return false;
             }
             catch
             {
@@ -94,7 +100,7 @@ namespace VSS.BL.Operation
             }
             catch
             {
-                return 0;
+                return 1;
             }
         }
         public bool Update(BusinessPartner model)
@@ -108,7 +114,7 @@ namespace VSS.BL.Operation
                 {
                     oBP.BpTypeId = model.BpTypeId;
                     oBP.Name = model.Name;
-                    oBP.Phone = model.Phone;
+                    oBP.Phone = model.Phone.Trim();
                     oBP.Email = model.Email;
                     oBP.Address = model.Address;
                     oBP.ContactPerson = model.ContactPerson;

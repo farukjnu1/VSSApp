@@ -11,6 +11,8 @@ namespace VSS.API.DA.ADO
         public const string sp_GetJobCardNo = "[dbo].[sp_GetJobCardNo]";
         public const string sp_GetByVehicleNo = "[dbo].[sp_GetByVehicleNo]";
         public const string sp_GetWorkGroupById = "[dbo].[sp_GetWorkGroupById]";
+        public const string sp_GetReceiver = "[dbo].[sp_GetReceiver]";
+        public const string sp_GetManPower = "[dbo].[sp_GetManPower]";
         public const string sp_GetCompany = "[dbo].[sp_GetCompany]";
         public const string sp_GetJob = "[dbo].[sp_GetJob]";
         public const string sp_GetEngineSize = "[dbo].[sp_GetEngineSize]";

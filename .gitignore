@@ -476,4 +476,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 #list of ignore files
-web.config
+VSS.API/Web.config

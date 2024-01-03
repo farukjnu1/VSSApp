@@ -89,7 +89,7 @@ namespace VSS.API.BL.System
             }
             catch
             {
-                return 0;
+                return 1;
             }
         }
     }

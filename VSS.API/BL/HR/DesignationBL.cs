@@ -102,7 +102,7 @@ namespace VSS.API.BL.HR
             }
             catch
             {
-                return 0;
+                return 1;
             }
         }
     }

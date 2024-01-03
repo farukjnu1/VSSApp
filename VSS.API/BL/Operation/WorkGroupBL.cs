@@ -111,7 +111,7 @@ namespace VSS.API.BL.Operation
             }
             catch
             {
-                return 0;
+                return 1;
             }
         }
     }

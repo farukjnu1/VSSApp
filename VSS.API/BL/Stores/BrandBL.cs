@@ -145,7 +145,7 @@ namespace VSS.API.BL.Stores
             }
             catch
             {
-                return 0;
+                return 1;
             }
         }
 

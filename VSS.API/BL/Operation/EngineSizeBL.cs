@@ -83,7 +83,7 @@ namespace VSS.BL.Operation
             }
             catch
             {
-                return 0;
+                return 1;
             }
         }
 

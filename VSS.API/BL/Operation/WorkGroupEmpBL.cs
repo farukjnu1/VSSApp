@@ -105,7 +105,7 @@ namespace VSS.API.BL.Operation
             }
             catch(Exception ex)
             {
-                return 0;
+                return 1;
             }
         }
     }

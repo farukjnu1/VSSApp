@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using VSS.API.DA.ViewModels.Operation;
 
 namespace VSS.API.DA.ViewModels.Billing
 {
-    public class InvoiceVM
+    public class InvoiceVM: ClientVehicleVM
     {
         public long Id { get; set; }
 
@@ -36,6 +37,7 @@ namespace VSS.API.DA.ViewModels.Billing
         public decimal? BalanceAmount { get; set; }
         public string GrandTotalWord { get; set; }
         public List<PaySettleVM> PaySettles { get; set; } = new List<PaySettleVM>();
+        public string Supervisor { get; set; }
     }
 
     public class InvoiceItemVM

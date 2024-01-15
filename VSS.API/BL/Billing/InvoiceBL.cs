@@ -185,7 +185,9 @@ namespace VSS.API.BL.Billing
             InvoiceVM oInvoice = new InvoiceVM();
             oInvoice = (from i in _vssDb.Invoices
                         join bp in _vssDb.BusinessPartners on i.ClientId equals bp.BpId
+                        join cv in _vssDb.ClientVehicles on i.ClientId equals cv.ClientId
                         join jc in _vssDb.JobCards on i.JcId equals jc.Id
+                        join e in _vssDb.Employees on jc.SupervisorId equals e.EmployeeId
                         where i.JcId == jcId
                         select new InvoiceVM
                         {
@@ -204,6 +206,10 @@ namespace VSS.API.BL.Billing
                             ClientPhone = bp.Phone,
                             ContactPerson = jc.ContactPerson,
                             ContactPersonNo = jc.ContactPersonNo,
+                            VehicleNo = cv.VehicleNo,
+                            Vin = cv.Vin,
+                            Model = cv.Model,
+                            Supervisor = e.FirstName + " " + e.MiddleName + " " + e.LastName,
                             InvoiceItems = (from ii in _vssDb.InvoiceItems
                                             where ii.InvoiceId == i.Id
                                             select new InvoiceItemVM

@@ -16,13 +16,13 @@ namespace VSS.DA.ViewModels.Operation
         public string Name { get; set; }
 
         [StringLength(250)]
-        public string Address { get; set; }
+        public string Address { get; set; } = "";
 
         [StringLength(25)]
         public string Phone { get; set; }
 
         [StringLength(250)]
-        public string Email { get; set; }
+        public string Email { get; set; } = "";
 
         public int? BpTypeId { get; set; }
 

@@ -38,8 +38,8 @@ namespace VSS.API.DA.ViewModels.Operation
         public string ClientPhone { get; set; }
         public string ClientEmail { get; set; }
         public string ClientAddress { get; set; }
-        public string ContactPerson { get; set; } = "";
-        public string ContactPersonNo { get; set; } = "";
+        public string ContactPerson { get; set; }
+        public string ContactPersonNo { get; set; }
         public string Description { get; set; }
         public int? IsInvoice { get; set; }
         public decimal? GrandTotal { get; set; }

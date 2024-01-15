@@ -38,6 +38,7 @@ namespace VSS.API.DA.ViewModels.Billing
         public string GrandTotalWord { get; set; }
         public List<PaySettleVM> PaySettles { get; set; } = new List<PaySettleVM>();
         public string Supervisor { get; set; }
+        public string MembershipNo { get; set; }
     }
 
     public class InvoiceItemVM

@@ -53,10 +53,10 @@ namespace VSS.API.DA.EF.VssDb
         public string ClientInfo { get; set; }
 
         [StringLength(50)]
-        public string ContactPerson { get; set; }
+        public string ContactPerson { get; set; } = "";
 
         [StringLength(20)]
-        public string ContactPersonNo { get; set; }
+        public string ContactPersonNo { get; set; } = "";
 
         public bool? IsDelivered { get; set; }
 

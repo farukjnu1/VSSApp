@@ -75,5 +75,8 @@ namespace VSS.API.DA.ViewModels.Billing
         public decimal? TotalVat { get; set; }
 
         public decimal? TotalAmount { get; set; }
+        public string SpareParts { get; set; }
+        public string JobName { get; set; }
+        public string ItemName { get; set; }
     }
 }

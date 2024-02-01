@@ -205,8 +205,8 @@ namespace VSS.API.BL.Billing
             ,ISNULL(E.FirstName,'') + ' ' + ISNULL(e.MiddleName,'') + ' ' + ISNULL(e.LastName,'') Supervisor
             FROM Invoice I
             LEFT JOIN BusinessPartner C ON C.BpId = I.ClientId
-            LEFT JOIN ClientVehicle CV ON CV.ClientId = I.ClientId
-            LEFT JOIN JobCard JC ON JC.Id = I.JcId
+			LEFT JOIN JobCard JC ON JC.Id = I.JcId
+            LEFT JOIN ClientVehicle CV ON CV.ClientId = I.ClientId AND RTRIM(LTRIM(JC.VehicleNo))=RTRIM(LTRIM(CV.VehicleNo))
             LEFT JOIN Employee E ON E.EmployeeId = JC.SupervisorId
             WHERE I.JcId=" + jcId).FirstOrDefault();
             if (oInvoice != null)

@@ -109,5 +109,65 @@ namespace VSS.API.BL.Operation
             return listCV;
         }
 
+        public List<VehicleStda110UVm> GetManufacturer(string manufacturer, int offset = 0,int fetch = 20)
+        {
+            var listManufacturer = _vssDb.Database.SqlQuery<VehicleStda110UVm>(@"SELECT DISTINCT Manufacturer 
+            FROM VehicleStda110U 
+            WHERE Manufacturer IS NOT NULL AND Manufacturer <> ''
+            AND Manufacturer LIKE '" + manufacturer + @"%'
+            ORDER BY Manufacturer
+            OFFSET " + offset + @" ROWS 
+            FETCH NEXT " + fetch + " ROWS ONLY;").ToList();
+            return listManufacturer;
+        }
+
+        public List<VehicleStda110UVm> GetModel(string manufacturer, string model, int offset = 0, int fetch = 20)
+        {
+            var listManufacturer = _vssDb.Database.SqlQuery<VehicleStda110UVm>(@"SELECT DISTINCT Model 
+            FROM VehicleStda110U 
+            WHERE Model IS NOT NULL AND Model <> ''
+            AND Manufacturer = '"+ manufacturer + @"' AND Model LIKE '"+ model + @"%'
+            ORDER BY Model
+            OFFSET " + offset + @" ROWS 
+            FETCH NEXT " + fetch + " ROWS ONLY;").ToList();
+            return listManufacturer;
+        }
+
+        public List<VehicleStda110UVm> GetSubModel(string manufacturer, string model, string subModel, int offset = 0, int fetch = 20)
+        {
+            var listManufacturer = _vssDb.Database.SqlQuery<VehicleStda110UVm>(@"SELECT DISTINCT SubModel
+            FROM VehicleStda110U 
+            WHERE SubModel IS NOT NULL AND SubModel <> ''
+            AND Manufacturer = '" + manufacturer + @"' AND Model='" + model + @"' AND SubModel LIKE '"+ subModel + @"%'
+            ORDER BY SubModel
+            OFFSET " + offset + @" ROWS 
+            FETCH NEXT " + fetch + " ROWS ONLY;").ToList();
+            return listManufacturer;
+        }
+
+        public List<VehicleStda110UVm> GetFrom(string manufacturer, string model, string subModel, string from, int offset = 0, int fetch = 20)
+        {
+            var listManufacturer = _vssDb.Database.SqlQuery<VehicleStda110UVm>(@"SELECT DISTINCT [From]
+            FROM VehicleStda110U 
+            WHERE SubModel IS NOT NULL AND SubModel <> ''
+            AND Manufacturer = '" + manufacturer + @"' AND Model='" + model + @"' AND SubModel = '" + subModel + @"' AND [From] LIKE '" + from + @"%'
+            ORDER BY SubModel
+            OFFSET " + offset + @" ROWS 
+            FETCH NEXT " + fetch + " ROWS ONLY;").ToList();
+            return listManufacturer;
+        }
+
+        public List<VehicleStda110UVm> GetTo(string manufacturer, string model, string subModel, string from, string to, int offset = 0, int fetch = 20)
+        {
+            var listManufacturer = _vssDb.Database.SqlQuery<VehicleStda110UVm>(@"SELECT DISTINCT [From]
+            FROM VehicleStda110U 
+            WHERE SubModel IS NOT NULL AND SubModel <> ''
+            AND Manufacturer = '" + manufacturer + @"' AND Model='" + model + @"' AND SubModel = '" + subModel + @"' AND [From] = '" + from + @"' AND [To] LIKE '" + to + @"%'
+            ORDER BY SubModel
+            OFFSET " + offset + @" ROWS 
+            FETCH NEXT " + fetch + " ROWS ONLY;").ToList();
+            return listManufacturer;
+        }
+
     }
 }

@@ -16,7 +16,7 @@ using VSS.DA.ViewModels.Operation;
 
 namespace VSS.API.Controllers
 {
-    [MyAuth]
+    //[MyAuth]
     public class ClientVehicleController : ApiController
     {
         // GET: api/ClientVehicle
@@ -52,6 +52,46 @@ namespace VSS.API.Controllers
         {
             ClientVehicleBL _BL = new ClientVehicleBL();
             return _BL.GetVehiclesByClient(id);
+        }
+
+        [HttpGet]
+        [Route("api/ClientVehicle/GetManufacturer")]
+        public IEnumerable<VehicleStda110UVm> GetManufacturer(string manufacturer, int offset = 0, int fetch = 20)
+        {
+            ClientVehicleBL _BL = new ClientVehicleBL();
+            return _BL.GetManufacturer(manufacturer, offset, fetch);
+        }
+
+        [HttpGet]
+        [Route("api/ClientVehicle/GetModel")]
+        public IEnumerable<VehicleStda110UVm> GetModel(string manufacturer, string model, int offset = 0, int fetch = 20)
+        {
+            ClientVehicleBL _BL = new ClientVehicleBL();
+            return _BL.GetModel(manufacturer, model, offset, fetch);
+        }
+
+        [HttpGet]
+        [Route("api/ClientVehicle/GetSubModel")]
+        public IEnumerable<VehicleStda110UVm> GetSubModel(string manufacturer, string model, string subModel, int offset = 0, int fetch = 20)
+        {
+            ClientVehicleBL _BL = new ClientVehicleBL();
+            return _BL.GetSubModel(manufacturer, model, subModel, offset, fetch);
+        }
+
+        [HttpGet]
+        [Route("api/ClientVehicle/GetFrom")]
+        public IEnumerable<VehicleStda110UVm> GetFrom(string manufacturer, string model, string subModel, string from, int offset = 0, int fetch = 20)
+        {
+            ClientVehicleBL _BL = new ClientVehicleBL();
+            return _BL.GetFrom(manufacturer, model, subModel, from, offset, fetch);
+        }
+
+        [HttpGet]
+        [Route("api/ClientVehicle/GetTo")]
+        public IEnumerable<VehicleStda110UVm> GetTo(string manufacturer, string model, string subModel, string from, string to, int offset = 0, int fetch = 20)
+        {
+            ClientVehicleBL _BL = new ClientVehicleBL();
+            return _BL.GetTo(manufacturer, model, subModel, from, to, offset, fetch);
         }
 
     }

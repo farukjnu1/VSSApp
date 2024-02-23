@@ -6,7 +6,10 @@ using System.Net.Http;
 using System.Web.Http;
 using VSS.API.Attributes;
 using VSS.API.BL.Stores;
+using VSS.API.DA.EF.VssDb;
+using VSS.API.DA.ViewModels.Operation;
 using VSS.API.DA.ViewModels.Stores;
+using VSS.BL.Operation;
 
 namespace VSS.API.Controllers
 {
@@ -14,9 +17,10 @@ namespace VSS.API.Controllers
     public class WarehouseController : ApiController
     {
         // GET: api/Warehouse
-        public IEnumerable<string> Get()
+        public IEnumerable<WarehouseVM> Get(int pi = 0, int ps = 5)
         {
-            return new string[] { "value1", "value2" };
+            WarehouseBL _BL = new WarehouseBL();
+            return _BL.Get(pi, ps);
         }
 
         // GET: api/Warehouse/5
@@ -31,8 +35,10 @@ namespace VSS.API.Controllers
         }
 
         // PUT: api/Warehouse/5
-        public void Put(int id, [FromBody]string value)
+        public bool Put([FromBody] Warehouse model)
         {
+            WarehouseBL _BL = new WarehouseBL();
+            return _BL.Update(model);
         }
 
         // DELETE: api/Warehouse/5

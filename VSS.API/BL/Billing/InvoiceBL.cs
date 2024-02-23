@@ -182,65 +182,74 @@ namespace VSS.API.BL.Billing
         public InvoiceVM GetByJc([FromUri] int jcId)
         {
             _vssDb = new ModelVssDb();
-            InvoiceVM oInvoice = new InvoiceVM();
-            oInvoice = (from i in _vssDb.Invoices
-                        join bp in _vssDb.BusinessPartners on i.ClientId equals bp.BpId
-                        join jc in _vssDb.JobCards on i.JcId equals jc.Id
-                        where i.JcId == jcId
-                        select new InvoiceVM
-                        {
-                            Id = i.Id,
-                            JcId = jc.Id,
-                            IsInvoice = i.JcId == null || i.JcId == 0 ? 0 : 1,
-                            CreateBy = i.CreateBy,
-                            CreateDate = i.CreateDate,
-                            GrandTotal = i.GrandTotal,
-                            JcNo = jc.JcNo,
-                            ClientId = jc.ClientId,
-                            Description = jc.ClientInfo,
-                            ClientAddress = bp.Address,
-                            ClientEmail = bp.Email,
-                            ClientName = bp.Name,
-                            ClientPhone = bp.Phone,
-                            ContactPerson = jc.ContactPerson,
-                            ContactPersonNo = jc.ContactPersonNo,
-                            InvoiceItems = (from ii in _vssDb.InvoiceItems
-                                            where ii.InvoiceId == i.Id
-                                            select new InvoiceItemVM
-                                            {
-                                                Id = ii.Id,
-                                                InvoiceId = ii.Id,
-                                                ItemId = ii.ItemId,
-                                                ItemType = ii.ItemType,
-                                                Qty = ii.Qty,
-                                                UnitPrice = ii.UnitPrice,
-                                                Tax = ii.Tax,
-                                                DoneBy = ii.DoneBy,
-                                                DoneDate = ii.DoneDate,
-                                                TotalPrice = ii.TotalPrice,
-                                                Discount = ii.Discount,
-                                                DiscountAmount = ii.DiscountAmount,
-                                                TpAfterDiscount = ii.TpAfterDiscount,
-                                                Vat = ii.Vat,
-                                                TotalVat = ii.TotalVat,
-                                                TotalAmount = ii.TotalAmount
-                                            }).ToList(),
-                            BalanceAmount = (from b in _vssDb.BusinessPartnerBalances where b.BusinessPartnerId == i.ClientId select b.BalanceAmount).FirstOrDefault(),
-                            PaySettles = (from ps in _vssDb.PaySettles
-                                          join pm in _vssDb.PayMethods on ps.PaymentMethod equals pm.MethodId
-                                          where ps.InvoiceId == i.Id
-                                          select new PaySettleVM()
-                                          {
-                                              Amount = ps.Amount,
-                                              Id = ps.Id,
-                                              InvoiceId = i.Id,
-                                              PayDate = ps.PayDate,
-                                              PaymentMethod = ps.PaymentMethod,
-                                              PayMethodName = pm.Name
-                                          }).ToList()
-                        }).FirstOrDefault();
-            oInvoice = oInvoice != null ? oInvoice : new InvoiceVM();
-            oInvoice.GrandTotalWord = NumberToWord.ConvertAmount((double)oInvoice.GrandTotal);
+            InvoiceVM oInvoice = null;
+            oInvoice = _vssDb.Database.SqlQuery<InvoiceVM>(@"SELECT I.Id
+            ,I.JcId
+            ,CASE WHEN I.JcId IS NULL OR I.JcId = 0 THEN 0 ELSE 1 END IsInvoice
+            ,I.CreateBy
+            ,I.CreateDate
+            ,I.GrandTotal
+            ,JC.JcNo
+            ,JC.ClientId 
+            ,JC.ClientInfo Description 
+            ,C.Address ClientAddress
+            ,C.Email ClientEmail 
+            ,C.Name ClientName
+            ,C.Phone ClientPhone
+            ,C.MembershipNo                            
+            ,ISNULL(JC.ContactPerson,'') ContactPerson
+            ,ISNULL(JC.ContactPersonNo,'') ContactPersonNo
+            ,CV.VehicleNo
+            ,CV.Vin
+            ,CV.Model
+            ,ISNULL(E.FirstName,'') + ' ' + ISNULL(e.MiddleName,'') + ' ' + ISNULL(e.LastName,'') Supervisor
+            FROM Invoice I
+            LEFT JOIN BusinessPartner C ON C.BpId = I.ClientId
+			LEFT JOIN JobCard JC ON JC.Id = I.JcId
+            LEFT JOIN ClientVehicle CV ON CV.ClientId = I.ClientId AND RTRIM(LTRIM(JC.VehicleNo))=RTRIM(LTRIM(CV.VehicleNo))
+            LEFT JOIN Employee E ON E.EmployeeId = JC.SupervisorId
+            WHERE I.JcId=" + jcId).FirstOrDefault();
+            if (oInvoice != null)
+            {
+                oInvoice.InvoiceItems = _vssDb.Database.SqlQuery<InvoiceItemVM>(@"SELECT
+                                                II.Id,
+                                                II.ItemId,
+                                                II.ItemType,
+                                                II.Qty,
+                                                II.UnitPrice,
+                                                II.Tax,
+                                                II.DoneBy,
+                                                II.DoneDate,
+                                                II.TotalPrice,
+                                                II.Discount,
+                                                II.DiscountAmount,
+                                                II.TpAfterDiscount,
+                                                II.Vat,
+                                                II.TotalVat,
+                                                II.TotalAmount ,
+                                                I.ItemName SpareParts,
+	                                            J.Description JobName,
+	                                            CASE WHEN I.ItemName IS NULL THEN J.Description WHEN J.Description IS NULL THEN I.ItemName ELSE '' END ItemName
+                                                FROM InvoiceItem II
+                                                LEFT JOIN Item I ON I.Id = II.ItemId AND II.ItemType=2
+                                                LEFT JOIN Job J ON J.JobId = II.ItemId AND II.ItemType=1
+                                                WHERE II.InvoiceId=" + oInvoice.Id).ToList();
+                oInvoice.BalanceAmount = (from b in _vssDb.BusinessPartnerBalances where b.BusinessPartnerId == oInvoice.ClientId select b.BalanceAmount).FirstOrDefault();
+                oInvoice.PaySettles = (from ps in _vssDb.PaySettles
+                                       join pm in _vssDb.PayMethods on ps.PaymentMethod equals pm.MethodId
+                                       where ps.InvoiceId == oInvoice.Id
+                                       select new PaySettleVM()
+                                       {
+                                           Amount = ps.Amount,
+                                           Id = ps.Id,
+                                           InvoiceId = oInvoice.Id,
+                                           PayDate = ps.PayDate,
+                                           PaymentMethod = ps.PaymentMethod,
+                                           PayMethodName = pm.Name
+                                       }).ToList();
+                oInvoice.GrandTotalWord = NumberToWord.ConvertAmount((double)oInvoice.GrandTotal);
+                oInvoice = oInvoice != null ? oInvoice : new InvoiceVM();
+            }
             return oInvoice;
         }
 

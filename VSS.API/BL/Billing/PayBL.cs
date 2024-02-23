@@ -53,7 +53,7 @@ namespace VSS.API.BL.Billing
                         _vssDb.SaveChanges();
                         #endregion
                         #region Pay Settle
-                        var listInvoice = _vssDb.Invoices.Where(x => x.ClientId == model.BusinessPartnerId).ToList();
+                        var listInvoice = _vssDb.Invoices.Where(x => x.ClientId == model.BusinessPartnerId && x.IsPaid != true).ToList();
                         foreach (var oI in listInvoice)
                         {
                             oBPBalance = _vssDb.BusinessPartnerBalances.Where(x => x.BusinessPartnerId == model.BusinessPartnerId).FirstOrDefault();

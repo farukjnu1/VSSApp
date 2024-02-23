@@ -393,9 +393,10 @@ namespace VSS.API.BL.Operation
                             Description = jc.ClientInfo,
                             CreateBy = jc.CreateBy,
                             CreateDate = jc.CreateDate,
-                            ContactPerson = jc.ContactPerson,
-                            ContactPersonNo = jc.ContactPersonNo,
+                            ContactPerson = jc.ContactPerson == null ? "" : jc.ContactPerson,
+                            ContactPersonNo = jc.ContactPersonNo == null ? "" : jc.ContactPersonNo,
                             UpdateDate = jc.UpdateDate,
+
                             JobDetails = (from j in _vssDb.JcJobs
                                           join jg in _vssDb.JobGroups on j.JobGroupId equals jg.GroupId
                                           join es in _vssDb.EngineSizes on j.EngineSizeId equals es.EngineSizeId

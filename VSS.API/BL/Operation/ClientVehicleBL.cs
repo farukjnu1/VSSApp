@@ -76,12 +76,17 @@ namespace VSS.API.BL.Operation
                 if (oClientVehicle != null)
                 {
                     oClientVehicle.Id = model.Id;
+                    oClientVehicle.ClientId = model.ClientId;
                     oClientVehicle.VehicleNo = model.VehicleNo;
                     oClientVehicle.Model = model.Model;
                     oClientVehicle.Vin = model.Vin;
-                    oClientVehicle.ClientId = model.ClientId;
                     oClientVehicle.CreateBy = model.CreateBy;
                     oClientVehicle.CreateDate = DateTime.Now;
+                    oClientVehicle.Manufacturer = model.Manufacturer;
+                    oClientVehicle.Model = model.Model;
+                    oClientVehicle.SubModel = model.SubModel;
+                    oClientVehicle.From = model.From;
+                    oClientVehicle.To = model.To;
                     _vssDb.SaveChanges();
                     return true;
                 }
@@ -151,7 +156,7 @@ namespace VSS.API.BL.Operation
             FROM VehicleStda110U 
             WHERE SubModel IS NOT NULL AND SubModel <> ''
             AND Manufacturer = '" + manufacturer + @"' AND Model='" + model + @"' AND SubModel = '" + subModel + @"' AND [From] LIKE '" + from + @"%'
-            ORDER BY SubModel
+            ORDER BY [From]
             OFFSET " + offset + @" ROWS 
             FETCH NEXT " + fetch + " ROWS ONLY;").ToList();
             return listManufacturer;
@@ -159,11 +164,11 @@ namespace VSS.API.BL.Operation
 
         public List<VehicleStda110UVm> GetTo(string manufacturer, string model, string subModel, string from, string to, int offset = 0, int fetch = 20)
         {
-            var listManufacturer = _vssDb.Database.SqlQuery<VehicleStda110UVm>(@"SELECT DISTINCT [From]
+            var listManufacturer = _vssDb.Database.SqlQuery<VehicleStda110UVm>(@"SELECT DISTINCT [To]
             FROM VehicleStda110U 
             WHERE SubModel IS NOT NULL AND SubModel <> ''
             AND Manufacturer = '" + manufacturer + @"' AND Model='" + model + @"' AND SubModel = '" + subModel + @"' AND [From] = '" + from + @"' AND [To] LIKE '" + to + @"%'
-            ORDER BY SubModel
+            ORDER BY [To]
             OFFSET " + offset + @" ROWS 
             FETCH NEXT " + fetch + " ROWS ONLY;").ToList();
             return listManufacturer;

@@ -343,6 +343,7 @@
     <Compile Include="DA\EF\VssDb\Unit.cs" />
     <Compile Include="DA\EF\VssDb\User.cs" />
     <Compile Include="DA\EF\VssDb\UserRole.cs" />
+    <Compile Include="DA\EF\VssDb\VehicleStda110U.cs" />
     <Compile Include="DA\EF\VssDb\Warehouse.cs" />
     <Compile Include="DA\EF\VssDb\WorkGroup.cs" />
     <Compile Include="DA\EF\VssDb\WorkGroupEmp.cs" />

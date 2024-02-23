@@ -28,7 +28,7 @@ namespace VSS.API.DA.EF.VssDb
 
         public decimal? Qty { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
         public string Remark { get; set; }
 
         public DateTime? CreateDate { get; set; }

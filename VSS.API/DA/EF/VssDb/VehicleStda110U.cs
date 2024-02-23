@@ -6,26 +6,17 @@ namespace VSS.API.DA.EF.VssDb
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("ClientVehicle")]
-    public partial class ClientVehicle
+    public partial class VehicleStda110U
     {
         public long Id { get; set; }
-
-        public int? ClientId { get; set; }
-
-        [StringLength(25)]
-        public string VehicleNo { get; set; }
-
-        [StringLength(30)]
-        public string Vin { get; set; }
 
         [StringLength(50)]
         public string Manufacturer { get; set; }
 
-        [StringLength(15)]
+        [StringLength(50)]
         public string Model { get; set; }
 
-        [StringLength(50)]
+        [StringLength(200)]
         public string SubModel { get; set; }
 
         [StringLength(10)]
@@ -33,9 +24,5 @@ namespace VSS.API.DA.EF.VssDb
 
         [StringLength(10)]
         public string To { get; set; }
-
-        public DateTime? CreateDate { get; set; }
-
-        public int? CreateBy { get; set; }
     }
 }

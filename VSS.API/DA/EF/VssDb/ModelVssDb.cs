@@ -64,6 +64,7 @@ namespace VSS.API.DA.EF.VssDb
         public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<WorkGroup> WorkGroups { get; set; }
         public virtual DbSet<WorkGroupEmp> WorkGroupEmps { get; set; }
+        public virtual DbSet<VehicleStda110U> VehicleStda110U { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -122,11 +123,27 @@ namespace VSS.API.DA.EF.VssDb
                 .HasForeignKey(e => e.BpTypeId);
 
             modelBuilder.Entity<ClientVehicle>()
+                .Property(e => e.Vin)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ClientVehicle>()
+                .Property(e => e.Manufacturer)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ClientVehicle>()
                 .Property(e => e.Model)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ClientVehicle>()
-                .Property(e => e.Vin)
+                .Property(e => e.SubModel)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ClientVehicle>()
+                .Property(e => e.From)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ClientVehicle>()
+                .Property(e => e.To)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Company>()
@@ -541,6 +558,26 @@ namespace VSS.API.DA.EF.VssDb
 
             modelBuilder.Entity<WorkGroup>()
                 .Property(e => e.WgName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<VehicleStda110U>()
+                .Property(e => e.Manufacturer)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<VehicleStda110U>()
+                .Property(e => e.Model)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<VehicleStda110U>()
+                .Property(e => e.SubModel)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<VehicleStda110U>()
+                .Property(e => e.From)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<VehicleStda110U>()
+                .Property(e => e.To)
                 .IsUnicode(false);
         }
     }

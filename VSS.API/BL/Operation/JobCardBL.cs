@@ -434,7 +434,9 @@ namespace VSS.API.BL.Operation
                                             Quantity = s.Quantity,
                                             SpareAmount = s.SpareAmount,
                                             ItemStatus = s.ItemStatus,
-                                            ItemStatusName = s.ItemStatus == 1 ? "Used" : "Refund"
+                                            ItemStatusName = s.ItemStatus == 1 ? "Used" : "Refund",
+                                            PartNoOld = i.PartNoOld,
+                                            PartNoNew = i.PartNoNew
                                         }).ToList(),
                             Resources = (from hr in _vssDb.JcHRs
                                          join e in _vssDb.Employees on hr.EmployeeId equals e.EmployeeId

@@ -23,10 +23,10 @@ namespace VSS.API.Controllers
         JobCardBL _BL = null;
         CompanyBL _BLCompany = null;
         // GET: api/JobCard/5
-        public IEnumerable<JobCardVM> Get(int pi = 0, int ps = 5, int jcStatus = 0)
+        public IEnumerable<JobCardVM> Get(int pi = 0, int ps = 5, int jcStatus = 0, string jcNo = "", DateTime? startDate = null, DateTime? endDate = null)
         {
             _BL = new JobCardBL();
-            return _BL.Get(pi, ps, jcStatus);
+            return _BL.Get(pi, ps, jcStatus, jcNo, startDate, endDate);
         }
 
         // GET: api/JobGroup/5

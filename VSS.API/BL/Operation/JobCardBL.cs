@@ -347,7 +347,7 @@ namespace VSS.API.BL.Operation
             }
         }
 
-        public IEnumerable<JobCardVM> Get(int pageIndex = 0, int pageSize = 5, int jcStatus = 0)
+        public IEnumerable<JobCardVM> Get(int pageIndex = 0, int pageSize = 5, int jcStatus = 0, string JcNo = "", DateTime? StartDate = null, DateTime? EndDate = null)
         {
             string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
             Generic_JobCardVM = new GenericFactory<JobCardVM>();
@@ -355,7 +355,10 @@ namespace VSS.API.BL.Operation
             {
                 { "PageIndex", pageIndex },
                 { "PageSize", pageSize },
-                { "JcStatus", jcStatus }
+                { "JcStatus", jcStatus },
+                { "JcNo", JcNo },
+                { "StartDate", StartDate },
+                { "EndDate", EndDate }
             };
             return Generic_JobCardVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetJobCard, oHashTable, vssDb);
         }

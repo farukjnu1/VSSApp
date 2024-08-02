@@ -5,10 +5,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VSS.API.DA.ViewModels.Common;
 
 namespace VSS.DA.ViewModels.Operation
 {
-    public class ClientVM
+    public class ClientVM : Pager
     {
         public int BpId { get; set; }
 

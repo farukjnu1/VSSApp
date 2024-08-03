@@ -92,7 +92,220 @@ namespace VSS.API.BL.Operation
         }
 
         ModelVssDb _vssDb = null;
+        
+
         public bool Add(JobCardVM model)
+        {
+            using (_vssDb = new ModelVssDb())
+            {
+                using (var _tran = _vssDb.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var oJC = (from x in _vssDb.JobCards where x.JcNo == model.JcNo.Trim() select x).FirstOrDefault();
+                        if (oJC != null)
+                        {
+                            _tran.Rollback();
+                            return false;
+                        }
+                        #region Vehicle Info
+                        JobCard oJobCard = new JobCard();
+                        oJobCard.JcNo = model.JcNo;
+                        oJobCard.VehicleNo = model.VehicleNo;
+                        oJobCard.Model = model.Model;
+                        oJobCard.Vin = model.Vin;
+                        oJobCard.Mileage = model.Mileage;
+                        oJobCard.ReceiveDate = model.ReceiveDate;
+                        oJobCard.SupervisorId = model.ReceiveBy;
+                        oJobCard.Bay = model.Bay;
+                        oJobCard.JcStatus = model.JcStatus;
+                        oJobCard.EstiCostJob = model.EstiCostJob;
+                        oJobCard.EstiCostSpare = model.EstiCostSpare;
+                        oJobCard.EstiCostTotal = model.EstiCostTotal;
+                        oJobCard.ActualCostJob = model.ActualCostJob;
+                        oJobCard.ActualCostSpare = model.ActualCostSpare;
+                        oJobCard.ActualCostTotal = model.ActualCostTotal;
+                        oJobCard.ClientId = model.ClientId;
+                        oJobCard.ClientInfo = model.Description;
+                        oJobCard.ContactPerson = model.ContactPerson;
+                        oJobCard.ContactPersonNo = model.ContactPersonNo;
+                        oJobCard.CreateBy = model.CreateBy;
+                        oJobCard.CreateDate = DateTime.Now;
+                        _vssDb.JobCards.Add(oJobCard);
+                        _vssDb.SaveChanges();
+                        model.Id = oJobCard.Id;
+                        #endregion
+                        #region Job-Details
+                        var listJcJobRem = _vssDb.JcJobs.Where(x => x.JcId == model.Id).ToList();
+                        _vssDb.JcJobs.RemoveRange(listJcJobRem);
+                        _vssDb.SaveChanges();
+                        List<JcJob> listJcJob = new List<JcJob>();
+                        foreach (var jcJob in model.JobDetails)
+                        {
+                            JcJob oJcJob = new JcJob();
+                            oJcJob.JobGroupId = jcJob.JobGroupId;
+                            oJcJob.JobId = jcJob.JobId;
+                            oJcJob.EngineSizeId = jcJob.EngineSizeId;
+                            oJcJob.Price = jcJob.Price;
+                            oJcJob.Duration = jcJob.Duration;
+                            oJcJob.JobStatus = jcJob.JobStatus;
+                            oJcJob.JcId = oJobCard.Id;
+                            listJcJob.Add(oJcJob);
+                        }
+                        _vssDb.JcJobs.AddRange(listJcJob);
+                        _vssDb.SaveChanges();
+                        #endregion
+                        #region Spare-Parts
+                        List<JcSpare> listJcSpare = new List<JcSpare>();
+                        foreach (var jcSpare in model.JcSpares)
+                        {
+                            JcSpare oJcSpare = new JcSpare();
+                            oJcSpare.ItemId = jcSpare.ItemId;
+                            oJcSpare.Quantity = jcSpare.Quantity;
+                            oJcSpare.SalePrice = jcSpare.SalePrice;
+                            oJcSpare.ItemStatus = jcSpare.ItemStatus;
+                            oJcSpare.SpareAmount = jcSpare.SpareAmount;
+                            oJcSpare.JcId = oJobCard.Id;
+                            listJcSpare.Add(oJcSpare);
+                        }
+                        _vssDb.JcSpares.AddRange(listJcSpare);
+                        _vssDb.SaveChanges();
+                        #endregion
+                        #region JC HR
+                        var listJcHRRe = _vssDb.JcHRs.Where(x => x.JcId == model.Id).ToList();
+                        _vssDb.JcHRs.RemoveRange(listJcHRRe);
+                        _vssDb.SaveChanges();
+                        List<JcHR> listJcHR = new List<JcHR>();
+                        foreach (var oJcHR in model.Resources)
+                        {
+                            JcHR oJcHr = new JcHR();
+                            oJcHr.EmployeeId = oJcHR.EmployeeId;
+                            oJcHr.JcId = oJobCard.Id;
+                            listJcHR.Add(oJcHr);
+                        }
+                        _vssDb.JcHRs.AddRange(listJcHR);
+                        _vssDb.SaveChanges();
+                        #endregion
+                        _tran.Commit();
+                        return true;
+                    }
+                    catch
+                    {
+                        _tran.Rollback();
+                        return false;
+                    }
+                }
+            }
+        }
+
+        public bool Update(JobCardVM model)
+        {
+            using (_vssDb = new ModelVssDb())
+            {
+                using (var _tran = _vssDb.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        #region Validation
+                        Invoice oI = (from x in _vssDb.Invoices where x.JcId == model.Id select x).FirstOrDefault();
+                        if (oI != null) 
+                        {
+                            _tran.Rollback();
+                            return false;
+                        }
+                        #endregion
+                        #region Vehicle Info
+                        JobCard oJobCard = (from x in _vssDb.JobCards where x.Id == model.Id select x).FirstOrDefault();
+                        if (oJobCard != null)
+                        {
+                            oJobCard.JcNo = model.JcNo;
+                            oJobCard.VehicleNo = model.VehicleNo;
+                            oJobCard.Model = model.Model;
+                            oJobCard.Vin = model.Vin;
+                            oJobCard.Mileage = model.Mileage;
+                            oJobCard.ReceiveDate = model.ReceiveDate;
+                            oJobCard.SupervisorId = model.ReceiveBy;
+                            oJobCard.Bay = model.Bay;
+                            oJobCard.JcStatus = model.JcStatus;
+                            oJobCard.EstiCostJob = model.EstiCostJob;
+                            oJobCard.EstiCostSpare = model.EstiCostSpare;
+                            oJobCard.EstiCostTotal = model.EstiCostTotal;
+                            oJobCard.ActualCostJob = model.ActualCostJob;
+                            oJobCard.ActualCostSpare = model.ActualCostSpare;
+                            oJobCard.ActualCostTotal = model.ActualCostTotal;
+                            oJobCard.ClientId = model.ClientId;
+                            oJobCard.ClientInfo = model.Description;
+                            oJobCard.ContactPerson = model.ContactPerson;
+                            oJobCard.ContactPersonNo = model.ContactPersonNo;
+                            oJobCard.UpdateBy = model.CreateBy;
+                            oJobCard.UpdateDate = DateTime.Now;
+                            _vssDb.SaveChanges();
+                        }
+                        #endregion
+                        #region Job-Details
+                        var listJcJobRem = _vssDb.JcJobs.Where(x => x.JcId == model.Id).ToList();
+                        _vssDb.JcJobs.RemoveRange(listJcJobRem);
+                        _vssDb.SaveChanges();
+                        List<JcJob> listJcJob = new List<JcJob>();
+                        foreach (var jcJob in model.JobDetails)
+                        {
+                            JcJob oJcJob = new JcJob();
+                            oJcJob.JobGroupId = jcJob.JobGroupId;
+                            oJcJob.JobId = jcJob.JobId;
+                            oJcJob.EngineSizeId = jcJob.EngineSizeId;
+                            oJcJob.Price = jcJob.Price;
+                            oJcJob.Duration = jcJob.Duration;
+                            oJcJob.JobStatus = jcJob.JobStatus;
+                            oJcJob.JcId = oJobCard.Id;
+                            listJcJob.Add(oJcJob);
+                        }
+                        _vssDb.JcJobs.AddRange(listJcJob);
+                        _vssDb.SaveChanges();
+                        #endregion
+                        #region Spare-Parts
+                        List<JcSpare> listJcSpare = new List<JcSpare>();
+                        foreach (var jcSpare in model.JcSpares)
+                        {
+                            JcSpare oJcSpare = new JcSpare();
+                            oJcSpare.ItemId = jcSpare.ItemId;
+                            oJcSpare.Quantity = jcSpare.Quantity;
+                            oJcSpare.SalePrice = jcSpare.SalePrice;
+                            oJcSpare.ItemStatus = jcSpare.ItemStatus;
+                            oJcSpare.SpareAmount = jcSpare.SpareAmount;
+                            oJcSpare.JcId = oJobCard.Id;
+                            listJcSpare.Add(oJcSpare);
+                        }
+                        _vssDb.JcSpares.AddRange(listJcSpare);
+                        _vssDb.SaveChanges();
+                        #endregion
+                        #region JC HR
+                        var listJcHRRe = _vssDb.JcHRs.Where(x => x.JcId == model.Id).ToList();
+                        _vssDb.JcHRs.RemoveRange(listJcHRRe);
+                        _vssDb.SaveChanges();
+                        List<JcHR> listJcHR = new List<JcHR>();
+                        foreach (var oJcHR in model.Resources)
+                        {
+                            JcHR oJcHr = new JcHR();
+                            oJcHr.EmployeeId = oJcHR.EmployeeId;
+                            oJcHr.JcId = oJobCard.Id;
+                            listJcHR.Add(oJcHr);
+                        }
+                        _vssDb.JcHRs.AddRange(listJcHR);
+                        _vssDb.SaveChanges();
+                        #endregion
+                        _tran.Commit();
+                        return true;
+                    }
+                    catch
+                    {
+                        _tran.Rollback();
+                        return false;
+                    }
+                }
+            }
+        }
+
+        /*public bool Add1(JobCardVM model)
         {
             using (_vssDb = new ModelVssDb())
             {
@@ -216,9 +429,9 @@ namespace VSS.API.BL.Operation
                     }
                 }
             }
-        }
+        }*/
 
-        public bool Update(JobCardVM model)
+        /*public bool Update1(JobCardVM model)
         {
             using (_vssDb = new ModelVssDb())
             {
@@ -228,7 +441,7 @@ namespace VSS.API.BL.Operation
                     {
                         #region Validation
                         Invoice oI = (from x in _vssDb.Invoices where x.JcId == model.Id select x).FirstOrDefault();
-                        if (oI != null) 
+                        if (oI != null)
                         {
                             _tran.Rollback();
                             return false;
@@ -345,7 +558,7 @@ namespace VSS.API.BL.Operation
                     }
                 }
             }
-        }
+        }*/
 
         public IEnumerable<JobCardVM> Get(int pageIndex = 0, int pageSize = 5, int jcStatus = 0, string JcNo = "", DateTime? StartDate = null, DateTime? EndDate = null)
         {

@@ -1,29 +1,50 @@
-﻿using System;
+﻿using Google.Protobuf.WellKnownTypes;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Web;
+using VSS.API.DA.ADO;
 using VSS.API.DA.EF.VssDb;
 using VSS.API.DA.ViewModels.Operation;
 using VSS.API.DA.ViewModels.Stores;
+using VSS.DA.ADO;
+using VSS.DA.ViewModels.Operation;
 
 namespace VSS.API.BL.Stores
 {
     public class SalesPriceBL
     {
         ModelVssDb _vssDb = null;
+        private IGenericFactory<SalesPriceVM> Generic_SalesPriceVM = null;
+        string VssDb = "";
 
-        public IEnumerable<SalesPriceVM> Get(string partNo,int pageIndex = 0, int pageSize = 10)
+        public SalesPriceBL()
         {
             _vssDb = new ModelVssDb();
-            int nRow = (from sp in _vssDb.SalesPrices
-                        join i in _vssDb.Items on sp.ItemId equals i.Id
+            Generic_SalesPriceVM = new GenericFactory<SalesPriceVM>();
+            VssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
+        }
+
+        public List<SalesPriceVM> Get(string partNo, int pageIndex = 0, int pageSize = 10)
+        {
+            var oHashTable = new Hashtable() { { "partNo", partNo } };
+            return Generic_SalesPriceVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetSalesPrice, oHashTable, VssDb);
+        }
+
+        /*public IEnumerable<SalesPriceVM> Get(string partNo,int pageIndex = 0, int pageSize = 10)
+        {
+            int nRow = (from i in _vssDb.Items
+                        join sp in _vssDb.SalesPrices on i.Id equals sp.ItemId
                         join b in _vssDb.Brands on i.BrandId equals b.Id
                         join bm in _vssDb.BrandModels on i.ModelId equals bm.Id
                         where i.PartNoOld == (string.IsNullOrEmpty(partNo) ? i.PartNoOld : partNo)
                         || i.PartNoNew == (string.IsNullOrEmpty(partNo) ? i.PartNoNew : partNo)
                         select sp).Count();
-            var listItem = (from sp in _vssDb.SalesPrices
-                            join i in _vssDb.Items on sp.ItemId equals i.Id
+            var listItem = (from i in _vssDb.Items
+                            join sp in _vssDb.SalesPrices on i.Id equals sp.ItemId
                             join b in _vssDb.Brands on i.BrandId equals b.Id
                             join bm in _vssDb.BrandModels on i.ModelId equals bm.Id
                             where i.PartNoOld == (string.IsNullOrEmpty(partNo) ? i.PartNoOld : partNo)
@@ -56,7 +77,7 @@ namespace VSS.API.BL.Stores
                 .Take(pageSize)
                 .ToList();
             return listItem;
-        }
+        }*/
 
         public bool Add(SalesPriceVM model)
         {

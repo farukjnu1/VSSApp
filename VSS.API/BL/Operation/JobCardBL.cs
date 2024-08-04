@@ -156,6 +156,9 @@ namespace VSS.API.BL.Operation
                         _vssDb.SaveChanges();
                         #endregion
                         #region Spare-Parts
+                        var listJcSpareRem = _vssDb.JcSpares.Where(x => x.JcId == model.Id).ToList();
+                        _vssDb.JcSpares.RemoveRange(listJcSpareRem);
+                        _vssDb.SaveChanges();
                         List<JcSpare> listJcSpare = new List<JcSpare>();
                         foreach (var jcSpare in model.JcSpares)
                         {
@@ -263,6 +266,9 @@ namespace VSS.API.BL.Operation
                         _vssDb.SaveChanges();
                         #endregion
                         #region Spare-Parts
+                        var listJcSpareRem = _vssDb.JcSpares.Where(x => x.JcId == model.Id).ToList();
+                        _vssDb.JcSpares.RemoveRange(listJcSpareRem);
+                        _vssDb.SaveChanges();
                         List<JcSpare> listJcSpare = new List<JcSpare>();
                         foreach (var jcSpare in model.JcSpares)
                         {

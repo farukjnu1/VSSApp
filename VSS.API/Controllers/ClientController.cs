@@ -35,14 +35,14 @@ namespace VSS.API.Controllers
         }
 
         // POST: api/Client
-        public bool Post([FromBody] BusinessPartner model)
+        public object Post([FromBody] BusinessPartner model)
         {
             ClientBL _BL = new ClientBL();
             return _BL.Add(model);
         }
 
         // PUT: api/Client/5
-        public bool Put([FromBody] BusinessPartner model)
+        public object Put([FromBody] BusinessPartner model)
         {
             ClientBL _BL = new ClientBL();
             return _BL.Update(model);
@@ -71,5 +71,14 @@ namespace VSS.API.Controllers
             ClientBL _BL = new ClientBL();
             return _BL.GetClient();
         }
+
+        [HttpGet]
+        [Route("api/Client/GetClientByInfo")]
+        public IEnumerable<ClientVM> GetClientByInfo(string value = "")
+        {
+            ClientBL _BL = new ClientBL();
+            return _BL.GetClientByInfo(value);
+        }
+
     }
 }

@@ -705,6 +705,17 @@ namespace VSS.API.BL.Operation
                     oJobCard.MembershipNo = oClient.MembershipNo;
                 }
                 #endregion
+                #region Client Vehicle
+                if (oClient != null)
+                {
+                    var oClientVehicle = (from x in _vssDb.ClientVehicles where x.ClientId == oClient.BpId && x.VehicleNo.Trim()==oJobCard.VehicleNo.Trim() select x).FirstOrDefault();
+                    if (oClientVehicle != null)
+                    {
+                        oJobCard.Model = oClientVehicle.Model;
+                        oJobCard.SubModel = oClientVehicle.SubModel;
+                    }
+                }
+                #endregion
             }
             return oJobCard;
         }

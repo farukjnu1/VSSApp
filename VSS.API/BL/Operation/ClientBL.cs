@@ -54,12 +54,9 @@ namespace VSS.BL.Operation
             }
             return oClient;
         }
+
         public IEnumerable<ClientVM> GetClient()
         {
-            //oClient = new ClientVM();
-            //var listClient = _vssDb.BusinessPartners
-            //    .Where(x => x.BpTypeId == 1)
-            //    .ToList();
             var listClient = from x in _vssDb.BusinessPartners
                              where x.BpTypeId == 1
                              select new ClientVM
@@ -69,11 +66,26 @@ namespace VSS.BL.Operation
                              };
             return listClient;
         }
-        public bool Add(BusinessPartner model)
+
+        public IEnumerable<ClientVM> GetClientByInfo(string value = "")
+        {
+            var listClient = (from x in _vssDb.BusinessPartners
+                             where x.BpTypeId == 1 && (x.Phone.Contains(value) || x.Name.Contains(value))
+                             orderby x.Name
+                             select new ClientVM
+                             {
+                                 BpId = x.BpId,
+                                 Name = x.Phone + " - " + x.Name
+                             }).ToList().Take(20);
+            return listClient;
+        }
+
+        public object Add(BusinessPartner model)
         {
             try
             {
-                var oClient = (from x in _vssDb.BusinessPartners where x.Phone == model.Phone.Trim() select x).FirstOrDefault();
+                var phone = model.Phone.Substring(model.Phone.Length - 10);
+                var oClient = (from x in _vssDb.BusinessPartners where x.Phone.Substring(x.Phone.Length - 10) == phone.Trim() select x).FirstOrDefault();
                 if (oClient == null)
                 {
                     model.Phone = model.Phone.Trim();
@@ -82,13 +94,16 @@ namespace VSS.BL.Operation
                     model.CreateDate = DateTime.Now;
                     _vssDb.BusinessPartners.Add(model);
                     _vssDb.SaveChanges();
-                    return true;
+                    return new { message = "New client added successfully.", status = true };
                 }
-                return false;
+                else
+                {
+                    return new { message = "Client mobile already exist.", status = false };
+                }
             }
-            catch
+            catch(Exception ex)
             {
-                return false;
+                return new { message = ex.Message, status = false };
             }
         }
         private int GetNewId()
@@ -103,35 +118,64 @@ namespace VSS.BL.Operation
                 return 1;
             }
         }
-        public bool Update(BusinessPartner model)
+        public object Update(BusinessPartner model)
         {
             try
             {
-                var oBP = _vssDb.BusinessPartners
-                 .Where(x => x.BpTypeId == 1 && x.BpId == model.BpId)
-                 .FirstOrDefault();
+                var oBP = _vssDb.BusinessPartners.Where(x => x.BpTypeId == 1 && x.BpId == model.BpId).FirstOrDefault();
                 if (oBP != null)
                 {
-                    oBP.BpTypeId = model.BpTypeId;
-                    oBP.Name = model.Name;
-                    oBP.Phone = model.Phone.Trim();
-                    oBP.Email = model.Email;
-                    oBP.Address = model.Address;
-                    oBP.ContactPerson = model.ContactPerson;
-                    oBP.ContactPersonNo = model.ContactPersonNo;
-                    oBP.ClientInfo = model.ClientInfo;
-                    oBP.MembershipNo = model.MembershipNo;
-                    oBP.UpdateBy = model.UpdateBy;
-                    oBP.UpdateDate = DateTime.Now;
-                    _vssDb.SaveChanges();
-                    return true;
+                    if (oBP.Phone.Trim() == model.Phone.Trim())
+                    {
+                        oBP.BpTypeId = model.BpTypeId;
+                        oBP.Name = model.Name;
+                        oBP.Phone = model.Phone.Trim();
+                        oBP.Email = model.Email;
+                        oBP.Address = model.Address;
+                        oBP.ContactPerson = model.ContactPerson;
+                        oBP.ContactPersonNo = model.ContactPersonNo;
+                        oBP.ClientInfo = model.ClientInfo;
+                        oBP.MembershipNo = model.MembershipNo;
+                        oBP.UpdateBy = model.UpdateBy;
+                        oBP.UpdateDate = DateTime.Now;
+                        _vssDb.SaveChanges();
+                        return new { message = "Updated successfully.", status = true };
+                    }
+                    else
+                    {
+                        var phone = model.Phone.Substring(model.Phone.Length - 10);
+                        var oClient = (from x in _vssDb.BusinessPartners where x.Phone.Substring(x.Phone.Length - 10) == phone.Trim() select x).FirstOrDefault();
+                        if (oClient == null)
+                        {
+                            oBP.BpTypeId = model.BpTypeId;
+                            oBP.Name = model.Name;
+                            oBP.Phone = model.Phone.Trim();
+                            oBP.Email = model.Email;
+                            oBP.Address = model.Address;
+                            oBP.ContactPerson = model.ContactPerson;
+                            oBP.ContactPersonNo = model.ContactPersonNo;
+                            oBP.ClientInfo = model.ClientInfo;
+                            oBP.MembershipNo = model.MembershipNo;
+                            oBP.UpdateBy = model.UpdateBy;
+                            oBP.UpdateDate = DateTime.Now;
+                            _vssDb.SaveChanges();
+                            return new { message = "Updated successfully.", status = true };
+                        }
+                        else
+                        {
+                            return new { message = "Client mobile already registered with other client.", status = false };
+                        }
+                    }
+                }
+                else
+                {
+                    return new { message = "Data not exist.", status = false };
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                return false;
+                return new { message = ex.Message, status = false };
             }
-            return false;
         }
         public bool Remove(int id)
         {

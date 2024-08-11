@@ -202,6 +202,7 @@ namespace VSS.API.BL.Billing
             ,CV.VehicleNo
             ,CV.Vin
             ,CV.Model
+            ,CV.SubModel
             ,ISNULL(E.FirstName,'') + ' ' + ISNULL(e.MiddleName,'') + ' ' + ISNULL(e.LastName,'') Supervisor
             FROM Invoice I
             LEFT JOIN BusinessPartner C ON C.BpId = I.ClientId

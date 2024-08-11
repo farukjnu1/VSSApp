@@ -40,5 +40,6 @@ namespace VSS.API.DA.ViewModels.Operation
         // extra
         public string ClientName { get; set; }
         public string Phone { get; set; }
+        public string Value { get; set; }
     }
 }

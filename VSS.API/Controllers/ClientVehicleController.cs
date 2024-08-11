@@ -33,14 +33,14 @@ namespace VSS.API.Controllers
         }
 
         // POST: api/ClientVehicle
-        public bool Post([FromBody] ClientVehicle model)
+        public bool Post([FromBody] ClientVehicleVM model)
         {
             ClientVehicleBL _BL = new ClientVehicleBL();
             return _BL.Add(model);
         }
 
         // PUT: api/ClientVehicle/5
-        public bool Put([FromBody] ClientVehicle model)
+        public bool Put([FromBody] ClientVehicleVM model)
         {
             ClientVehicleBL _BL = new ClientVehicleBL();
             return _BL.Update(model);

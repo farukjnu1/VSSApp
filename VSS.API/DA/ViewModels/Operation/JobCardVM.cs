@@ -32,6 +32,7 @@ namespace VSS.API.DA.ViewModels.Operation
         public int? Bay { get; set; }
         public string VehicleNo { get; set; }
         public string Model { get; set; }
+        public string SubModel { get; set; }
         public int? JcStatus { get; set; }
         public int? ClientId { get; set; }
         public string ClientName { get; set; }

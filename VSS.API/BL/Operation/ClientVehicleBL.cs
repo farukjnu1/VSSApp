@@ -16,10 +16,15 @@ namespace VSS.API.BL.Operation
 {
     public class ClientVehicleBL
     {
-        ModelVssDb _vssDb = new ModelVssDb();
+        ModelVssDb _vssDb = null;
         List<ClientVehicleVM> listClientVehicle = null;
         ClientVehicleVM oClientVehicle = null;
         private IGenericFactory<ClientVehicleVM> Generic_ClientVehicle = null;
+
+        public ClientVehicleBL()
+        {
+            _vssDb = new ModelVssDb();
+        }
 
         public IEnumerable<ClientVehicleVM> Get(string phone, string vehicle, int pageIndex, int pageSize)
         {
@@ -51,13 +56,23 @@ namespace VSS.API.BL.Operation
             return oCV;
         }
 
-        public bool Add(ClientVehicle model)
+        public bool Add(ClientVehicleVM model)
         {
             try
             {
-                model.CreateBy = model.CreateBy;
-                model.CreateDate = DateTime.Now;
-                _vssDb.ClientVehicles.Add(model);
+                var oClientVehicle = new ClientVehicle();
+                oClientVehicle.Manufacturer = model.Manufacturer;
+                oClientVehicle.Vin = model.Vin;
+                //oClientVehicle.ClientId = model.ClientId;
+                oClientVehicle.ClientId = GetClientId(model.Value);
+                oClientVehicle.Model = model.Model;
+                oClientVehicle.SubModel = model.SubModel;
+                oClientVehicle.From = model.From;
+                oClientVehicle.To = model.To;
+                oClientVehicle.VehicleNo = model.VehicleNo;
+                oClientVehicle.CreateBy = model.CreateBy;
+                oClientVehicle.CreateDate = DateTime.Now;
+                _vssDb.ClientVehicles.Add(oClientVehicle);
                 _vssDb.SaveChanges();
                 return true;
             }
@@ -67,7 +82,25 @@ namespace VSS.API.BL.Operation
             }
         }
 
-        public bool Update(ClientVehicle model)
+        private int GetClientId(string value)
+        {
+            int clientId = 0;
+            if (!string.IsNullOrEmpty(value))
+            {
+                if (value.Contains("-"))
+                {
+                    string phone = value.Split('-')[0].Trim();
+                    var oClient = _vssDb.BusinessPartners.Where(x => x.Phone.Trim() == phone).FirstOrDefault();
+                    if (oClient != null)
+                    {
+                        clientId = oClient.BpId;   
+                    }
+                }
+            }
+            return clientId;
+        }
+
+        public bool Update(ClientVehicleVM model)
         {
             try
             {
@@ -76,7 +109,8 @@ namespace VSS.API.BL.Operation
                 if (oClientVehicle != null)
                 {
                     oClientVehicle.Id = model.Id;
-                    oClientVehicle.ClientId = model.ClientId;
+                    //oClientVehicle.ClientId = model.ClientId;
+                    oClientVehicle.ClientId = GetClientId(model.Value);
                     oClientVehicle.VehicleNo = model.VehicleNo;
                     oClientVehicle.Model = model.Model;
                     oClientVehicle.Vin = model.Vin;

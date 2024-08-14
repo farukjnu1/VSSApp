@@ -74,7 +74,7 @@ namespace VSS.API.Controllers
 
         [HttpGet]
         [Route("api/Client/GetClientByInfo")]
-        public IEnumerable<ClientVM> GetClientByInfo(string value = "")
+        public IEnumerable<ClientVM> GetClientByInfo([FromUri] string value = "")
         {
             ClientBL _BL = new ClientBL();
             return _BL.GetClientByInfo(value);

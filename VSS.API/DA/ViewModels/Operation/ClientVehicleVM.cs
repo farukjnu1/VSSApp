@@ -41,5 +41,8 @@ namespace VSS.API.DA.ViewModels.Operation
         public string ClientName { get; set; }
         public string Phone { get; set; }
         public string Value { get; set; }
+        public string Body { get; set; }
+        public string Engine { get; set; }
+        public string Transmission { get; set; }
     }
 }

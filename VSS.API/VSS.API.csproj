@@ -335,6 +335,7 @@
     <Compile Include="DA\EF\VssDb\ReqUrgent.cs" />
     <Compile Include="DA\EF\VssDb\Role.cs" />
     <Compile Include="DA\EF\VssDb\SalesPrice.cs" />
+    <Compile Include="DA\EF\VssDb\SalesReturn.cs" />
     <Compile Include="DA\EF\VssDb\Size.cs" />
     <Compile Include="DA\EF\VssDb\Stock.cs" />
     <Compile Include="DA\EF\VssDb\StoreReq.cs" />

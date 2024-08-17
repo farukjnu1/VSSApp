@@ -44,5 +44,6 @@ namespace VSS.API.DA.ViewModels.Operation
         public string Body { get; set; }
         public string Engine { get; set; }
         public string Transmission { get; set; }
+        public string Remark { get; set; }
     }
 }

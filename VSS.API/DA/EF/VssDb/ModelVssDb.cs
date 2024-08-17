@@ -53,6 +53,7 @@ namespace VSS.API.DA.EF.VssDb
         public virtual DbSet<ReqUrgent> ReqUrgents { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<SalesPrice> SalesPrices { get; set; }
+        public virtual DbSet<SalesReturn> SalesReturns { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<Stock> Stocks { get; set; }
         public virtual DbSet<StoreReq> StoreReqs { get; set; }
@@ -144,6 +145,22 @@ namespace VSS.API.DA.EF.VssDb
 
             modelBuilder.Entity<ClientVehicle>()
                 .Property(e => e.To)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ClientVehicle>()
+                .Property(e => e.Body)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ClientVehicle>()
+                .Property(e => e.Engine)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ClientVehicle>()
+                .Property(e => e.Transmission)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ClientVehicle>()
+                .Property(e => e.Remark)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Company>()
@@ -483,6 +500,38 @@ namespace VSS.API.DA.EF.VssDb
             modelBuilder.Entity<SalesPrice>()
                 .Property(e => e.Remarks)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<SalesReturn>()
+                .Property(e => e.JcNo)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<SalesReturn>()
+                .Property(e => e.Qty)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<SalesReturn>()
+                .Property(e => e.UnitPrice)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<SalesReturn>()
+                .Property(e => e.Discount)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<SalesReturn>()
+                .Property(e => e.DiscountAmount)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<SalesReturn>()
+                .Property(e => e.TpAfterDiscount)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<SalesReturn>()
+                .Property(e => e.ReturnCharge)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<SalesReturn>()
+                .Property(e => e.ReturnAmount)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<Size>()
                 .Property(e => e.Size1)

@@ -34,6 +34,18 @@ namespace VSS.API.DA.EF.VssDb
         [StringLength(10)]
         public string To { get; set; }
 
+        [StringLength(50)]
+        public string Body { get; set; }
+
+        [StringLength(50)]
+        public string Engine { get; set; }
+
+        [StringLength(50)]
+        public string Transmission { get; set; }
+
+        [StringLength(100)]
+        public string Remark { get; set; }
+
         public DateTime? CreateDate { get; set; }
 
         public int? CreateBy { get; set; }

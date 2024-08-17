@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Net;
 using System.Net.NetworkInformation;
 using System.Web;
+using System.Web.Mvc;
 using VSS.API.DA.ADO;
 using VSS.API.DA.EF.VssDb;
 using VSS.API.DA.ViewModels.Operation;
@@ -42,7 +44,6 @@ namespace VSS.API.BL.Operation
 
         public ClientVehicleVM Get(long id)
         {
-            listClientVehicle = new List<ClientVehicleVM>();
             var oCV = (from x in _vssDb.ClientVehicles
                        where x.Id == id
                        select new ClientVehicleVM
@@ -61,10 +62,10 @@ namespace VSS.API.BL.Operation
             try
             {
                 var oClientVehicle = new ClientVehicle();
-                oClientVehicle.Manufacturer = model.Manufacturer;
-                oClientVehicle.Vin = model.Vin;
                 //oClientVehicle.ClientId = model.ClientId;
                 oClientVehicle.ClientId = GetClientId(model.Value);
+                oClientVehicle.Manufacturer = model.Manufacturer;
+                oClientVehicle.Vin = model.Vin;
                 oClientVehicle.Model = model.Model;
                 oClientVehicle.SubModel = model.SubModel;
                 oClientVehicle.From = model.From;
@@ -72,6 +73,10 @@ namespace VSS.API.BL.Operation
                 oClientVehicle.VehicleNo = model.VehicleNo;
                 oClientVehicle.CreateBy = model.CreateBy;
                 oClientVehicle.CreateDate = DateTime.Now;
+                oClientVehicle.Body = model.Body;
+                oClientVehicle.Engine = model.Engine;
+                oClientVehicle.Transmission = model.Transmission;
+                oClientVehicle.Remark = model.Remark;
                 _vssDb.ClientVehicles.Add(oClientVehicle);
                 _vssDb.SaveChanges();
                 return true;
@@ -114,13 +119,17 @@ namespace VSS.API.BL.Operation
                     oClientVehicle.VehicleNo = model.VehicleNo;
                     oClientVehicle.Model = model.Model;
                     oClientVehicle.Vin = model.Vin;
-                    oClientVehicle.CreateBy = model.CreateBy;
-                    oClientVehicle.CreateDate = DateTime.Now;
                     oClientVehicle.Manufacturer = model.Manufacturer;
                     oClientVehicle.Model = model.Model;
                     oClientVehicle.SubModel = model.SubModel;
                     oClientVehicle.From = model.From;
                     oClientVehicle.To = model.To;
+                    oClientVehicle.Body = model.Body;
+                    oClientVehicle.Engine = model.Engine;
+                    oClientVehicle.CreateBy = model.CreateBy;
+                    oClientVehicle.CreateDate = DateTime.Now;
+                    oClientVehicle.Transmission = model.Transmission;
+                    oClientVehicle.Remark = model.Remark;
                     _vssDb.SaveChanges();
                     return true;
                 }

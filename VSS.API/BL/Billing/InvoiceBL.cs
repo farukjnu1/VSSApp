@@ -234,7 +234,7 @@ namespace VSS.API.BL.Billing
                                                 FROM InvoiceItem II
                                                 LEFT JOIN Item I ON I.Id = II.ItemId AND II.ItemType=2
                                                 LEFT JOIN Job J ON J.JobId = II.ItemId AND II.ItemType=1
-                                                WHERE II.InvoiceId=" + oInvoice.Id).ToList();
+                                                WHERE II.InvoiceId=" + oInvoice.Id + @" ORDER BY II.ItemType").ToList();
                 oInvoice.BalanceAmount = (from b in _vssDb.BusinessPartnerBalances where b.BusinessPartnerId == oInvoice.ClientId select b.BalanceAmount).FirstOrDefault();
                 oInvoice.PaySettles = (from ps in _vssDb.PaySettles
                                        join pm in _vssDb.PayMethods on ps.PaymentMethod equals pm.MethodId

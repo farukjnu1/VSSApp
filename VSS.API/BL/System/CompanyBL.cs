@@ -45,7 +45,7 @@ namespace VSS.API.BL.System
             var oCompany = _vssDb.Companies.Where(y => y.CompanyId == CompanyId)
                 .Select(x => new CompanyVM
                 {
-                    Address = x.Address,
+                    Address = x.Address == null ? "" : x.Address,
                     Bay = x.Bay,
                     CompanyCode = x.CompanyCode,
                     CompanyName = x.CompanyName,
@@ -53,9 +53,9 @@ namespace VSS.API.BL.System
                     DateFormat = x.DateFormat,
                     DecimalPlace = x.DecimalPlace,
                     Description = x.Description,
-                    Email = x.Email,
+                    Email = x.Email == null ? "" : x.Email,
                     IsActive = x.IsActive,
-                    Phone = x.Phone,
+                    Phone = x.Phone == null ? "" : x.Phone,
                     Vat = x.Vat,
                     Website = x.Website,
                     Logos = (from z in _vssDb.CompanyLogoes

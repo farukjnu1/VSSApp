@@ -17,11 +17,17 @@ namespace VSS.API.Controllers
     public class InvoiceController : ApiController
     {
         // GET: api/Invoice
-        public IEnumerable<JobCardVM> Get(int pi = 0, int ps = 5, int jcStatus = 1, bool isPaid = false)
+        public IEnumerable<JobCardVM> Get(int pi = 0, int ps = 5, int jcStatus = 1, bool isPaid = false, string jcNo = "", DateTime? startDate = null, DateTime? endDate = null)
         {
             InvoiceBL _BL = new InvoiceBL();
-            return _BL.Get(pi, ps, jcStatus, isPaid);
+            return _BL.Get(pi, ps, jcStatus, isPaid, jcNo, startDate, endDate);
         }
+
+        /*public IEnumerable<JobCardVM> Get(int pi = 0, int ps = 5, int jcStatus = 0, string jcNo = "", DateTime? startDate = null, DateTime? endDate = null)
+        {
+            _BL = new JobCardBL();
+            return _BL.Get(pi, ps, jcStatus, jcNo, startDate, endDate);
+        }*/
 
         // GET: api/Invoice/5
         public string Get(int id)

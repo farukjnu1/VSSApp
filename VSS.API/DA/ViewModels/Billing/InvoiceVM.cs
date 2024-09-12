@@ -39,6 +39,7 @@ namespace VSS.API.DA.ViewModels.Billing
         public List<PaySettleVM> PaySettles { get; set; } = new List<PaySettleVM>();
         public string Supervisor { get; set; }
         public string MembershipNo { get; set; }
+        public decimal? Mileage { get; set; }
     }
 
     public class InvoiceItemVM

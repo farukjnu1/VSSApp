@@ -165,7 +165,8 @@ namespace VSS.API.BL.Billing
             }
         }
 
-        public IEnumerable<JobCardVM> Get(int pageIndex = 0, int pageSize = 5, int jcStatus = 1, bool isPaid = false)
+        //(int pageIndex = 0, int pageSize = 5, int jcStatus = 0, string JcNo = "", DateTime? StartDate = null, DateTime? EndDate = null)
+        public IEnumerable<JobCardVM> Get(int pageIndex = 0, int pageSize = 5, int jcStatus = 1, bool isPaid = false, string JcNo = "", DateTime? StartDate = null, DateTime? EndDate = null)
         {
             string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
             Generic_JobCardVM = new GenericFactory<JobCardVM>();
@@ -174,36 +175,41 @@ namespace VSS.API.BL.Billing
                 { "PageIndex", pageIndex },
                 { "PageSize", pageSize },
                 { "JcStatus", jcStatus },
+                { "JcNo", JcNo },
+                { "StartDate", StartDate },
+                { "EndDate", EndDate },
                 { "IsPaid", isPaid }
             };
-            return Generic_JobCardVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetJcInvoice, oHashTable, vssDb);
+            var list = Generic_JobCardVM.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetJcInvoice, oHashTable, vssDb);
+            return list;
         }
 
         public InvoiceVM GetByJc([FromUri] int jcId)
         {
             _vssDb = new ModelVssDb();
             InvoiceVM oInvoice = null;
-            oInvoice = _vssDb.Database.SqlQuery<InvoiceVM>(@"SELECT I.Id
-            ,I.JcId
+            oInvoice = _vssDb.Database.SqlQuery<InvoiceVM>(@"SELECT ISNULL(I.Id,0) Id
+            ,ISNULL(JC.Id,0) JcId
             ,CASE WHEN I.JcId IS NULL OR I.JcId = 0 THEN 0 ELSE 1 END IsInvoice
-            ,I.CreateBy
-            ,I.CreateDate
-            ,I.GrandTotal
-            ,JC.JcNo
-            ,JC.ClientId 
-            ,JC.ClientInfo Description 
-            ,C.Address ClientAddress
-            ,C.Email ClientEmail 
-            ,C.Name ClientName
-            ,C.Phone ClientPhone
-            ,C.MembershipNo                            
+            ,ISNULL(I.CreateBy,0) CreateBy
+            ,ISNULL(I.CreateDate,'') CreateDate
+            ,ISNULL(I.GrandTotal,0) GrandTotal
+            ,ISNULL(JC.JcNo,'') JcNo
+            ,ISNULL(JC.ClientId,0) ClientId 
+            ,ISNULL(JC.ClientInfo,'') Description 
+            ,ISNULL(C.Address,'') ClientAddress
+            ,ISNULL(C.Email,'') ClientEmail
+            ,ISNULL(C.Name,'') ClientName
+            ,ISNULL(C.Phone,'') ClientPhone
+            ,ISNULL(C.MembershipNo,'') MembershipNo                            
             ,ISNULL(JC.ContactPerson,'') ContactPerson
             ,ISNULL(JC.ContactPersonNo,'') ContactPersonNo
-            ,CV.VehicleNo
-            ,CV.Vin
-            ,CV.Model
-            ,CV.SubModel
+            ,ISNULL(CV.VehicleNo,'') VehicleNo
+            ,ISNULL(CV.Vin,'') Vin
+            ,ISNULL(CV.Model,'') Model
+            ,ISNULL(CV.SubModel,'') SubModel
             ,ISNULL(E.FirstName,'') + ' ' + ISNULL(e.MiddleName,'') + ' ' + ISNULL(e.LastName,'') Supervisor
+            ,ISNULL(JC.Mileage,0) Mileage
             FROM Invoice I
             LEFT JOIN BusinessPartner C ON C.BpId = I.ClientId
 			LEFT JOIN JobCard JC ON JC.Id = I.JcId

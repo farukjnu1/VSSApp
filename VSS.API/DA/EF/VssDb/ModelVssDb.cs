@@ -48,6 +48,8 @@ namespace VSS.API.DA.EF.VssDb
         public virtual DbSet<PaySettle> PaySettles { get; set; }
         public virtual DbSet<PayStatu> PayStatus { get; set; }
         public virtual DbSet<PayTran> PayTrans { get; set; }
+        public virtual DbSet<PO> POes { get; set; }
+        public virtual DbSet<PoItem> PoItems { get; set; }
         public virtual DbSet<Religion> Religions { get; set; }
         public virtual DbSet<ReqStatu> ReqStatus { get; set; }
         public virtual DbSet<ReqUrgent> ReqUrgents { get; set; }
@@ -468,6 +470,34 @@ namespace VSS.API.DA.EF.VssDb
             modelBuilder.Entity<PayTran>()
                 .Property(e => e.ChequeNo)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<PO>()
+                .Property(e => e.TotalAmount)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<PoItem>()
+                .Property(e => e.TotalAmount)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<PoItem>()
+                .Property(e => e.Qty)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<PoItem>()
+                .Property(e => e.UnitPrice)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<PoItem>()
+                .Property(e => e.TotalPrice)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<PoItem>()
+                .Property(e => e.Vat)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<PoItem>()
+                .Property(e => e.Tax)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<ReqStatu>()
                 .Property(e => e.Name)

@@ -31,5 +31,7 @@ namespace VSS.API.DA.ADO
         public const string sp_GetJobs = "[dbo].[sp_GetJobs]";
         public const string sp_GetJcReq = "[dbo].[sp_GetJcReq]";
         public const string sp_GetSalesPrice = "[dbo].[sp_GetSalesPrice]";
+        public const string sp_GetPo = "[dbo].[sp_GetPo]";
+        public const string sp_GetPoById = "[dbo].[sp_GetPoById]";
     }
 }

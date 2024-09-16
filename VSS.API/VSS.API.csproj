@@ -49,6 +49,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Acornima, Version=1.1.0.0, Culture=neutral, PublicKeyToken=496b38436bb9edeb, processorArchitecture=MSIL">
+      <HintPath>..\packages\Acornima.1.1.0\lib\net462\Acornima.dll</HintPath>
+    </Reference>
     <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
       <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
@@ -57,6 +60,9 @@
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Esprima, Version=3.0.5.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Esprima.3.0.5\lib\net462\Esprima.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.21.9.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.21.9\lib\net45\Google.Protobuf.dll</HintPath>
@@ -226,6 +232,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Attributes\JsonWebToken.cs" />
     <Compile Include="Attributes\MyAuth.cs" />
+    <Compile Include="BL\Purchase\PoBL .cs" />
     <Compile Include="BL\Billing\InvoiceBL.cs" />
     <Compile Include="BL\Billing\PayBL.cs" />
     <Compile Include="BL\HR\DesignationBL.cs" />
@@ -330,6 +337,8 @@
     <Compile Include="DA\EF\VssDb\PaySettle.cs" />
     <Compile Include="DA\EF\VssDb\PayStatu.cs" />
     <Compile Include="DA\EF\VssDb\PayTran.cs" />
+    <Compile Include="DA\EF\VssDb\PO.cs" />
+    <Compile Include="DA\EF\VssDb\PoItem.cs" />
     <Compile Include="DA\EF\VssDb\Religion.cs" />
     <Compile Include="DA\EF\VssDb\ReqStatu.cs" />
     <Compile Include="DA\EF\VssDb\ReqUrgent.cs" />
@@ -351,6 +360,9 @@
     <Compile Include="DA\Utilities\BLStatus.cs" />
     <Compile Include="DA\Utilities\Logs.cs" />
     <Compile Include="DA\Utilities\NumberToWord.cs" />
+    <Compile Include="DA\Utilities\SmsWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DA\ViewModels\Billing\InvoiceVM.cs" />
     <Compile Include="DA\ViewModels\Billing\PaySettleVM.cs" />
     <Compile Include="DA\ViewModels\Billing\PayTranVM.cs" />
@@ -368,6 +380,8 @@
     <Compile Include="DA\ViewModels\Operation\VehicleReceiverVM.cs" />
     <Compile Include="DA\ViewModels\Operation\VehicleStda110UVm.cs" />
     <Compile Include="DA\ViewModels\Operation\WorkGroupEmpVM.cs" />
+    <Compile Include="DA\ViewModels\Purchase\PoItemVm.cs" />
+    <Compile Include="DA\ViewModels\Purchase\PoVm.cs" />
     <Compile Include="DA\ViewModels\Stores\BrandModelVM.cs" />
     <Compile Include="DA\ViewModels\Stores\ItemCategoryVM.cs" />
     <Compile Include="DA\ViewModels\Stores\BrandVM.cs" />

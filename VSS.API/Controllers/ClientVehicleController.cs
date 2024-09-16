@@ -10,13 +10,14 @@ using VSS.API.Attributes;
 using VSS.API.BL.Operation;
 using VSS.API.BL.Stores;
 using VSS.API.DA.EF.VssDb;
+using VSS.API.DA.Utilities;
 using VSS.API.DA.ViewModels.Operation;
 using VSS.BL.Operation;
 using VSS.DA.ViewModels.Operation;
 
 namespace VSS.API.Controllers
 {
-    //[MyAuth]
+    [MyAuth]
     public class ClientVehicleController : ApiController
     {
         // GET: api/ClientVehicle
@@ -176,17 +177,40 @@ namespace VSS.API.Controllers
             string address = baseURL + relativeURL + queryString;
             string Url = address.ToLower();
             string resultAsString = "";
-            try
+
+            /*try
+            {
+                CookieContainer cookies = new CookieContainer();
+                SmsWebClient client = new SmsWebClient(cookies);
+                string html = client.DownloadString(Url);
+            }
+            catch (Exception ex)
+            {
+
+            }*/
+
+            /*try
+            {
+                WebClient client = null;
+                while (client == null)
+                {
+                    Console.WriteLine("Trying..");
+                    client = CloudflareEvader.CreateBypassedWebClient(Url);
+                }
+                //Console.WriteLine("Solved! We're clear to go");
+                //Console.WriteLine(client.DownloadString("http://anilinkz.tv/anime-list"));
+                var str = client.DownloadString(Url);
+                //Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+
+            }*/
+
+            /*try
             {
                 using (WebClient client = new WebClient())
                 {
-                    /*ServicePointManager.Expect100Continue = true;
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
-                           | SecurityProtocolType.Tls11
-                           | SecurityProtocolType.Tls12
-                           | SecurityProtocolType.Ssl3;
-                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);*/
-
                     ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                     byte[] result = client.DownloadData(Url);
                     resultAsString = System.Text.Encoding.UTF8.GetString(result);
@@ -229,7 +253,7 @@ namespace VSS.API.Controllers
             catch (Exception ex)
             {
 
-            }
+            }*/
             return oClientVehicle;
         }
 

@@ -181,7 +181,7 @@ namespace VSS.API.BL.Purchase
             return Generic_PoVm.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetPo, oHashTable, vssDb);
         }
 
-        public PoVm Get([FromUri] int poid)
+        public PoVm Get([FromUri] long poid)
         {
             string vssDb = ConfigurationManager.ConnectionStrings["VssDb"].ConnectionString;
             Generic_PoVm = new GenericFactory<PoVm>();
@@ -192,6 +192,40 @@ namespace VSS.API.BL.Purchase
             return Generic_PoVm.ExecuteCommandList(CommandType.StoredProcedure, StoredProcedure.sp_GetPoById, oHashTable, vssDb).FirstOrDefault();
         }
 
-        
+        public bool Remove(long poid)
+        {
+            bool isSuccess = false;
+            using (_vssDb = new ModelVssDb())
+            {
+                using (var _tran = _vssDb.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var oPO = _vssDb.POes.Where(x => x.PoId == poid).FirstOrDefault();
+                        if (oPO != null)
+                        {
+                            var listPoItem = _vssDb.PoItems.Where(x => x.PoId == poid).ToList();
+
+                            _vssDb.PoItems.RemoveRange(listPoItem);
+                            _vssDb.SaveChanges();
+
+                            _vssDb.POes.Remove(oPO);
+                            _vssDb.SaveChanges();
+
+                            _tran.Commit();
+                            isSuccess = true;
+                        }
+                    }
+                    catch
+                    {
+                        _tran.Rollback();
+                        isSuccess = false;
+                    }
+                }
+            }
+            return isSuccess;
+        }
+
+
     }
 }
